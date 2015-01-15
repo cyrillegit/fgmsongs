@@ -1,6 +1,7 @@
 package com.intelness.fgmsongs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
@@ -25,19 +27,24 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity implements OnItemClickListener {
 
-    protected static final String TAG     = "MainActiviy";
-    private DrawerLayout          drawerLayout;
-    private ListView              listView;
-    private ActionBarDrawerToggle drawerListener;
-    private Toolbar               toolbar = null;
-    private MyAdapter             myAdapter;
-    private String[]              navDrawerItems;
-    private SpinnerAdapter        spinnerAdapter;
+    protected static final String   TAG     = "MainActiviy";
+    protected DrawerLayout          drawerLayout;
+    protected ListView              listView;
+    protected ActionBarDrawerToggle drawerListener;
+    protected Toolbar               toolbar = null;
+    protected MyAdapter             myAdapter;
+    protected String[]              navDrawerItems;
+    protected SpinnerAdapter        spinnerAdapter;
+    protected FrameLayout           frameLayout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
+
+        // frameLayout : other activities layout are going to be put in this
+        // layout
+        frameLayout = (FrameLayout) findViewById( R.id.mainContent );
 
         drawerLayout = (DrawerLayout) findViewById( R.id.drawerLayout );
         listView = (ListView) findViewById( R.id.drawerList );
@@ -104,11 +111,51 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     @Override
     public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
         selectItem( position );
+        Intent mainIntent;
+
+        switch ( position ) {
+        case 0:
+            mainIntent = new Intent( getApplicationContext(), ListSongsActivity.class );
+            startActivity( mainIntent );
+            break;
+
+        case 1:
+            mainIntent = new Intent( getApplicationContext(), SearchSongActivity.class );
+            startActivity( mainIntent );
+            break;
+
+        case 2:
+            mainIntent = new Intent( getApplicationContext(), AddSongActivity.class );
+            startActivity( mainIntent );
+            break;
+
+        case 3:
+            mainIntent = new Intent( getApplicationContext(), EditSongActivity.class );
+            startActivity( mainIntent );
+            break;
+
+        case 4:
+            mainIntent = new Intent( getApplicationContext(), SommaryActivity.class );
+            startActivity( mainIntent );
+            break;
+
+        case 5:
+            mainIntent = new Intent( getApplicationContext(), OptionsActivity.class );
+            startActivity( mainIntent );
+            break;
+
+        case 6:
+            mainIntent = new Intent( getApplicationContext(), AboutActivity.class );
+            startActivity( mainIntent );
+            break;
+
+        default:
+            break;
+        }
     }
 
     public void selectItem( int position ) {
         listView.setItemChecked( position, true );
-        setTitle( navDrawerItems[position] );
     }
 
     public void setTitle( String title ) {

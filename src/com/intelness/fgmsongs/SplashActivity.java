@@ -21,7 +21,7 @@ public class SplashActivity extends ActionBarActivity {
             @Override
             public void run() {
                 Intent i = new Intent( getApplicationContext(),
-                        MainActivity.class );
+                        ListSongsActivity.class );
                 startActivity( i );
                 finish();
             }
