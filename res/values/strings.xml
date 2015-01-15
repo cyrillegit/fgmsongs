@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FGM Songs</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="lord">L\&#39;ETERNEL</string>
+    <string name="sing">Chantez</string>
+    <string name="praises">les louanges </string>
+    <string name="of">de</string>
+    <string name="descLogo">Logo FGM</string>
+    <string name="fullGospelMission">Mission du Plein Evangile</string>
+
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="planets">
+        <item >Mercury</item>
+        <item >Venus</item>
+        <item >Earth</item>
+        <item >Mars</item>
+        <item >Jupiter</item>
+        <item >Saturn</item>
+        <item >Uranus</item>
+        <item >Neptune</item>
+        <item >Pluto</item>  
+        <item >Sedna</item>       
+    </string-array>
+    
+      <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >List of songs</item>
+        <item >Search a song</item>
+        <item >Add a song</item>
+        <item >Edit a song</item>
+        <item >Sommary</item>
+        <item >Options</item>
+        <item >About</item>
+    </string-array>
+     
+    <!-- Nav Drawer List Item Icons -->
+    <!-- Keep them in order as the titles are in -->
+    <array name="nav_drawer_icons">
+        <item>R.drawable.ic_action_view_as_list</item>
+        <item>R.drawable.ic_action_search</item>
+        <item>R.drawable.ic_action_new</item>
+        <item>R.drawable.ic_action_edit</item>
+        <item>R.drawable.ic_action_sort_by_size</item>
+        <item>R.drawable.ic_action_settings</item>
+        <item>R.drawable.ic_action_about</item>
+    </array>
+     
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
+    <string name="empty"> </string>
+</resources>
