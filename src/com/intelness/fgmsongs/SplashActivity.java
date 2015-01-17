@@ -1,31 +1,44 @@
 package com.intelness.fgmsongs;
 
+import java.util.List;
+
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.intelness.fgmsongs.beans.Song;
+import com.intelness.fgmsongs.beans.SongDAO;
+import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.utils.XMLParser;
+
 public class SplashActivity extends ActionBarActivity {
 
-    private static final int SPLASH_TIME_OUT = 3000;
+    private static final int    SPLASH_TIME_OUT = 3000;
+    private static final String TAG             = "SplashActivity";
+    private List<Song>          songs;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_splash );
+        getSupportActionBar().hide();
 
-        new Handler().postDelayed( new Runnable() {
+        // new Handler().postDelayed( new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // Intent i = new Intent( getApplicationContext(),
+        // ListSongsActivity.class );
+        // startActivity( i );
+        // finish();
+        // }
+        // }, SPLASH_TIME_OUT );
 
-            @Override
-            public void run() {
-                Intent i = new Intent( getApplicationContext(),
-                        ListSongsActivity.class );
-                startActivity( i );
-                finish();
-            }
-        }, SPLASH_TIME_OUT );
+        new loadSongs().execute();
     }
 
     @Override
@@ -50,5 +63,82 @@ public class SplashActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    private class loadSongs extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground( Void... params ) {
+
+            try {
+                Thread.sleep( SPLASH_TIME_OUT );
+            } catch ( InterruptedException e ) {
+                Thread.interrupted();
+            }
+            // loadDB();
+            songs = getAllSongs();
+            // load global variables
+            setGlobalVariables();
+            return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+        }
+
+        @Override
+        protected void onPostExecute( Void result ) {
+
+            Intent i = new Intent( getApplicationContext(), ListSongsActivity.class );
+            startActivity( i );
+            finish();
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onProgressUpdate( Void... values ) {
+        }
+    }
+
+    public List<Song> getAllSongs() {
+
+        SongDAO sDao = new SongDAO( this );
+        List<Song> allSongs = sDao.getAllSongs();
+        for ( int i = 0; i < allSongs.size(); i++ ) {
+            Log.i( TAG, "song : " + allSongs.get( i ).getTitle() );
+        }
+        return allSongs;
+    }
+
+    public void loadDB() {
+
+        SongDAO sDao = new SongDAO( this );
+        int rows = sDao.getNumberOfSongs();
+
+        List<Song> songs;
+
+        XMLParser parser = new XMLParser();
+        songs = parser.parse( getResources().openRawResource( R.raw.fr_songs ) );
+
+        for ( int i = 0; i < songs.size(); i++ ) {
+            int number = songs.get( i ).getNumber();
+            // if db is empty, store every devinettes that is in xml file in db
+            if ( rows <= 0 ) {
+                sDao.addSong( songs.get( i ) );
+                // else, check to not store two same devinette
+            } else if ( sDao.getSongByNumber( number ).getNumber() != number ) {
+                sDao.addSong( songs.get( i ) );
+            }
+        }
+    }
+
+    private void setGlobalVariables() {
+        // calling the application class
+        final AppManager app = (AppManager) getApplicationContext();
+        app.setSongs( songs );
     }
 }

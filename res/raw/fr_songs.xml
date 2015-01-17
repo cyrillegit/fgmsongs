@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<songs>
+    <song>
+        <number>1</number>
+        <title>Quel sort merveilleux d'être sauvé</title>
+        <second>Sauvé par le sang de l'Agneau</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>2</number>
+        <title>Oh! Quel bonheur de le connaitre</title>
+        <second>L'ami qui ne saurait changer</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>3</number>
+        <title>Le nom de Jésus est si doux!</title>
+        <second>De Dieu désarmant le courroux</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>4</number>
+        <title>Un nom si doux réjouit mon coeur</title>
+        <second>Me fait chanter ses louanges</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>5</number>
+        <title>Poussons des cris de joie en accord</title>
+        <second>Dieu nous aime</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>6</number>
+        <title>Toi qui dispose</title>
+        <second>De toutes choses</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>7</number>
+        <title>Quel ami fidéle et tendre</title>
+        <second>Nous avons en Jésus-Christ</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>8</number>
+        <title>Jésus est mon divin berger</title>
+        <second>Réjouis-toi, mon âme</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>9</number>
+        <title>Sauveur adorable</title>
+        <second>Oh! Jésus, mon Roi</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>10</number>
+        <title>Divin rocher, refuge sûr</title>
+        <second>L'abri pour nous dans la tempête</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>    
+</songs>

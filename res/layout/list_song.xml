@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tvNumberSong"
+        android:layout_width="@dimen/number_frame"
+        android:layout_height="@dimen/number_frame"
+        android:gravity="center"
+        android:textSize="@dimen/number"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvTitleSong"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/title_song_frame"
+        android:textSize="@dimen/title_song"
+        android:gravity="left"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tvNumberSong"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvSecondLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textSize="@dimen/second_line"
+        android:layout_alignBottom="@+id/tvNumberSong"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/tvNumberSong"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

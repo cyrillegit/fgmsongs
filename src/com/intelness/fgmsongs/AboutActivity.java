@@ -10,5 +10,6 @@ public class AboutActivity extends MainActivity {
         getLayoutInflater().inflate( R.layout.activity_about, frameLayout );
 
         setTitle( navDrawerItems[6] );
+        getSupportActionBar().setIcon( R.drawable.ic_launcher );
     }
 }

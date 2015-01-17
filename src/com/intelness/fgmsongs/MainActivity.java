@@ -1,38 +1,45 @@
 package com.intelness.fgmsongs;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 
+import com.intelness.fgmsongs.adapters.DrawerAdapter;
+
+/**
+ * this class is the class that implements the navigation drawer, all the other
+ * activities extend this class
+ * 
+ * @author McCyrille
+ * @version 1.0
+ * @since 1.0
+ */
 public class MainActivity extends ActionBarActivity implements OnItemClickListener {
 
-    protected static final String   TAG     = "MainActiviy";
+    private static final String     TAG      = "MainActiviy";
+
+    protected static final String   POSITION = "position";
     protected DrawerLayout          drawerLayout;
     protected ListView              listView;
     protected ActionBarDrawerToggle drawerListener;
-    protected Toolbar               toolbar = null;
-    protected MyAdapter             myAdapter;
+    protected Toolbar               toolbar  = null;
+    protected DrawerAdapter         drawerAdapter;
     protected String[]              navDrawerItems;
     protected SpinnerAdapter        spinnerAdapter;
     protected FrameLayout           frameLayout;
@@ -49,13 +56,13 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         drawerLayout = (DrawerLayout) findViewById( R.id.drawerLayout );
         listView = (ListView) findViewById( R.id.drawerList );
 
-        myAdapter = new MyAdapter( this );
-        listView.setAdapter( myAdapter );
+        drawerAdapter = new DrawerAdapter( this );
+        listView.setAdapter( drawerAdapter );
 
         listView.setOnItemClickListener( this );
 
         // get list of items of the drawer
-        navDrawerItems = myAdapter.getNavDrawerItems();
+        navDrawerItems = drawerAdapter.getNavDrawerItems();
 
         drawerListener = new ActionBarDrawerToggle( this, drawerLayout,
                 toolbar, R.string.drawer_open,
@@ -73,8 +80,24 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 
         };
         drawerLayout.setDrawerListener( drawerListener );
-        getSupportActionBar().setHomeButtonEnabled( true );
-        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled( true );
+        actionBar.setDisplayHomeAsUpEnabled( true );
+        actionBar.setDisplayUseLogoEnabled( true );
+
+        // // actionBar.setCustomView( R.layout.actionbar_view );
+        // // EditText search = (EditText)
+        // actionBar.getCustomView().findViewById( R.id.searchfield );
+        // search.setOnEditorActionListener( new OnEditorActionListener() {
+        //
+        // @Override
+        // public boolean onEditorAction( TextView v, int actionId, KeyEvent
+        // event ) {
+        // Log.i( TAG, "search triggered1" );
+        // return false;
+        // }
+        // } );
+        // actionBar.setDisplayOptions( ActionBar.DISPLAY_USE_LOGO );
 
         spinnerAdapter = ArrayAdapter.createFromResource( this, R.array.planets,
                 android.R.layout.simple_spinner_dropdown_item );
@@ -149,6 +172,8 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
             startActivity( mainIntent );
             break;
 
+        case 7:
+            break;
         default:
             break;
         }
@@ -158,66 +183,14 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         listView.setItemChecked( position, true );
     }
 
+    /**
+     * set the title on the bar of nav drawer
+     * 
+     * @param title
+     *            set the title on bar nav drawer
+     */
     public void setTitle( String title ) {
         getSupportActionBar().setTitle( title );
     }
-}
 
-/**
- * 
- * @author McCyrille
- * 
- */
-class MyAdapter extends BaseAdapter {
-    private Context  context;
-    private String[] navDrawerItems;
-    private int[]    navDrawerIcons = { R.drawable.ic_action_view_as_list,
-                                    R.drawable.ic_action_search,
-                                    R.drawable.ic_action_new,
-                                    R.drawable.ic_action_edit,
-                                    R.drawable.ic_action_sort_by_size,
-                                    R.drawable.ic_action_settings,
-                                    R.drawable.ic_action_about };
-
-    public MyAdapter( Context context ) {
-        this.context = context;
-        navDrawerItems = context.getResources().getStringArray( R.array.nav_drawer_items );
-    }
-
-    @Override
-    public int getCount() {
-        return navDrawerItems.length;
-    }
-
-    @Override
-    public Object getItem( int position ) {
-        return navDrawerItems[position];
-    }
-
-    @Override
-    public long getItemId( int position ) {
-        return position;
-    }
-
-    @Override
-    public View getView( int position, View convertView, ViewGroup parent ) {
-        View row = null;
-        if ( convertView == null ) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-            row = inflater.inflate( R.layout.custom_row, parent, false );
-        } else {
-            row = convertView;
-        }
-        TextView tvDrawerItem = (TextView) row.findViewById( R.id.tvDrawerItem );
-        ImageView ivDrawerIcon = (ImageView) row.findViewById( R.id.ivDrawerIcon );
-
-        tvDrawerItem.setText( navDrawerItems[position] );
-        ivDrawerIcon.setImageResource( navDrawerIcons[position] );
-
-        return row;
-    }
-
-    public String[] getNavDrawerItems() {
-        return navDrawerItems;
-    }
 }

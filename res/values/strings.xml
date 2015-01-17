@@ -34,6 +34,7 @@
         <item >Summary</item>
         <item >Options</item>
         <item >About</item>
+        <item >Exit</item>
     </string-array>
      
     <!-- Nav Drawer List Item Icons -->
