@@ -3,15 +3,28 @@ package com.intelness.fgmsongs;
 import java.util.List;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
+import com.intelness.fgmsongs.adapters.ASongAdapter;
 import com.intelness.fgmsongs.beans.Song;
+import com.intelness.fgmsongs.beans.Verse;
 import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.utils.FGMSongsUtils;
+import com.intelness.fgmsongs.utils.XMLParser;
 
+/**
+ * 
+ * @author McCyrille
+ * @version 1.0
+ */
 public class SongActivity extends MainActivity {
 
-    private List<Song> songs;
-    private int        position;
+    private static final String TAG = "SongActivity";
+    private List<Song>          songs;
+    private List<Verse>         verses;
+    private int                 position;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -29,6 +42,33 @@ public class SongActivity extends MainActivity {
             position = 0;
         }
         setTitle( songs.get( position ).getNumber() + ". " + songs.get( position ).getTitle() );
+        verses = getVersesOfSong( songs.get( position ).getNumber(), FGMSongsUtils.FR );
+        Log.i( TAG, verses.get( 0 ).getStrophe() );
+
+        ListView lvASong = (ListView) layout.findViewById( R.id.lvASong );
+        ASongAdapter adapter = new ASongAdapter( this, verses );
+        lvASong.setAdapter( adapter );
+    }
+
+    /**
+     * get the verses of a song acording to the number and the language
+     * 
+     * @param number
+     *            of the song
+     * @param language
+     *            of the song
+     * @return
+     */
+    public List<Verse> getVersesOfSong( int number, String language ) {
+
+        List<Verse> versesOfSong = null;
+        int fileResource = FGMSongsUtils.getFileByNumber( number, language );
+        if ( fileResource <= 0 ) {
+            return versesOfSong;
+        }
+        XMLParser parser = new XMLParser( XMLParser.VERSE );
+        versesOfSong = parser.parseVerse( ( getResources().openRawResource( fileResource ) ) );
+        return versesOfSong;
     }
 
     /**

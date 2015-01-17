@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.intelness.fgmsongs.R;
+import com.intelness.fgmsongs.beans.Verse;
+import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 /**
  * manage the display of a song
@@ -20,22 +22,22 @@ import com.intelness.fgmsongs.R;
 public class ASongAdapter extends BaseAdapter {
 
     private Context        context;
-    private List<String>   song;
+    private List<Verse>    verses;
     private LayoutInflater inflater;
 
-    public ASongAdapter( Context context, List<String> song ) {
+    public ASongAdapter( Context context, List<Verse> verses ) {
         this.context = context;
-        this.song = song;
+        this.verses = verses;
     }
 
     @Override
     public int getCount() {
-        return song.size();
+        return verses.size();
     }
 
     @Override
     public Object getItem( int position ) {
-        return song.get( position );
+        return verses.get( position );
     }
 
     @Override
@@ -55,9 +57,17 @@ public class ASongAdapter extends BaseAdapter {
 
         TextView tvASong = (TextView) convertView.findViewById( R.id.tvAsong );
 
-        String verse = song.get( position );
+        Verse verse = verses.get( position );
 
-        tvASong.setText( verse );
+        // get a strophe , and change it so that it has back line
+        String newVerse = FGMSongsUtils.StringsWithNewLine( verse.getStrophe() );
+        // String[] splitVerse = verse.getStrophe().split( FGMSongsUtils.SPLIT
+        // );
+        //
+        // for ( int i = 0; i < splitVerse.length; i++ ) {
+        // newVerse += splitVerse[i] + System.getProperty( "line.separator" );
+        // }
+        tvASong.setText( newVerse );
         return convertView;
     }
 }

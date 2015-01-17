@@ -15,6 +15,12 @@ import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.utils.XMLParser;
 
+/**
+ * splash activity
+ * 
+ * @author McCyrille
+ * @version 1.0
+ */
 public class SplashActivity extends ActionBarActivity {
 
     private static final int    SPLASH_TIME_OUT = 3000;
@@ -26,17 +32,6 @@ public class SplashActivity extends ActionBarActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_splash );
         getSupportActionBar().hide();
-
-        // new Handler().postDelayed( new Runnable() {
-        //
-        // @Override
-        // public void run() {
-        // Intent i = new Intent( getApplicationContext(),
-        // ListSongsActivity.class );
-        // startActivity( i );
-        // finish();
-        // }
-        // }, SPLASH_TIME_OUT );
 
         new loadSongs().execute();
     }
@@ -89,7 +84,7 @@ public class SplashActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute( Void result ) {
 
-            Intent i = new Intent( getApplicationContext(), ListSongsActivity.class );
+            Intent i = new Intent( getApplicationContext(), HomeActivity.class );
             startActivity( i );
             finish();
         }
@@ -121,8 +116,8 @@ public class SplashActivity extends ActionBarActivity {
 
         List<Song> songs;
 
-        XMLParser parser = new XMLParser();
-        songs = parser.parse( getResources().openRawResource( R.raw.fr_songs ) );
+        XMLParser parser = new XMLParser( XMLParser.SONG );
+        songs = parser.parseSong( getResources().openRawResource( R.raw.fr_songs ) );
 
         for ( int i = 0; i < songs.size(); i++ ) {
             int number = songs.get( i ).getNumber();

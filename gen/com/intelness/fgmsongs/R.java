@@ -1604,7 +1604,7 @@ containing a value of this type.
         public static final int number_frame=0x7f09002f;
         public static final int second_line=0x7f090034;
         public static final int second_line_frame=0x7f090033;
-        public static final int song_padding=0x7f090036;
+        public static final int song_margin=0x7f090036;
         public static final int title_song=0x7f090032;
         public static final int title_song_frame=0x7f090031;
         public static final int year=0x7f090035;
@@ -1689,7 +1689,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f06002f;
         public static final int action_mode_bar_stub=0x7f06002e;
         public static final int action_mode_close_button=0x7f060021;
-        public static final int action_settings=0x7f060051;
+        public static final int action_settings=0x7f060055;
         public static final int activity_chooser_view_content=0x7f060022;
         public static final int always=0x7f06000d;
         public static final int beginning=0x7f060012;
@@ -1699,8 +1699,8 @@ containing a value of this type.
         public static final int default_activity_button=0x7f060025;
         public static final int dialog=0x7f060010;
         public static final int disableHome=0x7f06000a;
-        public static final int drawerLayout=0x7f060042;
-        public static final int drawerList=0x7f060044;
+        public static final int drawerLayout=0x7f060046;
+        public static final int drawerList=0x7f060048;
         public static final int dropdown=0x7f060011;
         public static final int edit_query=0x7f060034;
         public static final int end=0x7f060014;
@@ -1711,13 +1711,14 @@ containing a value of this type.
         public static final int icon=0x7f060027;
         public static final int ifRoom=0x7f06000c;
         public static final int image=0x7f060024;
-        public static final int ivDrawerIcon=0x7f06004c;
-        public static final int ivLogo=0x7f06004a;
+        public static final int imageView1=0x7f060044;
+        public static final int ivDrawerIcon=0x7f060050;
+        public static final int ivLogo=0x7f06004e;
         public static final int listMode=0x7f060002;
         public static final int list_item=0x7f060026;
-        public static final int lvASong=0x7f060045;
-        public static final int lvListSongs=0x7f060041;
-        public static final int mainContent=0x7f060043;
+        public static final int lvASong=0x7f060049;
+        public static final int lvListSongs=0x7f060045;
+        public static final int mainContent=0x7f060047;
         public static final int middle=0x7f060013;
         public static final int never=0x7f06000b;
         public static final int none=0x7f060004;
@@ -1745,15 +1746,18 @@ containing a value of this type.
         public static final int textView1=0x7f060040;
         public static final int title=0x7f060028;
         public static final int tvAsong=0x7f06001e;
-        public static final int tvDrawerItem=0x7f06004d;
-        public static final int tvFullGospelMission=0x7f06004b;
-        public static final int tvLord=0x7f060049;
-        public static final int tvNumberSong=0x7f06004e;
-        public static final int tvOf=0x7f060048;
-        public static final int tvPraises=0x7f060047;
-        public static final int tvSecondLine=0x7f060050;
-        public static final int tvSing=0x7f060046;
-        public static final int tvTitleSong=0x7f06004f;
+        public static final int tvDrawerItem=0x7f060051;
+        public static final int tvFullGospelMission=0x7f06004f;
+        public static final int tvHomeFirstVerse=0x7f060041;
+        public static final int tvHomeSecondVerse=0x7f060042;
+        public static final int tvLord=0x7f06004d;
+        public static final int tvNumberSong=0x7f060052;
+        public static final int tvOf=0x7f06004c;
+        public static final int tvPraises=0x7f06004b;
+        public static final int tvPsalms342=0x7f060043;
+        public static final int tvSecondLine=0x7f060054;
+        public static final int tvSing=0x7f06004a;
+        public static final int tvTitleSong=0x7f060053;
         public static final int up=0x7f060016;
         public static final int useLogo=0x7f060005;
         public static final int withText=0x7f06000e;
@@ -1812,23 +1816,53 @@ containing a value of this type.
         public static final int activity_about=0x7f030018;
         public static final int activity_addsong=0x7f030019;
         public static final int activity_editsong=0x7f03001a;
-        public static final int activity_listsongs=0x7f03001b;
-        public static final int activity_main=0x7f03001c;
-        public static final int activity_options=0x7f03001d;
-        public static final int activity_searchsong=0x7f03001e;
-        public static final int activity_song=0x7f03001f;
-        public static final int activity_splash=0x7f030020;
-        public static final int activity_summary=0x7f030021;
-        public static final int custom_row=0x7f030022;
-        public static final int list_song=0x7f030023;
-        public static final int support_simple_spinner_dropdown_item=0x7f030024;
+        public static final int activity_home=0x7f03001b;
+        public static final int activity_listsongs=0x7f03001c;
+        public static final int activity_main=0x7f03001d;
+        public static final int activity_options=0x7f03001e;
+        public static final int activity_searchsong=0x7f03001f;
+        public static final int activity_song=0x7f030020;
+        public static final int activity_splash=0x7f030021;
+        public static final int activity_summary=0x7f030022;
+        public static final int custom_row=0x7f030023;
+        public static final int list_song=0x7f030024;
+        public static final int support_simple_spinner_dropdown_item=0x7f030025;
     }
     public static final class menu {
         public static final int splash=0x7f0e0000;
     }
     public static final class raw {
         public static final int fr_1=0x7f050000;
-        public static final int fr_songs=0x7f050001;
+        public static final int fr_10=0x7f050001;
+        public static final int fr_11=0x7f050002;
+        public static final int fr_12=0x7f050003;
+        public static final int fr_13=0x7f050004;
+        public static final int fr_14=0x7f050005;
+        public static final int fr_15=0x7f050006;
+        public static final int fr_16=0x7f050007;
+        public static final int fr_17=0x7f050008;
+        public static final int fr_18=0x7f050009;
+        public static final int fr_19=0x7f05000a;
+        public static final int fr_2=0x7f05000b;
+        public static final int fr_20=0x7f05000c;
+        public static final int fr_21=0x7f05000d;
+        public static final int fr_22=0x7f05000e;
+        public static final int fr_23=0x7f05000f;
+        public static final int fr_24=0x7f050010;
+        public static final int fr_25=0x7f050011;
+        public static final int fr_26=0x7f050012;
+        public static final int fr_27=0x7f050013;
+        public static final int fr_28=0x7f050014;
+        public static final int fr_29=0x7f050015;
+        public static final int fr_3=0x7f050016;
+        public static final int fr_30=0x7f050017;
+        public static final int fr_4=0x7f050018;
+        public static final int fr_5=0x7f050019;
+        public static final int fr_6=0x7f05001a;
+        public static final int fr_7=0x7f05001b;
+        public static final int fr_8=0x7f05001c;
+        public static final int fr_9=0x7f05001d;
+        public static final int fr_songs=0x7f05001e;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1898,10 +1932,14 @@ containing a value of this type.
         public static final int empty=0x7f0b001c;
         public static final int fullGospelMission=0x7f0b0018;
         public static final int hello_world=0x7f0b0011;
+        public static final int home_first_verse=0x7f0b001d;
+        public static final int home_seconf_verse=0x7f0b001e;
         public static final int lord=0x7f0b0013;
         public static final int of=0x7f0b0016;
         public static final int praises=0x7f0b0015;
+        public static final int psalms_34_2=0x7f0b001f;
         public static final int sing=0x7f0b0014;
+        public static final int songs=0x7f0b0020;
     }
     public static final class style {
         /** 

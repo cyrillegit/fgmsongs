@@ -12,6 +12,6 @@
     <dimen name="second_line_frame">20dip</dimen>
     <dimen name="second_line">12dip</dimen>
     <dimen name="year">12dip</dimen>
-    <dimen name="song_padding">2dp</dimen>
+    <dimen name="song_margin">10dp</dimen>
 
 </resources>
