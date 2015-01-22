@@ -115,21 +115,113 @@ public class FGMSongsUtils {
             if ( language.equals( EN ) ) {
                 // fileId = R.raw.en_1;
             } else if ( language.equals( FR ) ) {
-                fileId = R.raw.fr_1;
+                fileId = R.raw.fr_11;
             }
             break;
         case 12:
             if ( language.equals( EN ) ) {
                 // fileId = R.raw.en_1;
             } else if ( language.equals( FR ) ) {
-                fileId = R.raw.fr_1;
+                fileId = R.raw.fr_12;
             }
             break;
         case 13:
             if ( language.equals( EN ) ) {
                 // fileId = R.raw.en_1;
             } else if ( language.equals( FR ) ) {
-                fileId = R.raw.fr_1;
+                fileId = R.raw.fr_13;
+            }
+            break;
+
+        case 14:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_14;
+            }
+            break;
+        case 15:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_15;
+            }
+            break;
+        case 16:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_16;
+            }
+            break;
+        case 17:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_17;
+            }
+            break;
+        case 18:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_18;
+            }
+            break;
+        case 19:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_19;
+            }
+            break;
+        case 20:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_20;
+            }
+            break;
+        case 21:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_21;
+            }
+            break;
+        case 22:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_22;
+            }
+            break;
+        case 23:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_23;
+            }
+            break;
+        case 24:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_24;
+            }
+            break;
+        case 25:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_12;
+            }
+            break;
+        case 26:
+            if ( language.equals( EN ) ) {
+                // fileId = R.raw.en_1;
+            } else if ( language.equals( FR ) ) {
+                fileId = R.raw.fr_13;
             }
             break;
 

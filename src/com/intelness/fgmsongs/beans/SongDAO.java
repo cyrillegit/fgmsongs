@@ -156,7 +156,8 @@ public class SongDAO extends DatabaseDAO {
                 songList.add( song );
             } while ( cursor.moveToNext() );
         }
-
+        cursor.close();
+        super.close();
         return songList;
     }
 
@@ -171,6 +172,7 @@ public class SongDAO extends DatabaseDAO {
             return -1;
         }
         int numRows = (int) DatabaseUtils.queryNumEntries( db, TABLE_SONG );
+        super.close();
         return numRows;
     }
 

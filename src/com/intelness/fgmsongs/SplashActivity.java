@@ -118,13 +118,13 @@ public class SplashActivity extends ActionBarActivity {
 
         XMLParser parser = new XMLParser( XMLParser.SONG );
         songs = parser.parseSong( getResources().openRawResource( R.raw.fr_songs ) );
-
+        // Log.i( TAG, "songs : " + songs.toString() );
         for ( int i = 0; i < songs.size(); i++ ) {
             int number = songs.get( i ).getNumber();
-            // if db is empty, store every devinettes that is in xml file in db
+            // if db is empty, store every songs that is in xml file in db
             if ( rows <= 0 ) {
                 sDao.addSong( songs.get( i ) );
-                // else, check to not store two same devinette
+                // else, check to not store two same song
             } else if ( sDao.getSongByNumber( number ).getNumber() != number ) {
                 sDao.addSong( songs.get( i ) );
             }

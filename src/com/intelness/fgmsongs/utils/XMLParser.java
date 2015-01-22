@@ -27,6 +27,7 @@ public class XMLParser {
     private static final String CREATED_DATE = "created_date";
 
     public static final String  VERSE        = "verse";
+    private static final String TAG          = "XMLParser";
 
     private List<Song>          songs;
     private Song                song;
@@ -40,6 +41,11 @@ public class XMLParser {
         } else if ( string.equals( VERSE ) ) {
             verses = new ArrayList<Verse>();
         }
+    }
+
+    public XMLParser() {
+        songs = new ArrayList<Song>();
+        verses = new ArrayList<Verse>();
     }
 
     /**
@@ -73,10 +79,12 @@ public class XMLParser {
 
                 case XmlPullParser.TEXT:
                     text = parser.getText();
+                    // Log.i( TAG, "text : " + text );
+
                     break;
 
                 case XmlPullParser.END_TAG:
-                    if ( tagName.equalsIgnoreCase( VERSE ) ) {
+                    if ( tagName.equalsIgnoreCase( SONG ) ) {
                         // add song object to the list
                         songs.add( song );
                     } else if ( tagName.equalsIgnoreCase( NUMBER ) ) {

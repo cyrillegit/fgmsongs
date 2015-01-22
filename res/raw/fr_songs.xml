@@ -69,5 +69,215 @@
         <second>L'abri pour nous dans la tempête</second>
         <author>Gospel Press</author>
         <created_date>1970-01-01</created_date>
-    </song>    
+    </song>
+    <song>
+        <number>11</number>
+        <title>Mon Jésus, Je t'aime</title>
+        <second>Je te sais à moi</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>12</number>
+        <title>Roi de ma vie, reçois l'hommage</title>
+        <second>Soit adoré, exalté</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>13</number>
+        <title>O Fils de Dieu, quand nous voyons</title>
+        <second>La coupe qu'il te fallu boire</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>14</number>
+        <title>O l'Agneau de Dieu sanglant</title>
+        <second>A la croix pour moi souffrant</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>15</number>
+        <title>Prés du trone de la grâce et de la paix</title>
+        <second>J'ai reçu la promesse d'un Dieu parfait</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>16</number>
+        <title>Seigneur, ta mort à Golgotha</title>
+        <second>Me fait d'aimer sans cesse</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>17</number>
+        <title>Venez au Sauveur qui vous aime</title>
+        <second>Venez, Il a brisé vos fers</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>18</number>
+        <title>Publiez bien haut</title>
+        <second>La bonne nouvelle</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>19</number>
+        <title>Entends-tu? Jésus t'appelle</title>
+        <second>Viens,ô pécheur! il t'attend</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>20</number>
+        <title>Pourquoi donc attendre mon frére?</title>
+        <second>Ton Sauveur t'appelle aujourd'hui</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>   
+    <song>
+        <number>21</number>
+        <title>Doucement, tendrement Jésus t'appelle</title>
+        <second>Nous appelle, vous et moi</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>22</number>
+        <title>Coeurs fatigués et lasses de péché</title>
+        <second>Assez souffert, assez cherché</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>23</number>
+        <title>Dis, sais-tu que Jésus-Christ seul purifie?</title>
+        <second>Es-tu lavé dans le sang de l'Agneau?</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+    <song>
+        <number>24</number>
+        <title>Veux-tu briser du péché le pouvoir?</title>
+        <second>La force est en Christ</second>
+        <author>Gospel Press</author>
+        <created_date>1970-01-01</created_date>
+    </song>
+<!--     <song> -->
+<!--         <number>25</number> -->
+<!--         <title>Source de grâce, source efficace</title> -->
+<!--         <second>Qui du mont Golgotha jaillit</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>6</number> -->
+<!--         <title>Toi qui dispose</title> -->
+<!--         <second>De toutes choses</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>7</number> -->
+<!--         <title>Quel ami fidéle et tendre</title> -->
+<!--         <second>Nous avons en Jésus-Christ</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>8</number> -->
+<!--         <title>Jésus est mon divin berger</title> -->
+<!--         <second>Réjouis-toi, mon âme</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>9</number> -->
+<!--         <title>Sauveur adorable</title> -->
+<!--         <second>Oh! Jésus, mon Roi</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>10</number> -->
+<!--         <title>Divin rocher, refuge sûr</title> -->
+<!--         <second>L'abri pour nous dans la tempête</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>11</number> -->
+<!--         <title>Mon Jésus, Je t'aime</title> -->
+<!--         <second>Je te sais à moi</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>12</number> -->
+<!--         <title>Roi de ma vie, reçois l'hommage</title> -->
+<!--         <second>Soit adoré, exalté</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>13</number> -->
+<!--         <title>O Fils de Dieu, quand nous voyons</title> -->
+<!--         <second>La coupe qu'il te fallu boire</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>14</number> -->
+<!--         <title>O l'Agneau de Dieu sanglant</title> -->
+<!--         <second>A la croix pour moi souffrant</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>15</number> -->
+<!--         <title>Prés du trone de la grâce et de la paix</title> -->
+<!--         <second>J'ai reçu la promesse d'un Dieu parfait</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>16</number> -->
+<!--         <title>Seigneur, ta mort à Golgotha</title> -->
+<!--         <second>Me fait d'aimer sans cesse</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>17</number> -->
+<!--         <title>Venez au Sauveur qui vous aime</title> -->
+<!--         <second>Venez, Il a brisé vos fers</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>18</number> -->
+<!--         <title>Publiez bien haut</title> -->
+<!--         <second>La bonne nouvelle</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>19</number> -->
+<!--         <title>Entends-tu? Jésus t'appelle</title> -->
+<!--         <second>Viens,ô pécheur! il t'attend</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song> -->
+<!--     <song> -->
+<!--         <number>20</number> -->
+<!--         <title>Pourquoi donc attendre mon frére?</title> -->
+<!--         <second>Ton Sauveur t'appelle aujourd'hui</second> -->
+<!--         <author>Gospel Press</author> -->
+<!--         <created_date>1970-01-01</created_date> -->
+<!--     </song>             -->
 </songs>

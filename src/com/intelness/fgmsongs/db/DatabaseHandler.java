@@ -13,7 +13,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAG               = "DatabaseHandler";
 
     public static final int     DATABASE_VERSION  = 1;
-    public static final String  DATABASE_NAME     = "SongDB";
+    public static final String  DATABASE_NAME     = "Song.db";
     public static final String  CREATE_SONG_TABLE = "CREATE TABLE " + SongDAO.TABLE_SONG + "("
                                                           + SongDAO.KEY_ID + " INTEGER PRIMARY KEY,"
                                                           + SongDAO.KEY_NUMBER + " TEXT,"
