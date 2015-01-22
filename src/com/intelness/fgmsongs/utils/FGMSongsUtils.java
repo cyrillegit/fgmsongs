@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.intelness.fgmsongs.R;
 import com.intelness.fgmsongs.beans.Song;
@@ -16,12 +17,14 @@ import com.intelness.fgmsongs.beans.Song;
  */
 public class FGMSongsUtils {
 
-    public static final String  FR       = "fr";
-    public static final String  EN       = "en";
-    public static final String  SPLIT    = "##";
-    public static final String  SPACE    = " ";
-    public static final int     MIN_CHAR = 3;
-    private static final String TAG      = "FGMSongsUtils";
+    public static final String   FR       = "fr";
+    public static final String   EN       = "en";
+    public static final String   SPLIT    = "##";
+    public static final String   SPACE    = " ";
+    public static final int      MIN_CHAR = 3;
+    public static final String[] ALPHABET = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+                                          "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+    private static final String  TAG      = "FGMSongsUtils";
 
     /**
      * put back to line in a string by the separator ##
@@ -130,6 +133,47 @@ public class FGMSongsUtils {
             }
         }
         return aSongs;
+    }
+
+    /**
+     * sort the songs alphabetically
+     * 
+     * @param songs
+     *            all the songs
+     * @return songs sorted alphabetically
+     */
+    public static ArrayList<Song> sortSongsAlphabetically( List<Song> songs ) {
+
+        SparseArray<ArrayList<Song>> sortedSongs = new SparseArray<ArrayList<Song>>();
+        ArrayList<Song> sortedSongsAlphabetically = new ArrayList<Song>();
+
+        // put the alphabet in the SparseArray
+        for ( int i = 0; i < ALPHABET.length; i++ ) {
+            ArrayList<Song> aSong = new ArrayList<Song>();
+            aSong.add( new Song( 0, 0, ALPHABET[i], "", "", "" ) );
+            sortedSongs.put( i, aSong );
+        }
+
+        // gather the song that starts with the same letter
+        for ( Song song : songs ) {
+            for ( int i = 0; i < ALPHABET.length; i++ ) {
+                if ( song.getTitle().startsWith( ALPHABET[i] ) ) {
+                    ArrayList<Song> s = new ArrayList<Song>();
+                    s = sortedSongs.get( i );
+                    s.add( song );
+                    sortedSongs.put( i, s );
+                }
+            }
+        }
+
+        for ( int i = 0; i < ALPHABET.length; i++ ) {
+            for ( int k = 0; k < sortedSongs.get( i ).size(); k++ ) {
+                sortedSongsAlphabetically.add( sortedSongs.get( i ).get( k ) );
+                Log.i( TAG, "sorted : " + sortedSongs.get( i ).get( k ).getTitle() );
+            }
+        }
+
+        return sortedSongsAlphabetically;
     }
 
     /**

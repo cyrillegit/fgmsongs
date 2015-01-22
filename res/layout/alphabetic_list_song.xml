@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tvAlpha"
+        android:layout_width="@dimen/number_frame"
+        android:layout_height="@dimen/number_frame"
+        android:gravity="center"
+         android:text="N"
+        android:textSize="@dimen/number"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvAlphaTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/title_song_frame"
+        android:layout_above="@+id/tvAlphaSecondLine"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/tvAlphaNumber"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/song_margin"
+        android:text="Title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="@dimen/title_song" />
+
+    <TextView
+        android:id="@+id/tvAlphaNumber"
+        android:layout_width="@dimen/number_frame"
+        android:layout_height="@dimen/number_frame"
+        android:gravity="center"
+         android:text="M"
+        android:textSize="@dimen/number"
+        android:layout_alignBottom="@+id/tvAlphaNumberSong"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvAlphaSecondLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvAlpha"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/tvAlphaNumber"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/song_margin"
+        android:text="Second line"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="@dimen/second_line" />
+
+</RelativeLayout>

@@ -13,7 +13,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.intelness.fgmsongs.adapters.ListSongsAdapter;
@@ -27,7 +26,6 @@ public class SearchSongActivity extends MainActivity {
     private AutoCompleteTextView     actvSearchSong;
     private ImageButton              ibSearchSong;
     private ListView                 lvSearchedSongs;
-    private LinearLayout             llSearchSong;
     private static ArrayList<String> titleSongs;
     private List<Song>               songs;
 
@@ -43,7 +41,6 @@ public class SearchSongActivity extends MainActivity {
         actvSearchSong = (AutoCompleteTextView) layout.findViewById( R.id.actvSearchSong );
         ibSearchSong = (ImageButton) layout.findViewById( R.id.ibSearchSong );
         lvSearchedSongs = (ListView) layout.findViewById( R.id.lvSearhedSongs );
-        llSearchSong = (LinearLayout) layout.findViewById( R.id.llSearchSong );
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1,
                 titleSongs );
