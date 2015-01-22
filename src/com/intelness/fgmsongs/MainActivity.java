@@ -1,7 +1,9 @@
 package com.intelness.fgmsongs;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -131,6 +133,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         drawerListener.onConfigurationChanged( newConfig );
     }
 
+    @TargetApi( Build.VERSION_CODES.HONEYCOMB )
     @Override
     public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
         selectItem( position );
@@ -173,6 +176,13 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
             break;
 
         case 7:
+            // mainIntent = new Intent( getApplicationContext(),
+            // SplashActivity.class );
+            // mainIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK |
+            // Intent.FLAG_ACTIVITY_CLEAR_TASK );
+            // mainIntent.putExtra( "EXIT", true );
+            this.finish();
+            System.exit( 0 );
             break;
         default:
             break;

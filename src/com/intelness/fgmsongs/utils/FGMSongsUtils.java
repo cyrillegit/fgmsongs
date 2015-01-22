@@ -17,14 +17,18 @@ import com.intelness.fgmsongs.beans.Song;
  */
 public class FGMSongsUtils {
 
-    public static final String   FR       = "fr";
-    public static final String   EN       = "en";
-    public static final String   SPLIT    = "##";
-    public static final String   SPACE    = " ";
-    public static final int      MIN_CHAR = 3;
-    public static final String[] ALPHABET = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
-                                          "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-    private static final String  TAG      = "FGMSongsUtils";
+    public static final String   FR          = "fr";
+    public static final String   EN          = "en";
+    public static final String   SPLIT       = "##";
+    public static final String   SPACE       = " ";
+    public static final int      MIN_CHAR    = 3;
+    public static final String[] ALPHABET    = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+                                             "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+    public static final String[] LANGUAGES   = { "English", "French" };
+    public static final String[] LOCALE      = { "en", "fr" };
+    public static final String   PREFERENCES = "Preferences";
+    public static final String   LANGUAGE    = "language";
+    private static final String  TAG         = "FGMSongsUtils";
 
     /**
      * put back to line in a string by the separator ##

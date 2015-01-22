@@ -2,14 +2,13 @@
 <resources>
 
     <string name="app_name">FGM Songs</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="lord">L\&#39;ETERNEL</string>
-    <string name="sing">Chantez</string>
-    <string name="praises">les louanges </string>
-    <string name="of">de</string>
+    <string name="lord">LORD</string>
+    <string name="sing">SING</string>
+    <string name="praises">the praises</string>
+    <string name="of">of</string>
     <string name="descLogo">Logo FGM</string>
-    <string name="fullGospelMission">Mission du Plein Evangile</string>
+    <string name="fullGospelMission">Full Gospel Mission</string>
 
     <!-- Nav Drawer Menu Items -->
     <string-array name="planets">
@@ -56,13 +55,13 @@
     <string name="empty"> </string>
     <string name="home_first_verse">&quot;JE BENIRAI L\&#39;ETERNEL ## EN TOUT TEMPS</string>
     <string name="home_seconf_verse">SA LOUANGE SERA TOUJOURS ## DANS MA BOUCHE.&quot;</string>
-    <string name="psalms_34_2">Psaumes 34.2</string>
-    <string name="songs">Cantiques</string>
+    <string name="psalms_34_2">Psalms 34.2</string>
+    <string name="songs">Songs</string>
     <string name="search_song">Search a song</string>
-    <string name="cancel">Annuler</string>
-    <string name="validate">Valider</string>
-    <string name="language">Langue</string>
-    <string name="english">Anglais</string>
-    <string name="french">Français</string>
+    <string name="cancel">Cancel</string>
+    <string name="validate">Validate</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="french">French</string>
     <string name="select_language">Select a language</string>
 </resources>

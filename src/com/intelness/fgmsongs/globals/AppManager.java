@@ -12,6 +12,7 @@ public class AppManager extends Application {
     private List<Song>        songs;
     private int               number;
     private ArrayList<String> titleSongs;
+    private int               language;
 
     public List<Song> getSongs() {
         return songs;
@@ -35,6 +36,14 @@ public class AppManager extends Application {
 
     public void setTitleSongs( ArrayList<String> titleSongs ) {
         this.titleSongs = titleSongs;
+    }
+
+    public int getLanguage() {
+        return language;
+    }
+
+    public void setLanguage( int language ) {
+        this.language = language;
     }
 
 }

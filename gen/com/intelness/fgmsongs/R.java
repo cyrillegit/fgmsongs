@@ -19,12 +19,20 @@ public final class R {
     public static final class array {
         /**  Nav Drawer List Item Icons 
  Keep them in order as the titles are in 
+ Nav Drawer List Item Icons 
+ Keep them in order as the titles are in 
+ Nav Drawer List Item Icons 
+ Keep them in order as the titles are in 
          */
         public static final int nav_drawer_icons=0x7f0d0002;
         /**  Nav Drawer Menu Items 
+ Nav Drawer Menu Items 
+ Nav Drawer Menu Items 
          */
         public static final int nav_drawer_items=0x7f0d0001;
         /**  Nav Drawer Menu Items 
+ Nav Drawer Menu Items 
+ Nav Drawer Menu Items 
          */
         public static final int planets=0x7f0d0000;
     }
@@ -1664,17 +1672,18 @@ containing a value of this type.
         public static final int abc_textfield_search_material=0x7f020032;
         public static final int bg1=0x7f020033;
         public static final int bg2=0x7f020034;
-        public static final int ic_action_about=0x7f020035;
-        public static final int ic_action_cancel=0x7f020036;
-        public static final int ic_action_edit=0x7f020037;
-        public static final int ic_action_new=0x7f020038;
-        public static final int ic_action_search=0x7f020039;
-        public static final int ic_action_settings=0x7f02003a;
-        public static final int ic_action_sort_by_size=0x7f02003b;
-        public static final int ic_action_view_as_list=0x7f02003c;
-        public static final int ic_drawer=0x7f02003d;
-        public static final int ic_launcher=0x7f02003e;
-        public static final int splash=0x7f02003f;
+        public static final int border=0x7f020035;
+        public static final int ic_action_about=0x7f020036;
+        public static final int ic_action_cancel=0x7f020037;
+        public static final int ic_action_edit=0x7f020038;
+        public static final int ic_action_new=0x7f020039;
+        public static final int ic_action_search=0x7f02003a;
+        public static final int ic_action_settings=0x7f02003b;
+        public static final int ic_action_sort_by_size=0x7f02003c;
+        public static final int ic_action_view_as_list=0x7f02003d;
+        public static final int ic_drawer=0x7f02003e;
+        public static final int ic_launcher=0x7f02003f;
+        public static final int splash=0x7f020040;
     }
     public static final class id {
         public static final int action_bar=0x7f060032;
@@ -1690,11 +1699,13 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f06002f;
         public static final int action_mode_bar_stub=0x7f06002e;
         public static final int action_mode_close_button=0x7f060021;
-        public static final int action_settings=0x7f06005f;
+        public static final int action_settings=0x7f060066;
         public static final int activity_chooser_view_content=0x7f060022;
-        public static final int actvSearchSong=0x7f06004a;
+        public static final int actvSearchSong=0x7f060051;
         public static final int always=0x7f06000d;
         public static final int beginning=0x7f060012;
+        public static final int btnOptionsCancel=0x7f06004a;
+        public static final int btnOptionsValidate=0x7f060049;
         public static final int checkbox=0x7f06002a;
         public static final int collapseActionView=0x7f06000f;
         public static final int decor_content_parent=0x7f060030;
@@ -1710,20 +1721,20 @@ containing a value of this type.
         public static final int expanded_menu=0x7f060029;
         public static final int home=0x7f060015;
         public static final int homeAsUp=0x7f060007;
-        public static final int ibSearchSong=0x7f06004b;
+        public static final int ibSearchSong=0x7f060052;
         public static final int icon=0x7f060027;
         public static final int ifRoom=0x7f06000c;
         public static final int image=0x7f060024;
         public static final int imageView1=0x7f060044;
-        public static final int ivDrawerIcon=0x7f06005a;
-        public static final int ivLogo=0x7f060052;
+        public static final int ivDrawerIcon=0x7f060061;
+        public static final int ivLogo=0x7f060059;
         public static final int listMode=0x7f060002;
         public static final int list_item=0x7f060026;
-        public static final int llSearchSong=0x7f060049;
-        public static final int lvASong=0x7f06004d;
+        public static final int llSearchSong=0x7f060050;
+        public static final int lvASong=0x7f060054;
         public static final int lvListSongs=0x7f060045;
-        public static final int lvSearhedSongs=0x7f06004c;
-        public static final int lvSummarySongs=0x7f060054;
+        public static final int lvSearhedSongs=0x7f060053;
+        public static final int lvSummarySongs=0x7f06005b;
         public static final int mainContent=0x7f060047;
         public static final int middle=0x7f060013;
         public static final int never=0x7f06000b;
@@ -1732,6 +1743,10 @@ containing a value of this type.
         public static final int progress_circular=0x7f06001c;
         public static final int progress_horizontal=0x7f06001d;
         public static final int radio=0x7f06002c;
+        public static final int rbEnglish=0x7f06004e;
+        public static final int rbFrench=0x7f06004f;
+        public static final int rgLanguages=0x7f06004d;
+        public static final int rlLanguages=0x7f06004b;
         public static final int search_badge=0x7f060036;
         public static final int search_bar=0x7f060035;
         public static final int search_button=0x7f060037;
@@ -1751,24 +1766,25 @@ containing a value of this type.
         public static final int tabMode=0x7f060003;
         public static final int textView1=0x7f060040;
         public static final int title=0x7f060028;
-        public static final int tvAlpha=0x7f060055;
-        public static final int tvAlphaNumber=0x7f060058;
-        public static final int tvAlphaNumberSong=0x7f060059;
-        public static final int tvAlphaSecondLine=0x7f060057;
-        public static final int tvAlphaTitle=0x7f060056;
+        public static final int tvAlpha=0x7f06005c;
+        public static final int tvAlphaNumber=0x7f06005f;
+        public static final int tvAlphaNumberSong=0x7f060060;
+        public static final int tvAlphaSecondLine=0x7f06005e;
+        public static final int tvAlphaTitle=0x7f06005d;
         public static final int tvAsong=0x7f06001e;
-        public static final int tvDrawerItem=0x7f06005b;
-        public static final int tvFullGospelMission=0x7f060053;
+        public static final int tvDrawerItem=0x7f060062;
+        public static final int tvFullGospelMission=0x7f06005a;
         public static final int tvHomeFirstVerse=0x7f060041;
         public static final int tvHomeSecondVerse=0x7f060042;
-        public static final int tvLord=0x7f060051;
-        public static final int tvNumberSong=0x7f06005c;
-        public static final int tvOf=0x7f060050;
-        public static final int tvPraises=0x7f06004f;
+        public static final int tvLanguage=0x7f06004c;
+        public static final int tvLord=0x7f060058;
+        public static final int tvNumberSong=0x7f060063;
+        public static final int tvOf=0x7f060057;
+        public static final int tvPraises=0x7f060056;
         public static final int tvPsalms342=0x7f060043;
-        public static final int tvSecondLine=0x7f06005e;
-        public static final int tvSing=0x7f06004e;
-        public static final int tvTitleSong=0x7f06005d;
+        public static final int tvSecondLine=0x7f060065;
+        public static final int tvSing=0x7f060055;
+        public static final int tvTitleSong=0x7f060064;
         public static final int up=0x7f060016;
         public static final int useLogo=0x7f060005;
         public static final int withText=0x7f06000e;
@@ -1941,24 +1957,32 @@ containing a value of this type.
         public static final int abc_toolbar_collapse_description=0x7f0b0004;
         public static final int action_settings=0x7f0b0012;
         public static final int app_name=0x7f0b0010;
+        public static final int cancel=0x7f0b0022;
         public static final int descLogo=0x7f0b0017;
         /**  Content Description 
+ Content Description 
+ Content Description 
          */
         public static final int desc_list_item_icon=0x7f0b0019;
         public static final int drawer_close=0x7f0b001b;
         public static final int drawer_open=0x7f0b001a;
         public static final int empty=0x7f0b001c;
+        public static final int english=0x7f0b0025;
+        public static final int french=0x7f0b0026;
         public static final int fullGospelMission=0x7f0b0018;
         public static final int hello_world=0x7f0b0011;
         public static final int home_first_verse=0x7f0b001d;
         public static final int home_seconf_verse=0x7f0b001e;
+        public static final int language=0x7f0b0024;
         public static final int lord=0x7f0b0013;
         public static final int of=0x7f0b0016;
         public static final int praises=0x7f0b0015;
         public static final int psalms_34_2=0x7f0b001f;
         public static final int search_song=0x7f0b0021;
+        public static final int select_language=0x7f0b0027;
         public static final int sing=0x7f0b0014;
         public static final int songs=0x7f0b0020;
+        public static final int validate=0x7f0b0023;
     }
     public static final class style {
         /** 

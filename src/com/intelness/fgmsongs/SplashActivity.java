@@ -3,9 +3,11 @@ package com.intelness.fgmsongs;
 import java.util.List;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -32,6 +34,15 @@ public class SplashActivity extends ActionBarActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_splash );
         getSupportActionBar().hide();
+
+        // if ( getIntent().getBooleanExtra( "EXIT", false ) ) {
+        // finish();
+        // System.exit( 0 );
+        // }
+
+        Resources res = getResources();
+        String current = res.getConfiguration().locale.getCountry();
+        Log.i( TAG, "current locale : " + current );
 
         new loadSongs().execute();
     }
@@ -136,6 +147,9 @@ public class SplashActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * set global variable
+     */
     private void setGlobalVariables() {
         // calling the application class
         final AppManager app = (AppManager) getApplicationContext();
