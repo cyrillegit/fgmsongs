@@ -3,15 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <include layout="@layout/activity_main"/>"
-    <TextView
-        android:id="@+id/textView1"
+    <include layout="@layout/activity_main" />
+"
+
+    <LinearLayout
+        android:id="@+id/llSearchSong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="225dp"
-        android:text="Search song"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_margin="@dimen/search_song_margin" >
+
+        <AutoCompleteTextView
+            android:id="@+id/actvSearchSong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.99"
+            android:ems="6"
+            android:hint="@string/search_song"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textSize="12sp" >
+
+            <requestFocus />
+        </AutoCompleteTextView>
+
+        <ImageButton
+            android:id="@+id/ibSearchSong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_search" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvSearhedSongs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/llSearchSong" >
+
+    </ListView>
 
 </RelativeLayout>

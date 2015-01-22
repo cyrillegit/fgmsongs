@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.utils.FGMSongsUtils;
 import com.intelness.fgmsongs.utils.XMLParser;
 
 /**
@@ -99,13 +99,18 @@ public class SplashActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * get all the title and second line of songs stored in db
+     * 
+     * @return list of songs
+     */
     public List<Song> getAllSongs() {
 
         SongDAO sDao = new SongDAO( this );
         List<Song> allSongs = sDao.getAllSongs();
-        for ( int i = 0; i < allSongs.size(); i++ ) {
-            Log.i( TAG, "song : " + allSongs.get( i ).getTitle() );
-        }
+        // for ( int i = 0; i < allSongs.size(); i++ ) {
+        // Log.i( TAG, "song : " + allSongs.get( i ).getTitle() );
+        // }
         return allSongs;
     }
 
@@ -135,5 +140,6 @@ public class SplashActivity extends ActionBarActivity {
         // calling the application class
         final AppManager app = (AppManager) getApplicationContext();
         app.setSongs( songs );
+        app.setTitleSongs( FGMSongsUtils.getAllTitleSongs( songs ) );
     }
 }
