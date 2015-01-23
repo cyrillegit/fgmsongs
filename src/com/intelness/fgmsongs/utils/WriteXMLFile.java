@@ -22,6 +22,12 @@ import android.util.SparseArray;
 
 import com.intelness.fgmsongs.beans.Verse;
 
+/**
+ * xml formatting of a string
+ * 
+ * @author McCyrille
+ * @version 1.0
+ */
 public class WriteXMLFile {
 
     public static final String SONG  = "song";
@@ -36,6 +42,11 @@ public class WriteXMLFile {
 
     }
 
+    /**
+     * format string xml alike
+     * 
+     * @return string xml-formatted
+     */
     public String write() {
         String xmlString = "";
         if ( verses.size() <= 0 ) {

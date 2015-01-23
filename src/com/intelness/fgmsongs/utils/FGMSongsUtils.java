@@ -107,6 +107,23 @@ public class FGMSongsUtils {
     }
 
     /**
+     * get all the editable songs
+     * 
+     * @param songs
+     *            list of all the songs
+     * @return list of editable songs
+     */
+    public static ArrayList<Song> getEditableSongs( List<Song> songs ) {
+        ArrayList<Song> editableSongs = new ArrayList<Song>();
+        for ( Song song : songs ) {
+            if ( song.getNumber() >= FIRST_CUSTOM_NUMBER_SONG ) {
+                editableSongs.add( song );
+            }
+        }
+        return editableSongs;
+    }
+
+    /**
      * get all songs that the title or the second line contain a certain string
      * 
      * @param string

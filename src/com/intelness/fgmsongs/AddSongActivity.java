@@ -2,6 +2,7 @@ package com.intelness.fgmsongs;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -157,19 +158,24 @@ public class AddSongActivity extends MainActivity {
                 // store xml file in internal storage
                 String filename = FGMSongsUtils.CUSTOM + lastNumber + ".xml";
                 storeXMLFile( filename, xmlString );
+                // store the song un DB
+                storeSongInDB( song );
                 Log.i( TAG, xmlString );
 
-                // setLastCustomNumberSong( lastNumber + 1 );
+                setNewSongInSongs( song );
+                setLastCustomNumberSong( lastNumber + 1 );
 
                 numberVerses = 0;
                 Intent i = new Intent( getApplicationContext(), EditSongActivity.class );
                 startActivity( i );
                 finish();
-
             }
         } );
     }
 
+    /**
+     * get all the data corresponding to the song
+     */
     public void getDataOfSong() {
 
         String title = etAddSongTitle.getText().toString();
@@ -178,6 +184,7 @@ public class AddSongActivity extends MainActivity {
 
         song.setNumber( lastNumber );
         song.setTitle( title );
+        song.setSecond( title );
         song.setCreatedDate( datetime );
 
         for ( int i = 0; i < numberVerses; i++ ) {
@@ -243,5 +250,18 @@ public class AddSongActivity extends MainActivity {
     public void setLastCustomNumberSong( int number ) {
         final AppManager app = (AppManager) getApplicationContext();
         app.setLastCustomNumberSong( number );
+    }
+
+    /**
+     * add new song to other songs
+     * 
+     * @param song
+     *            to add
+     */
+    public void setNewSongInSongs( Song song ) {
+        final AppManager app = (AppManager) getApplicationContext();
+        List<Song> oldSongs = app.getSongs();
+        oldSongs.add( song );
+        app.setSongs( oldSongs );
     }
 }
