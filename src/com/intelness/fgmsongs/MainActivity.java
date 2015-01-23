@@ -2,6 +2,7 @@ package com.intelness.fgmsongs;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 
 import com.intelness.fgmsongs.adapters.DrawerAdapter;
+import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 /**
  * this class is the class that implements the navigation drawer, all the other
@@ -189,6 +192,13 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i( TAG, "ondestroy" );
+        savePreferences();
+    }
+
     public void selectItem( int position ) {
         listView.setItemChecked( position, true );
     }
@@ -201,6 +211,19 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
      */
     public void setTitle( String title ) {
         getSupportActionBar().setTitle( title );
+    }
+
+    /**
+     * save the preferences
+     * 
+     */
+    public void savePreferences() {
+        SharedPreferences.Editor editor = getSharedPreferences( FGMSongsUtils.PREFERENCES, MODE_PRIVATE ).edit();
+        final AppManager app = (AppManager) getApplicationContext();
+        Log.i( TAG, "number custom : " + app.getLastCustomNumberSong() );
+        editor.putInt( FGMSongsUtils.LANGUAGE, app.getLanguage() );
+        editor.putInt( FGMSongsUtils.LAST_CUSTOM_NUMBER_SONG, app.getLastCustomNumberSong() );
+        editor.commit();
     }
 
 }

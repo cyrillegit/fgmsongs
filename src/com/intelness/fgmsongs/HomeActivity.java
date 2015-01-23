@@ -2,7 +2,6 @@ package com.intelness.fgmsongs;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +26,7 @@ public class HomeActivity extends MainActivity {
         TextView tvSecondVerse = (TextView) layout.findViewById( R.id.tvHomeSecondVerse );
         TextView tvPsalms342 = (TextView) layout.findViewById( R.id.tvPsalms342 );
 
-        int languageId = retrievePreferences();
+        int languageId = getLocaleLanguage();
         if ( languageId < 0 ) {
             displayAlertDialog();
         } else {
@@ -55,8 +54,8 @@ public class HomeActivity extends MainActivity {
 
             @Override
             public void onClick( DialogInterface dialog, int which ) {
-                savePreferences( which );
-                setGlobalVariables( which );
+                // savePreferences( which );
+                setLocaleLanguage( which );
                 alertDialog.dismiss();
             }
         } );
@@ -64,34 +63,48 @@ public class HomeActivity extends MainActivity {
         alertDialog.show();
     }
 
-    /**
-     * save the language
-     * 
-     * @param languageId
-     *            id of the selected language
-     */
-    public void savePreferences( int languageId ) {
-        SharedPreferences.Editor editor = getSharedPreferences( FGMSongsUtils.PREFERENCES, MODE_PRIVATE ).edit();
-        editor.putInt( FGMSongsUtils.LANGUAGE, languageId );
-        editor.commit();
-    }
+    // /**
+    // * save the language
+    // *
+    // * @param languageId
+    // * id of the selected language
+    // */
+    // public void savePreferences( int languageId ) {
+    // SharedPreferences.Editor editor = getSharedPreferences(
+    // FGMSongsUtils.PREFERENCES, MODE_PRIVATE ).edit();
+    // editor.putInt( FGMSongsUtils.LANGUAGE, languageId );
+    // editor.commit();
+    // }
+
+    // /**
+    // * retrieve preferences
+    // *
+    // * @return prferences
+    // */
+    // public int retrievePreferences() {
+    // final AppManager app = (AppManager) getApplicationContext();
+    // SharedPreferences prefs = getSharedPreferences(
+    // FGMSongsUtils.PREFERENCES, MODE_PRIVATE );
+    // app.setLanguage( prefs.getInt( FGMSongsUtils.LANGUAGE, -1 ) );
+    // app.setLastCustomNumberSong( prefs.getInt(
+    // FGMSongsUtils.LAST_CUSTOM_NUMBER_SONG,
+    // FGMSongsUtils.FIRST_CUSTOM_NUMBER_SONG ) );
+    // return prefs.getInt( FGMSongsUtils.LANGUAGE, -1 );
+    // }
 
     /**
-     * retrieve preferences
-     * 
-     * @return prferences
+     * set locale
      */
-    public int retrievePreferences() {
-        SharedPreferences prefs = getSharedPreferences( FGMSongsUtils.PREFERENCES, MODE_PRIVATE );
-        return prefs.getInt( FGMSongsUtils.LANGUAGE, -1 );
-    }
-
-    /**
-     * set global variable
-     */
-    private void setGlobalVariables( int id ) {
-        // calling the application class
+    private void setLocaleLanguage( int language ) {
         final AppManager app = (AppManager) getApplicationContext();
-        app.setLanguage( id );
+        app.setLanguage( language );
+    }
+
+    /**
+     * get locale
+     */
+    private int getLocaleLanguage() {
+        final AppManager app = (AppManager) getApplicationContext();
+        return app.getLanguage();
     }
 }

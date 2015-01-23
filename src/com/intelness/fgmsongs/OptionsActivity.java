@@ -42,11 +42,12 @@ public class OptionsActivity extends MainActivity {
         rbEnglish = (RadioButton) layout.findViewById( R.id.rbEnglish );
         rbFrench = (RadioButton) layout.findViewById( R.id.rbFrench );
 
-        getGlobalVariables();
-        // set the current state
+        language = getLocaleLanguage();
+        // set the current state on the radio button
         setCurrentState( language );
-        // get the state of the layout
+        // get the state of the layout of the radio button
         getCurrentState();
+
         onClickBtnCancel();
         onClickBtnValidate();
     }
@@ -65,7 +66,7 @@ public class OptionsActivity extends MainActivity {
                 } else {
                     language = 0;
                 }
-                setGlobalVariables();
+                setLocaleLanguage( language );
                 setLocaleResources( FGMSongsUtils.LOCALE[language] );
                 Intent intent = new Intent( getApplicationContext(), SplashActivity.class );
                 startActivity( intent );
@@ -128,16 +129,16 @@ public class OptionsActivity extends MainActivity {
     /**
      * get global variables
      */
-    public void getGlobalVariables() {
+    public int getLocaleLanguage() {
         AppManager app = (AppManager) getApplicationContext();
-        language = app.getLanguage();
+        return app.getLanguage();
     }
 
     /**
      * set global variables
      */
-    public void setGlobalVariables() {
+    public void setLocaleLanguage( int localeLanguage ) {
         AppManager app = (AppManager) getApplicationContext();
-        app.setLanguage( language );
+        app.setLanguage( localeLanguage );
     }
 }

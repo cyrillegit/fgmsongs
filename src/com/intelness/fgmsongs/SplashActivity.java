@@ -3,6 +3,7 @@ package com.intelness.fgmsongs;
 import java.util.List;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -119,9 +120,6 @@ public class SplashActivity extends ActionBarActivity {
 
         SongDAO sDao = new SongDAO( this );
         List<Song> allSongs = sDao.getAllSongs();
-        // for ( int i = 0; i < allSongs.size(); i++ ) {
-        // Log.i( TAG, "song : " + allSongs.get( i ).getTitle() );
-        // }
         return allSongs;
     }
 
@@ -153,7 +151,12 @@ public class SplashActivity extends ActionBarActivity {
     private void setGlobalVariables() {
         // calling the application class
         final AppManager app = (AppManager) getApplicationContext();
+        SharedPreferences prefs = getSharedPreferences( FGMSongsUtils.PREFERENCES, MODE_PRIVATE );
+
         app.setSongs( songs );
         app.setTitleSongs( FGMSongsUtils.getAllTitleSongs( songs ) );
+        app.setLanguage( prefs.getInt( FGMSongsUtils.LANGUAGE, -1 ) );
+        app.setLastCustomNumberSong( prefs.getInt( FGMSongsUtils.LAST_CUSTOM_NUMBER_SONG,
+                FGMSongsUtils.FIRST_CUSTOM_NUMBER_SONG ) );
     }
 }

@@ -1,7 +1,10 @@
 package com.intelness.fgmsongs.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import android.util.Log;
 import android.util.SparseArray;
@@ -17,18 +20,25 @@ import com.intelness.fgmsongs.beans.Song;
  */
 public class FGMSongsUtils {
 
-    public static final String   FR          = "fr";
-    public static final String   EN          = "en";
-    public static final String   SPLIT       = "##";
-    public static final String   SPACE       = " ";
-    public static final int      MIN_CHAR    = 3;
-    public static final String[] ALPHABET    = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
-                                             "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-    public static final String[] LANGUAGES   = { "English", "French" };
-    public static final String[] LOCALE      = { "en", "fr" };
-    public static final String   PREFERENCES = "Preferences";
-    public static final String   LANGUAGE    = "language";
-    private static final String  TAG         = "FGMSongsUtils";
+    public static final String   FR                       = "fr";
+    public static final String   EN                       = "en";
+    public static final String   CUSTOM                   = "custom_";
+    public static final String   NEW_LINE                 = "\n";
+    public static final String   SPLIT                    = "##";
+    public static final String   SPACE                    = " ";
+    public static final int      MIN_CHAR                 = 3;
+    public static final String[] ALPHABET                 = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+                                                          "L", "M",
+                                                          "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y",
+                                                          "Z" };
+    public static final String[] LANGUAGES                = { "English", "French" };
+    public static final String[] LOCALE                   = { "en", "fr" };
+    public static final String   PREFERENCES              = "Preferences";
+    public static final String   LANGUAGE                 = "language";
+    public static final String   LAST_CUSTOM_NUMBER_SONG  = "lastCustomNumberSong";
+    public static final int      FIRST_CUSTOM_NUMBER_SONG = 75;
+    private static final String  TAG                      = "FGMSongsUtils";
+    private static final String  DATE_TIME_PATTERN        = "yyyy-MM-dd' 'HH:mm:ss";
 
     /**
      * put back to line in a string by the separator ##
@@ -48,6 +58,17 @@ public class FGMSongsUtils {
             }
         }
         return newString;
+    }
+
+    /**
+     * replace \n by ##
+     * 
+     * @param string
+     *            string1\n string2
+     * @return string1## string2
+     */
+    public static String StringsReplaceNewLine( String string ) {
+        return string.replace( NEW_LINE, SPLIT );
     }
 
     /**
@@ -178,6 +199,16 @@ public class FGMSongsUtils {
         }
 
         return sortedSongsAlphabetically;
+    }
+
+    /**
+     * get the current date time
+     * 
+     * @return the string of the current date time
+     */
+    public static String getCurrentDateTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat( DATE_TIME_PATTERN, Locale.ENGLISH );
+        return sdf.format( new Date() );
     }
 
     /**

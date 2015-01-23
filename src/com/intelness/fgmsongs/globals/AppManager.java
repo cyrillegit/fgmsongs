@@ -10,9 +10,10 @@ import com.intelness.fgmsongs.beans.Song;
 public class AppManager extends Application {
 
     private List<Song>        songs;
-    private int               number;
+    // private int number;
     private ArrayList<String> titleSongs;
     private int               language;
+    private int               lastCustomNumberSong;
 
     public List<Song> getSongs() {
         return songs;
@@ -22,13 +23,13 @@ public class AppManager extends Application {
         this.songs = songs;
     }
 
-    public int getNumber() {
-        return number;
-    }
+    // public int getNumber() {
+    // return number;
+    // }
 
-    public void setNumber( int number ) {
-        this.number = number;
-    }
+    // public void setNumber( int number ) {
+    // this.number = number;
+    // }
 
     public ArrayList<String> getTitleSongs() {
         return titleSongs;
@@ -44,6 +45,14 @@ public class AppManager extends Application {
 
     public void setLanguage( int language ) {
         this.language = language;
+    }
+
+    public int getLastCustomNumberSong() {
+        return lastCustomNumberSong;
+    }
+
+    public void setLastCustomNumberSong( int lastCustomNumberSong ) {
+        this.lastCustomNumberSong = lastCustomNumberSong;
     }
 
 }

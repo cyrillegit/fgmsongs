@@ -1,16 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlAddSong"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/song_margin"
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="187dp"
-        android:text="Add song"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:orientation="horizontal" >
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnAddNewVerse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_verse" />
+
+        <Button
+            android:id="@+id/btnAddSongCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/btnAddSongValidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/validate" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/svNewVerses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <LinearLayout
+            android:id="@+id/llNewVerses"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="@dimen/song_margin"
+	        android:orientation="vertical" >
+
+			    <LinearLayout
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_margin="@dimen/song_margin"
+			        android:orientation="vertical" >
+			
+			        <TextView
+			            android:id="@+id/tvAddSongTitle"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:text="@string/title"
+			            android:textAppearance="?android:attr/textAppearanceLarge" />
+			
+			        <EditText
+				        android:id="@+id/etAddSongTitle"
+				        android:layout_width="match_parent"
+				        android:layout_height="wrap_content"
+				        android:lines="1"
+				        android:ems="10"
+				        android:hint="@string/hint_title"
+				        android:inputType="textMultiLine" >
+				
+				        <requestFocus />
+			    	</EditText>
+			    </LinearLayout>
+		</LinearLayout>
+	    
+    </ScrollView>
+
+</LinearLayout>

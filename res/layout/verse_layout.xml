@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/song_margin"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvAddVerse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/song_margin"
+        android:text="@string/verse"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/etAddNewVerse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/song_margin"
+        android:ems="10"
+        android:lines="4"
+        android:hint="@string/hint_verse"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+  
+</LinearLayout>

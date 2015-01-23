@@ -64,4 +64,5 @@
     <string name="english">Anglais</string>
     <string name="french">Français</string>
     <string name="select_language">Choisis une langue</string>
+    <string name="of_the">de</string>
 </resources>
