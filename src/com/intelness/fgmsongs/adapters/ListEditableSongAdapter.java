@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.intelness.fgmsongs.R;
 import com.intelness.fgmsongs.beans.Song;
@@ -20,13 +18,13 @@ import com.intelness.fgmsongs.beans.Song;
  * @author McCyrille
  * @version 1.0
  */
-public class EditableSongAdapter extends BaseAdapter {
+public class ListEditableSongAdapter extends BaseAdapter {
 
     private Context        context;
     private List<Song>     songs;
     private LayoutInflater inflater;
 
-    public EditableSongAdapter( Context context, List<Song> songs ) {
+    public ListEditableSongAdapter( Context context, List<Song> songs ) {
         this.context = context;
         this.songs = songs;
     }
@@ -60,20 +58,21 @@ public class EditableSongAdapter extends BaseAdapter {
         TextView tvEditSongNumber = (TextView) convertView.findViewById( R.id.tvEditSongNumber );
         TextView tvEditSongTitle = (TextView) convertView.findViewById( R.id.tvEditSongTitle );
         TextView tvEditSongSecondLine = (TextView) convertView.findViewById( R.id.tvEditSongSecondLine );
-        ImageButton ibEditSongDelete = (ImageButton) convertView.findViewById( R.id.ibEditSongDelete );
+        // ImageButton ibEditSongDelete = (ImageButton)
+        // convertView.findViewById( R.id.ibEditSongDelete );
 
         Song song = songs.get( position );
 
         tvEditSongNumber.setText( String.valueOf( song.getNumber() ) );
         tvEditSongTitle.setText( song.getTitle() );
         tvEditSongSecondLine.setText( song.getSecond() );
-        ibEditSongDelete.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick( View v ) {
-                Toast.makeText( context, "toasted", Toast.LENGTH_LONG ).show();
-            }
-        } );
+        // ibEditSongDelete.setOnClickListener( new View.OnClickListener() {
+        //
+        // @Override
+        // public void onClick( View v ) {
+        // Toast.makeText( context, "toasted", Toast.LENGTH_LONG ).show();
+        // }
+        // } );
         return convertView;
     }
 }

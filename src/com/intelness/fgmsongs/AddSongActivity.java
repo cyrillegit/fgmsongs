@@ -89,8 +89,6 @@ public class AddSongActivity extends MainActivity {
             prepareNewVerseLayout( numberVerses, vgAddSong );
             numberVerses++;
         }
-
-        // }
     }
 
     /**
@@ -156,7 +154,7 @@ public class AddSongActivity extends MainActivity {
                 WriteXMLFile xml = new WriteXMLFile( songVerses );
                 String xmlString = xml.write();
                 // store xml file in internal storage
-                String filename = FGMSongsUtils.CUSTOM + lastNumber + ".xml";
+                String filename = FGMSongsUtils.CUSTOM + lastNumber + FGMSongsUtils.XML_EXTENSION;
                 storeXMLFile( filename, xmlString );
                 // store the song un DB
                 storeSongInDB( song );
@@ -166,7 +164,7 @@ public class AddSongActivity extends MainActivity {
                 setLastCustomNumberSong( lastNumber + 1 );
 
                 numberVerses = 0;
-                Intent i = new Intent( getApplicationContext(), EditSongActivity.class );
+                Intent i = new Intent( getApplicationContext(), ListEditableSongsActivity.class );
                 startActivity( i );
                 finish();
             }
@@ -228,6 +226,10 @@ public class AddSongActivity extends MainActivity {
      */
     public void storeSongInDB( Song song ) {
         SongDAO sDao = new SongDAO( this );
+        List<Song> sSongs = sDao.getAllSongs();
+        for ( Song s : sSongs ) {
+            Log.i( TAG, "sSongs   " + s.getNumber() + " : " + s.getTitle() );
+        }
         sDao.addSong( song );
     }
 

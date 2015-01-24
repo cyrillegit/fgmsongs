@@ -40,7 +40,7 @@
         </activity>
         
         <activity
-            android:name=".EditSongActivity"
+            android:name=".ListEditableSongsActivity"
             android:label="@string/app_name" >
         </activity>
         
@@ -66,6 +66,11 @@
         
         <activity
             android:name=".HomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name=".EditSongActivity"
             android:label="@string/app_name" >
         </activity>
               

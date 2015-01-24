@@ -37,6 +37,7 @@ public class FGMSongsUtils {
     public static final String   LANGUAGE                 = "language";
     public static final String   LAST_CUSTOM_NUMBER_SONG  = "lastCustomNumberSong";
     public static final int      FIRST_CUSTOM_NUMBER_SONG = 75;
+    public static final String   XML_EXTENSION            = ".xml";
     private static final String  TAG                      = "FGMSongsUtils";
     private static final String  DATE_TIME_PATTERN        = "yyyy-MM-dd' 'HH:mm:ss";
 

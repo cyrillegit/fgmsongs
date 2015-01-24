@@ -202,7 +202,7 @@ public class SongDAO extends DatabaseDAO {
      * @param song
      *            to delete
      */
-    public void deleteDevinette( Song song ) {
+    public void deleteSong( Song song ) {
         SQLiteDatabase db = open();
         db.delete( TABLE_SONG, KEY_ID + " = ?", new String[] { String.valueOf( song.getId() ) } );
     }

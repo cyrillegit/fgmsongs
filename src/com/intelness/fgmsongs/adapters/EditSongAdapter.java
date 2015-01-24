@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.intelness.fgmsongs.R;
@@ -14,18 +15,18 @@ import com.intelness.fgmsongs.beans.Verse;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 /**
- * manage the display of a song
+ * adapter to edit song
  * 
  * @author McCyrille
  * @version 1.0
  */
-public class ASongAdapter extends BaseAdapter {
+public class EditSongAdapter extends BaseAdapter {
 
     private Context        context;
     private List<Verse>    verses;
     private LayoutInflater inflater;
 
-    public ASongAdapter( Context context, List<Verse> verses ) {
+    public EditSongAdapter( Context context, List<Verse> verses ) {
         this.context = context;
         this.verses = verses;
     }
@@ -52,17 +53,24 @@ public class ASongAdapter extends BaseAdapter {
                     Context.LAYOUT_INFLATER_SERVICE );
         }
         if ( convertView == null ) {
-            convertView = inflater.inflate( R.layout.a_song, parent, false );
+            convertView = inflater.inflate( R.layout.edit_song, parent, false );
         }
 
-        TextView tvASong = (TextView) convertView.findViewById( R.id.tvAsong );
+        TextView tvEditSongHead = (TextView) convertView.findViewById( R.id.tvEditSongHead );
+        EditText etEditSongBody = (EditText) convertView.findViewById( R.id.etEditSongBody );
 
         Verse verse = verses.get( position );
 
         // get a strophe , and change it so that it has back line
         String newVerse = FGMSongsUtils.StringsWithNewLine( verse.getStrophe() );
 
-        tvASong.setText( newVerse );
+        if ( position == 0 ) {
+            tvEditSongHead.setText( context.getText( R.string.title ) );
+        } else {
+            tvEditSongHead.setText( context.getText( R.string.verse ) + " " + position );
+        }
+        etEditSongBody.setText( newVerse );
         return convertView;
     }
+
 }

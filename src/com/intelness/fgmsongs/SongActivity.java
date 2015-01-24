@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.intelness.fgmsongs.adapters.ASongAdapter;
 import com.intelness.fgmsongs.beans.Song;
@@ -43,11 +44,16 @@ public class SongActivity extends MainActivity {
         }
         setTitle( songs.get( position ).getNumber() + ". " + songs.get( position ).getTitle() );
         verses = getVersesOfSong( songs.get( position ).getNumber(), FGMSongsUtils.FR );
-        Log.i( TAG, verses.get( 0 ).getStrophe() );
+        if ( verses != null ) {
+            Log.i( TAG, verses.get( 0 ).getStrophe() );
 
-        ListView lvASong = (ListView) layout.findViewById( R.id.lvASong );
-        ASongAdapter adapter = new ASongAdapter( this, verses );
-        lvASong.setAdapter( adapter );
+            ListView lvASong = (ListView) layout.findViewById( R.id.lvASong );
+            ASongAdapter adapter = new ASongAdapter( this, verses );
+            lvASong.setAdapter( adapter );
+        } else {
+            Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_verse_to_display ),
+                    Toast.LENGTH_LONG ).show();
+        }
     }
 
     /**

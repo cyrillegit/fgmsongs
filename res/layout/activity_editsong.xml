@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
     
-   <ListView
-        android:id="@+id/lvEditSongs"
+    <ListView
+        android:id="@+id/lvEditSong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+        
+        <Button
+            android:id="@+id/btnEditSongCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/btnEditSongValidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/btnEditSongDelete"
+            android:layout_toRightOf="@+id/btnEditSongCancel"
+            android:text="@string/validate" />
+
+        <Button
+            android:id="@+id/btnEditSongDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/delete" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

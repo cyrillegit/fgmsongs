@@ -14,22 +14,14 @@
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ImageButton
-        android:id="@+id/ibEditSongDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvEditSongNumber"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_action_cancel" />
-
     <TextView
         android:id="@+id/tvEditSongTitle"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/title_song_frame"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/ibEditSongDelete"
         android:layout_toRightOf="@+id/tvEditSongNumber"
+        android:paddingTop="@dimen/song_margin"
         android:gravity="left"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
