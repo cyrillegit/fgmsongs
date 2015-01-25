@@ -9,10 +9,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.intelness.fgmsongs.adapters.EditSongAdapter;
@@ -20,8 +24,8 @@ import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.beans.Verse;
 import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
-import com.intelness.fgmsongs.utils.XMLParser;
 
 /**
  * activity to edit a song
@@ -35,6 +39,7 @@ public class EditSongActivity extends MainActivity {
     private List<Song>          editableSongs;
     private Song                song;
     private List<Verse>         verses;
+    private SparseArray<Verse>  editedSongVerses;
     private int                 position;
     private Button              btnEditSongCancel;
     private Button              btnEditSongValidate;
@@ -65,6 +70,7 @@ public class EditSongActivity extends MainActivity {
             Intent intent = new Intent( getApplicationContext(), ListEditableSongsActivity.class );
             startActivity( intent );
         }
+        editedSongVerses = new SparseArray<Verse>();
         // get the song
         song = editableSongs.get( position );
         // set the title on the toolbar
@@ -121,7 +127,15 @@ public class EditSongActivity extends MainActivity {
 
             @Override
             public void onClick( View v ) {
-                getSongOnValidate();
+                // get the data of the edited song
+                getNewDataOfEditedSong();
+                // write data in xml format
+                XMLFileManager xml = new XMLFileManager( getApplicationContext() );
+                String xmlString = xml.format( editedSongVerses );
+                // store xml file in internal storage
+                int currentNumber = song.getNumber();
+                String filename = FGMSongsUtils.CUSTOM + currentNumber + FGMSongsUtils.XML_EXTENSION;
+                xml.store( filename, xmlString );
             }
         } );
     }
@@ -166,9 +180,48 @@ public class EditSongActivity extends MainActivity {
         builder.create().show();
     }
 
+    /**
+     * get the edited song and store it
+     */
     private void getSongOnValidate() {
+
+        /*
+         * for ( int i = 0; i < verses.size(); i++ ) { View v =
+         * lvEditSong.getChildAt( i ); TextView tvVerse = (TextView)
+         * v.findViewById( R.id.tvEditSongHead ); EditText etVerse = (EditText)
+         * v.findViewById( R.id.etEditSongBody );
+         * 
+         * String editedVerse = etVerse.getText().toString(); if (
+         * !TextUtils.isEmpty( editedVerse ) ) { Verse verse = new Verse();
+         * verse.setStrophe( editedVerse ); editedSongVerses.put( i, verse ); }
+         * 
+         * Log.i( TAG, "verses : " + etVerse.getText().toString() ); }
+         */
+    }
+
+    /**
+     * get all the verses and de title of the edited song
+     */
+    private void getNewDataOfEditedSong() {
+
         for ( int i = 0; i < verses.size(); i++ ) {
-            Log.i( TAG, "verses ; " + lvEditSong.getItemAtPosition( i ) );
+            View v = lvEditSong.getChildAt( i );
+            TextView tvVerse = (TextView) v.findViewById( R.id.tvEditSongHead );
+            EditText etVerse = (EditText) v.findViewById( R.id.etEditSongBody );
+
+            String editedVerse = etVerse.getText().toString();
+            String editedTitle = tvVerse.getText().toString();
+
+            if ( !TextUtils.isEmpty( editedVerse ) ) {
+                if ( editedTitle.equals( getResources().getString( R.string.title ) ) ) {
+                    song.setTitle( editedTitle.trim() );
+                } else {
+                    Verse verse = new Verse();
+                    verse.setStrophe( editedVerse );
+                    editedSongVerses.put( i, verse );
+                }
+            }
+            Log.i( TAG, "verses : " + editedVerse );
         }
     }
 
@@ -194,8 +247,14 @@ public class EditSongActivity extends MainActivity {
         InputStream is = null;
         try {
             is = openFileInput( filename );
-            XMLParser parser = new XMLParser( XMLParser.VERSE );
-            versesOfSong = parser.parseVerse( is );
+            // old way
+            // XMLParser parser = new XMLParser( XMLParser.VERSE );
+            // versesOfSong = parser.parseVerse( is );
+
+            // new way with XMLFileManager
+            XMLFileManager manager = new XMLFileManager( XMLFileManager.VERSE );
+            versesOfSong = manager.parseVerse( is );
+
         } catch ( FileNotFoundException e ) {
             e.printStackTrace();
             Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_file_found ),

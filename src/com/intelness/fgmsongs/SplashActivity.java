@@ -12,11 +12,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.intelness.fgmsongs.beans.ApplicationVariables;
+import com.intelness.fgmsongs.beans.PreferencesVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.managers.ApplicationManager;
+import com.intelness.fgmsongs.managers.SharedPreferencesManager;
+import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
-import com.intelness.fgmsongs.utils.XMLParser;
 
 /**
  * splash activity
@@ -72,6 +76,12 @@ public class SplashActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * asyncTask to load the songs and initialize the App
+     * 
+     * @author McCyrille
+     * @version 1.0
+     */
     private class loadSongs extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -82,11 +92,13 @@ public class SplashActivity extends ActionBarActivity {
             } catch ( InterruptedException e ) {
                 Thread.interrupted();
             }
-            loadDB();
+            populateDatabase();
             songs = getAllSongs();
 
             // load global variables
-            setGlobalVariables();
+            // setGlobalVariables();
+            // initialize
+            initialize();
             return null;
         }
 
@@ -124,15 +136,27 @@ public class SplashActivity extends ActionBarActivity {
         return allSongs;
     }
 
-    public void loadDB() {
+    /**
+     * load xml file songs in DB
+     * 
+     * @since 2015-01-25
+     */
+    public void populateDatabase() {
 
         SongDAO sDao = new SongDAO( this );
         int rows = sDao.getNumberOfSongs();
 
         List<Song> songs;
 
-        XMLParser parser = new XMLParser( XMLParser.SONG );
-        songs = parser.parseSong( getResources().openRawResource( R.raw.fr_songs ) );
+        // old way
+        // XMLParser parser = new XMLParser( XMLParser.SONG );
+        // songs = parser.parseSong( getResources().openRawResource(
+        // R.raw.fr_songs ) );
+
+        // with XMLFileManager
+        XMLFileManager manager = new XMLFileManager( XMLFileManager.SONG );
+        songs = manager.parseSong( getResources().openRawResource( R.raw.fr_songs ) );
+
         // Log.i( TAG, "songs : " + songs.toString() );
         for ( Song song : songs ) {
             int number = song.getNumber();
@@ -148,6 +172,9 @@ public class SplashActivity extends ActionBarActivity {
 
     /**
      * set global variable
+     * 
+     * @deprecated use setApplicationVariables instead
+     * @see setApplicationVariables
      */
     private void setGlobalVariables() {
         // calling the application class
@@ -159,5 +186,45 @@ public class SplashActivity extends ActionBarActivity {
         app.setLanguage( prefs.getInt( FGMSongsUtils.LANGUAGE, -1 ) );
         app.setLastCustomNumberSong( prefs.getInt( FGMSongsUtils.LAST_CUSTOM_NUMBER_SONG,
                 FGMSongsUtils.FIRST_CUSTOM_NUMBER_SONG ) );
+    }
+
+    /**
+     * set the application variables scope
+     * 
+     * @since 2015-01-25
+     */
+    private void setAllApplicationVariables( ApplicationVariables variables ) {
+
+        ApplicationManager am = new ApplicationManager( this );
+        am.setApplicationVariables( variables );
+    }
+
+    /**
+     * get the preferences variables
+     * 
+     * @since 2015-01-25
+     */
+    private PreferencesVariables getAllPreferencesVariables() {
+        SharedPreferencesManager spm = new SharedPreferencesManager( this );
+        return spm.getPreferencesVariables();
+    }
+
+    /**
+     * initialize all the application variables
+     * 
+     * @since 2015-01-25
+     */
+    private void initialize() {
+        ApplicationVariables appVars = new ApplicationVariables();
+        PreferencesVariables prefVars = getAllPreferencesVariables();
+
+        appVars.setSongs( songs );
+        appVars.setTitleSongs( FGMSongsUtils.getAllTitleSongs( songs ) );
+        appVars.setLanguage( prefVars.getLocaleLanguage() );
+        appVars.setLastCustomNumberSong( prefVars.getLastCustomNumberSong() );
+
+        setAllApplicationVariables( appVars );
+
+        Log.i( TAG, "language : " + appVars.getLanguage() );
     }
 }

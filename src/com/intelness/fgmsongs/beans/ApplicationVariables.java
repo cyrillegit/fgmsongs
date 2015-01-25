@@ -1,25 +1,32 @@
-package com.intelness.fgmsongs.globals;
+package com.intelness.fgmsongs.beans;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Application;
-
-import com.intelness.fgmsongs.beans.Song;
-
 /**
- * store application variables scope
+ * bean for application variables
  * 
  * @author McCyrille
  * @version 1.0
- * @since
+ * @since 2015-01-25
  */
-public class AppManager extends Application {
+public class ApplicationVariables {
 
     private List<Song>        songs;
     private ArrayList<String> titleSongs;
     private int               language;
     private int               lastCustomNumberSong;
+
+    public ApplicationVariables( List<Song> songs, ArrayList<String> titleSongs, int language, int lastCustomNumberSong ) {
+        this.songs = songs;
+        this.titleSongs = titleSongs;
+        this.language = language;
+        this.lastCustomNumberSong = lastCustomNumberSong;
+    }
+
+    public ApplicationVariables() {
+
+    }
 
     public List<Song> getSongs() {
         return songs;

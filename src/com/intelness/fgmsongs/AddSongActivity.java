@@ -1,7 +1,5 @@
 package com.intelness.fgmsongs;
 
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.List;
 
 import android.content.Context;
@@ -22,8 +20,8 @@ import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.beans.Verse;
 import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
-import com.intelness.fgmsongs.utils.WriteXMLFile;
 
 /**
  * activity that manage the adding of a new song
@@ -126,6 +124,9 @@ public class AddSongActivity extends MainActivity {
         } );
     }
 
+    /**
+     * triggered when button cancel song is clicked
+     */
     public void onClickBtnAddSongCancel() {
         btnAddSongCancel.setOnClickListener( new View.OnClickListener() {
 
@@ -151,16 +152,17 @@ public class AddSongActivity extends MainActivity {
                 // get the title and verses of the song
                 getDataOfSong();
                 // write data in xml format
-                WriteXMLFile xml = new WriteXMLFile( songVerses );
-                String xmlString = xml.write();
+                XMLFileManager xml = new XMLFileManager( getApplicationContext() );
+                String xmlString = xml.format( songVerses );
                 // store xml file in internal storage
                 String filename = FGMSongsUtils.CUSTOM + lastNumber + FGMSongsUtils.XML_EXTENSION;
-                storeXMLFile( filename, xmlString );
+                xml.store( filename, xmlString );
+                // storeXMLFile( filename, xmlString );
                 // store the song un DB
                 storeSongInDB( song );
                 Log.i( TAG, xmlString );
 
-                setNewSongInSongs( song );
+                setNewSongInSetOfSongs( song );
                 setLastCustomNumberSong( lastNumber + 1 );
 
                 numberVerses = 0;
@@ -206,17 +208,14 @@ public class AddSongActivity extends MainActivity {
      * @param xmlString
      *            content of the file
      */
-    public void storeXMLFile( String filename, String xmlString ) {
-        try {
-            FileOutputStream fileout = openFileOutput( filename, MODE_PRIVATE );
-            OutputStreamWriter outputWriter = new OutputStreamWriter( fileout );
-            outputWriter.write( xmlString );
-            outputWriter.close();
-
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-    }
+    /*
+     * public void storeXMLFile( String filename, String xmlString ) { try {
+     * FileOutputStream fileout = this.openFileOutput( filename, MODE_PRIVATE );
+     * OutputStreamWriter outputWriter = new OutputStreamWriter( fileout );
+     * outputWriter.write( xmlString ); outputWriter.close();
+     * 
+     * } catch ( Exception e ) { e.printStackTrace(); } }
+     */
 
     /**
      * store the custom song in db
@@ -226,10 +225,10 @@ public class AddSongActivity extends MainActivity {
      */
     public void storeSongInDB( Song song ) {
         SongDAO sDao = new SongDAO( this );
-        List<Song> sSongs = sDao.getAllSongs();
-        for ( Song s : sSongs ) {
-            Log.i( TAG, "sSongs   " + s.getNumber() + " : " + s.getTitle() );
-        }
+        // List<Song> sSongs = sDao.getAllSongs();
+        // for ( Song s : sSongs ) {
+        // Log.i( TAG, "sSongs   " + s.getNumber() + " : " + s.getTitle() );
+        // }
         sDao.addSong( song );
     }
 
@@ -239,7 +238,7 @@ public class AddSongActivity extends MainActivity {
      * @return number of the song
      */
     public int getLastCustomNumberSong() {
-        final AppManager app = (AppManager) getApplicationContext();
+        final AppManager app = (AppManager) this.getApplicationContext();
         return app.getLastCustomNumberSong();
     }
 
@@ -260,7 +259,7 @@ public class AddSongActivity extends MainActivity {
      * @param song
      *            to add
      */
-    public void setNewSongInSongs( Song song ) {
+    public void setNewSongInSetOfSongs( Song song ) {
         final AppManager app = (AppManager) getApplicationContext();
         List<Song> oldSongs = app.getSongs();
         oldSongs.add( song );

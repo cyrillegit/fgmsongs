@@ -12,8 +12,8 @@ import com.intelness.fgmsongs.adapters.ASongAdapter;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.Verse;
 import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
-import com.intelness.fgmsongs.utils.XMLParser;
 
 /**
  * 
@@ -63,7 +63,7 @@ public class SongActivity extends MainActivity {
      *            of the song
      * @param language
      *            of the song
-     * @return
+     * @return list of verses
      */
     public List<Verse> getVersesOfSong( int number, String language ) {
 
@@ -72,8 +72,14 @@ public class SongActivity extends MainActivity {
         if ( fileResource <= 0 ) {
             return versesOfSong;
         }
-        XMLParser parser = new XMLParser( XMLParser.VERSE );
-        versesOfSong = parser.parseVerse( ( getResources().openRawResource( fileResource ) ) );
+        // old way
+        // XMLParser parser = new XMLParser( XMLParser.VERSE );
+        // versesOfSong = parser.parseVerse( ( getResources().openRawResource(
+        // fileResource ) ) );
+
+        // new way
+        XMLFileManager manager = new XMLFileManager( XMLFileManager.VERSE );
+        versesOfSong = manager.parseVerse( getResources().openRawResource( fileResource ) );
         return versesOfSong;
     }
 
