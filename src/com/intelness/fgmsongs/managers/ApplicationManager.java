@@ -29,18 +29,6 @@ public class ApplicationManager {
     public ApplicationManager() {
     }
 
-    /**
-     * initialize global variable
-     * 
-     * @deprecated
-     */
-    public void initialize( ApplicationVariables variables ) {
-        appManager.setSongs( variables.getSongs() );
-        appManager.setTitleSongs( FGMSongsUtils.getAllTitleSongs( variables.getSongs() ) );
-        appManager.setLanguage( variables.getLanguage() );
-        appManager.setLastCustomNumberSong( variables.getLastCustomNumberSong() );
-    }
-
     public ApplicationVariables getApplicationVariables() {
         applicationVariables = new ApplicationVariables();
 

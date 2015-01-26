@@ -240,16 +240,6 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         prefVars.setLastCustomNumberSong( appVars.getLastCustomNumberSong() );
 
         spm.setPreferencesVariables( prefVars );
-
-        /*
-         * SharedPreferences.Editor editor = getSharedPreferences(
-         * FGMSongsUtils.PREFERENCES, MODE_PRIVATE ).edit(); final AppManager
-         * app = (AppManager) getApplicationContext(); Log.i( TAG,
-         * "number custom : " + app.getLastCustomNumberSong() ); editor.putInt(
-         * FGMSongsUtils.LANGUAGE, app.getLanguage() ); editor.putInt(
-         * FGMSongsUtils.LAST_CUSTOM_NUMBER_SONG, app.getLastCustomNumberSong()
-         * ); editor.commit();
-         */
     }
 
     /**
@@ -273,7 +263,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
      *            to display the dialog
      * @since 2015-01-25
      */
-    protected void displayAlertDialog( String title, String message, String mode ) {
+    protected int displayAlertDialog( String title, String message, String mode ) {
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle( title );
 
@@ -322,6 +312,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         }
 
         builder.create().show();
+        return choice;
     }
 
     protected void setchoice( int which ) {

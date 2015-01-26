@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.intelness.fgmsongs.adapters.ListSongsAdapter;
+import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
@@ -28,6 +29,7 @@ public class SearchSongActivity extends MainActivity {
     private ListView                 lvSearchedSongs;
     private static ArrayList<String> titleSongs;
     private List<Song>               songs;
+    private ApplicationVariables     appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -36,7 +38,10 @@ public class SearchSongActivity extends MainActivity {
         View layout = getLayoutInflater().inflate( R.layout.activity_searchsong, frameLayout );
         setTitle( navDrawerItems[1] );
         // get all the global variables, particularly the list of title of songs
-        getGlobalVariables();
+        // getGlobalVariables();
+        appVars = super.getAllApplicationVariables();
+        songs = appVars.getSongs();
+        titleSongs = appVars.getTitleSongs();
 
         actvSearchSong = (AutoCompleteTextView) layout.findViewById( R.id.actvSearchSong );
         ibSearchSong = (ImageButton) layout.findViewById( R.id.ibSearchSong );
@@ -96,6 +101,8 @@ public class SearchSongActivity extends MainActivity {
 
     /**
      * get global variables
+     * 
+     * @deprecated
      */
     public void getGlobalVariables() {
         AppManager app = (AppManager) getApplicationContext();

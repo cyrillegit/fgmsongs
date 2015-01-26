@@ -11,7 +11,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.beans.ApplicationVariables;
+import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 /**
@@ -20,14 +21,15 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  * @version 1.0
  */
 public class OptionsActivity extends MainActivity {
-    private Button      btnOptionsValidate;
-    private Button      btnOptionsCancel;
-    private RadioGroup  rgLanguages;
-    private RadioButton rbLanguage;
-    private RadioButton rbEnglish;
-    private RadioButton rbFrench;
-    private int         selectedRadioButton;
-    private int         language;
+    private Button               btnOptionsValidate;
+    private Button               btnOptionsCancel;
+    private RadioGroup           rgLanguages;
+    private RadioButton          rbLanguage;
+    private RadioButton          rbEnglish;
+    private RadioButton          rbFrench;
+    private int                  selectedRadioButton;
+    private int                  language;
+    private ApplicationVariables appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -42,9 +44,10 @@ public class OptionsActivity extends MainActivity {
         rbEnglish = (RadioButton) layout.findViewById( R.id.rbEnglish );
         rbFrench = (RadioButton) layout.findViewById( R.id.rbFrench );
 
-        language = getLocaleLanguage();
+        appVars = super.getAllApplicationVariables();
+
         // set the current state on the radio button
-        setCurrentState( language );
+        setCurrentState( appVars.getLanguage() );
         // get the state of the layout of the radio button
         getCurrentState();
 
@@ -59,9 +62,11 @@ public class OptionsActivity extends MainActivity {
             public void onClick( View v ) {
                 int selected = rgLanguages.getCheckedRadioButtonId();
                 rbLanguage = (RadioButton) findViewById( selected );
-                if ( rbLanguage.getText().equals( getResources().getString( R.string.english ) ) ) {
+                if ( rbLanguage.getText().toString().trim()
+                        .equals( getResources().getString( R.string.english ).trim() ) ) {
                     language = 0;
-                } else if ( rbLanguage.getText().equals( getResources().getString( R.string.french ) ) ) {
+                } else if ( rbLanguage.getText().toString().trim()
+                        .equals( getResources().getString( R.string.french ).trim() ) ) {
                     language = 1;
                 } else {
                     language = 0;
@@ -127,18 +132,11 @@ public class OptionsActivity extends MainActivity {
     }
 
     /**
-     * get global variables
-     */
-    public int getLocaleLanguage() {
-        AppManager app = (AppManager) getApplicationContext();
-        return app.getLanguage();
-    }
-
-    /**
      * set global variables
      */
     public void setLocaleLanguage( int localeLanguage ) {
-        AppManager app = (AppManager) getApplicationContext();
-        app.setLanguage( localeLanguage );
+        ApplicationManager am = new ApplicationManager( this );
+        am.setLanguage( localeLanguage );
+        super.savePreferences();
     }
 }

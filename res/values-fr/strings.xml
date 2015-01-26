@@ -26,14 +26,14 @@
     
       <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
-        <item >List of songs</item>
-        <item >Search a song</item>
-        <item >Add a song</item>
-        <item >Edit a song</item>
-        <item >Summary</item>
-        <item >Options</item>
-        <item >About</item>
-        <item >Exit</item>
+        <item >Liste des cantiques</item>
+        <item >Recherche un cantique</item>
+        <item >Ajoute un cantique</item>
+        <item >Modifie un cantique </item>
+        <item >Table des cantiques</item>
+        <item >Paramétres</item>
+        <item >A propos</item>
+        <item >Sortir</item>
     </string-array>
      
     <!-- Nav Drawer List Item Icons -->
@@ -64,5 +64,21 @@
     <string name="english">Anglais</string>
     <string name="french">Français</string>
     <string name="select_language">Choisis une langue</string>
+    <string name="title">Titre</string>
+    <string name="hint_title">Entrer le titre du cantique</string>
+    <string name="verse">Strophe</string>
+    <string name="hint_verse">Ajouter une strophe au cantique</string>
+    <string name="add_new_verse">Ajouter une strophe</string>
     <string name="of_the">de</string>
+    <string name="no_empty_verse">La strophe est vide. Veuillez écrire quelque chose &#8230;</string>
+    <string name="delete">Supprimer</string>
+    <string name="no_verse_to_display">Aucune strophe à afficher</string>
+    <string name="no_file_found">Aucun file trouvé</string>
+    <string name="confirm_deletion">Voulez-vous réellement supprimer ce cantique?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="song_deleted">Cantique supprimé</string>
+    <string name="no_editable_songs">Vous n\&#39;avez aucun cantique personnel</string>
+    <string name="ok">OK</string>
+    <string name="song_updated">Cantique mis à jour</string>
 </resources>

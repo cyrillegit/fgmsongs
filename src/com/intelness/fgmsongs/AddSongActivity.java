@@ -16,10 +16,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.beans.Verse;
 import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
@@ -30,17 +32,18 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  * @version 1.0
  */
 public class AddSongActivity extends MainActivity {
-    private static final String TAG          = "AddSongActivity";
-    private Button              btnAddSongCancel;
-    private Button              btnAddSongValidate;
-    private Button              btnAddNewVerse;
-    private EditText            etAddSongTitle;
-    private ViewGroup           vgAddSong;
-    private int                 numberVerses = 0;
-    private Song                song;
-    private SparseArray<Verse>  songVerses;
-    private final static String VERSE        = "Verse";
-    private int                 lastNumber;
+    private static final String  TAG          = "AddSongActivity";
+    private Button               btnAddSongCancel;
+    private Button               btnAddSongValidate;
+    private Button               btnAddNewVerse;
+    private EditText             etAddSongTitle;
+    private ViewGroup            vgAddSong;
+    private int                  numberVerses = 0;
+    private Song                 song;
+    private SparseArray<Verse>   songVerses;
+    private final static String  VERSE        = "Verse";
+    private int                  lastNumber;
+    private ApplicationVariables appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -48,6 +51,9 @@ public class AddSongActivity extends MainActivity {
 
         View layout = getLayoutInflater().inflate( R.layout.activity_addsong, frameLayout );
         setTitle( navDrawerItems[2] );
+
+        // get all applications variables
+        appVars = super.getAllApplicationVariables();
 
         btnAddSongCancel = (Button) layout.findViewById(
                 R.id.btnAddSongCancel );
@@ -157,13 +163,13 @@ public class AddSongActivity extends MainActivity {
                 // store xml file in internal storage
                 String filename = FGMSongsUtils.CUSTOM + lastNumber + FGMSongsUtils.XML_EXTENSION;
                 xml.store( filename, xmlString );
-                // storeXMLFile( filename, xmlString );
                 // store the song un DB
-                storeSongInDB( song );
+                // storeSongInDB( song );
                 Log.i( TAG, xmlString );
-
-                setNewSongInSetOfSongs( song );
-                setLastCustomNumberSong( lastNumber + 1 );
+                // update songs
+                updateSongs( song );
+                // setNewSongInSetOfSongs( song );
+                // setLastCustomNumberSong( lastNumber + 1 );
 
                 numberVerses = 0;
                 Intent i = new Intent( getApplicationContext(), ListEditableSongsActivity.class );
@@ -180,7 +186,8 @@ public class AddSongActivity extends MainActivity {
 
         String title = etAddSongTitle.getText().toString();
         String datetime = FGMSongsUtils.getCurrentDateTime();
-        lastNumber = getLastCustomNumberSong();
+        lastNumber = appVars.getLastCustomNumberSong();
+        // lastNumber = getLastCustomNumberSong();
 
         song.setNumber( lastNumber );
         song.setTitle( title );
@@ -222,13 +229,10 @@ public class AddSongActivity extends MainActivity {
      * 
      * @param song
      *            to be stored
+     * @deprecated
      */
     public void storeSongInDB( Song song ) {
         SongDAO sDao = new SongDAO( this );
-        // List<Song> sSongs = sDao.getAllSongs();
-        // for ( Song s : sSongs ) {
-        // Log.i( TAG, "sSongs   " + s.getNumber() + " : " + s.getTitle() );
-        // }
         sDao.addSong( song );
     }
 
@@ -236,6 +240,7 @@ public class AddSongActivity extends MainActivity {
      * get the last custom song number
      * 
      * @return number of the song
+     * @deprecated
      */
     public int getLastCustomNumberSong() {
         final AppManager app = (AppManager) this.getApplicationContext();
@@ -247,6 +252,7 @@ public class AddSongActivity extends MainActivity {
      * 
      * @param number
      *            current number
+     * @deprecated
      */
     public void setLastCustomNumberSong( int number ) {
         final AppManager app = (AppManager) getApplicationContext();
@@ -258,11 +264,32 @@ public class AddSongActivity extends MainActivity {
      * 
      * @param song
      *            to add
+     * @deprecated
      */
     public void setNewSongInSetOfSongs( Song song ) {
         final AppManager app = (AppManager) getApplicationContext();
         List<Song> oldSongs = app.getSongs();
         oldSongs.add( song );
         app.setSongs( oldSongs );
+    }
+
+    /**
+     * update songs and last number of songs
+     * 
+     * @param number
+     *            last number of custom song
+     * @param song
+     *            to add
+     */
+    private void updateSongs( Song song ) {
+        ApplicationManager am = new ApplicationManager( this );
+        SongDAO sDao = new SongDAO( this );
+
+        sDao.addSong( song );
+        List<Song> oldSongs = appVars.getSongs();
+        oldSongs.add( song );
+
+        am.setLastCustomNumberSong( appVars.getLastCustomNumberSong() + 1 );
+        am.setSongs( oldSongs );
     }
 }

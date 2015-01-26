@@ -20,10 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.intelness.fgmsongs.adapters.EditSongAdapter;
+import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.beans.Verse;
-import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
@@ -35,16 +36,18 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  */
 public class EditSongActivity extends MainActivity {
 
-    private static final String TAG = "EditSongActivity";
-    private List<Song>          editableSongs;
-    private Song                song;
-    private List<Verse>         verses;
-    private SparseArray<Verse>  editedSongVerses;
-    private int                 position;
-    private Button              btnEditSongCancel;
-    private Button              btnEditSongValidate;
-    private Button              btnEditSongDelete;
-    private ListView            lvEditSong;
+    private static final String  TAG = "EditSongActivity";
+    private List<Song>           editableSongs;
+    private List<Song>           songs;
+    private Song                 song;
+    private List<Verse>          verses;
+    private SparseArray<Verse>   editedSongVerses;
+    private int                  position;
+    private Button               btnEditSongCancel;
+    private Button               btnEditSongValidate;
+    private Button               btnEditSongDelete;
+    private ListView             lvEditSong;
+    private ApplicationVariables appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -57,12 +60,18 @@ public class EditSongActivity extends MainActivity {
         btnEditSongDelete = (Button) layout.findViewById( R.id.btnEditSongDelete );
         btnEditSongValidate = (Button) layout.findViewById( R.id.btnEditSongValidate );
 
-        // get all the songs
-        getAllEditableSongs();
+        editedSongVerses = new SparseArray<Verse>();
+
+        appVars = super.getAllApplicationVariables();
+        // get all songs and all editable songs
+        songs = appVars.getSongs();
+        editableSongs = FGMSongsUtils.getEditableSongs( songs );
+        // get all the editable songs
+        // getAllEditableSongs();
 
         // get clicked item
         Bundle bundle = getIntent().getExtras();
-        if ( bundle != null ) {
+        if ( bundle != null && editableSongs != null ) {
             position = bundle.getInt( POSITION );
         } else {
             Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_verse_to_display ),
@@ -70,8 +79,8 @@ public class EditSongActivity extends MainActivity {
             Intent intent = new Intent( getApplicationContext(), ListEditableSongsActivity.class );
             startActivity( intent );
         }
-        editedSongVerses = new SparseArray<Verse>();
-        // get the song
+
+        // get the song to be edited
         song = editableSongs.get( position );
         // set the title on the toolbar
         setTitle( song.getNumber() + ". " + song.getTitle() );
@@ -114,7 +123,7 @@ public class EditSongActivity extends MainActivity {
 
             @Override
             public void onClick( View v ) {
-                alertDialogDeletion();
+                onDeleteSong();
             }
         } );
     }
@@ -127,15 +136,7 @@ public class EditSongActivity extends MainActivity {
 
             @Override
             public void onClick( View v ) {
-                // get the data of the edited song
-                getNewDataOfEditedSong();
-                // write data in xml format
-                XMLFileManager xml = new XMLFileManager( getApplicationContext() );
-                String xmlString = xml.format( editedSongVerses );
-                // store xml file in internal storage
-                int currentNumber = song.getNumber();
-                String filename = FGMSongsUtils.CUSTOM + currentNumber + FGMSongsUtils.XML_EXTENSION;
-                xml.store( filename, xmlString );
+                onValidateNewSong();
             }
         } );
     }
@@ -143,7 +144,7 @@ public class EditSongActivity extends MainActivity {
     /**
      * set alert dialog to confirm deletion of a song
      */
-    private void alertDialogDeletion() {
+    private void onDeleteSong() {
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle( R.string.delete );
         builder.setMessage( R.string.confirm_deletion )
@@ -152,15 +153,9 @@ public class EditSongActivity extends MainActivity {
 
                     @Override
                     public void onClick( DialogInterface dialog, int which ) {
-                        String filename = FGMSongsUtils.CUSTOM + song.getNumber() + FGMSongsUtils.XML_EXTENSION;
-                        deleteFile( filename );
-                        // delete the song in DB
-                        SongDAO sDao = new SongDAO( getApplicationContext() );
-                        sDao.deleteSong( song );
-                        // get the new list of songs in DB
-                        List<Song> newSongs = getAllSongs();
-                        // set new songs in global variables
-                        setSongsInGlobalVariables( newSongs );
+
+                        // delete de song, and update the set of songs
+                        updateSongsOnDelete( song );
 
                         Toast.makeText( getApplicationContext(), getResources().getString( R.string.song_deleted ),
                                 Toast.LENGTH_LONG ).show();
@@ -173,7 +168,7 @@ public class EditSongActivity extends MainActivity {
 
                     @Override
                     public void onClick( DialogInterface dialog, int which ) {
-                        dialog.cancel();
+                        dialog.dismiss();
                     }
                 } );
 
@@ -181,29 +176,27 @@ public class EditSongActivity extends MainActivity {
     }
 
     /**
-     * get the edited song and store it
+     * to update the modification of the song
+     * 
+     * @since 2015-01-26
      */
-    private void getSongOnValidate() {
+    private void onValidateNewSong() {
+        // update song
+        updateSongsOnValidate();
 
-        /*
-         * for ( int i = 0; i < verses.size(); i++ ) { View v =
-         * lvEditSong.getChildAt( i ); TextView tvVerse = (TextView)
-         * v.findViewById( R.id.tvEditSongHead ); EditText etVerse = (EditText)
-         * v.findViewById( R.id.etEditSongBody );
-         * 
-         * String editedVerse = etVerse.getText().toString(); if (
-         * !TextUtils.isEmpty( editedVerse ) ) { Verse verse = new Verse();
-         * verse.setStrophe( editedVerse ); editedSongVerses.put( i, verse ); }
-         * 
-         * Log.i( TAG, "verses : " + etVerse.getText().toString() ); }
-         */
+        Toast.makeText( getApplicationContext(), getResources().getString( R.string.song_updated ),
+                Toast.LENGTH_LONG ).show();
+
+        Intent intent = new Intent( getApplicationContext(), ListEditableSongsActivity.class );
+        startActivity( intent );
     }
 
     /**
      * get all the verses and de title of the edited song
      */
     private void getNewDataOfEditedSong() {
-
+        // SparseArray<Verse> editedVerses = new SparseArray<Verse>();
+        int j = 0;
         for ( int i = 0; i < verses.size(); i++ ) {
             View v = lvEditSong.getChildAt( i );
             TextView tvVerse = (TextView) v.findViewById( R.id.tvEditSongHead );
@@ -214,15 +207,22 @@ public class EditSongActivity extends MainActivity {
 
             if ( !TextUtils.isEmpty( editedVerse ) ) {
                 if ( editedTitle.equals( getResources().getString( R.string.title ) ) ) {
-                    song.setTitle( editedTitle.trim() );
+                    if ( !TextUtils.isEmpty( editedVerse.trim() ) ) {
+                        song.setTitle( editedVerse.trim() );
+                    } else {
+                        Toast.makeText( getApplicationContext(), "No title", Toast.LENGTH_LONG ).show();
+                    }
+
                 } else {
                     Verse verse = new Verse();
                     verse.setStrophe( editedVerse );
-                    editedSongVerses.put( i, verse );
+                    editedSongVerses.put( j, verse );
+                    j++;
                 }
             }
-            Log.i( TAG, "verses : " + editedVerse );
         }
+
+        // return editedSongVerses;
     }
 
     /**
@@ -247,11 +247,8 @@ public class EditSongActivity extends MainActivity {
         InputStream is = null;
         try {
             is = openFileInput( filename );
-            // old way
-            // XMLParser parser = new XMLParser( XMLParser.VERSE );
-            // versesOfSong = parser.parseVerse( is );
 
-            // new way with XMLFileManager
+            // parse verses of the song
             XMLFileManager manager = new XMLFileManager( XMLFileManager.VERSE );
             versesOfSong = manager.parseVerse( is );
 
@@ -272,32 +269,59 @@ public class EditSongActivity extends MainActivity {
     }
 
     /**
-     * get all the title and second line of songs stored in db
+     * delete the song, both in DB and internal storage, and update the songs
      * 
-     * @return list of songs
+     * @param song
+     *            to be deleted
+     * @since 2015-01-26
      */
-    public List<Song> getAllSongs() {
+    private void updateSongsOnDelete( Song song ) {
+        SongDAO sDao = new SongDAO( getApplicationContext() );
+        ApplicationManager am = new ApplicationManager( getApplicationContext() );
 
-        SongDAO sDao = new SongDAO( this );
-        return sDao.getAllSongs();
+        String filename = FGMSongsUtils.CUSTOM + song.getNumber() + FGMSongsUtils.XML_EXTENSION;
+        deleteFile( filename );
+
+        sDao.deleteSong( song );
+        List<Song> newSongs = sDao.getAllSongs();
+        ArrayList<String> newTitleSongs = FGMSongsUtils.getAllTitleSongs( newSongs );
+
+        am.setSongs( newSongs );
+        am.setTitleSongs( newTitleSongs );
     }
 
     /**
-     * set songs in global variables
+     * update song, both in DB and internal storage
      * 
-     * @param songs
+     * @since 2015-01-26
      */
-    private void setSongsInGlobalVariables( List<Song> songs ) {
-        AppManager app = (AppManager) getApplicationContext();
-        app.setSongs( songs );
-    }
+    private void updateSongsOnValidate() {
+        SongDAO sDao = new SongDAO( getApplicationContext() );
+        ApplicationManager am = new ApplicationManager( getApplicationContext() );
 
-    /**
-     * get global variables
-     */
-    private void getAllEditableSongs() {
-        AppManager app = (AppManager) getApplicationContext();
-        editableSongs = FGMSongsUtils.getEditableSongs( app.getSongs() );
+        // get the data of the edited song
+        // SparseArray<Verse> editedSongVerses;
+        getNewDataOfEditedSong();
+        Log.i( "update : ", editedSongVerses.toString() );
+        if ( editedSongVerses.size() <= 0 ) {
+            Toast.makeText( getApplicationContext(), "No Verses", Toast.LENGTH_LONG ).show();
+        } else {
+
+            // write data in xml format
+            XMLFileManager xml = new XMLFileManager( getApplicationContext() );
+            String xmlString = xml.format( editedSongVerses );
+            // store xml file in internal storage
+            int currentNumber = song.getNumber();
+            String filename = FGMSongsUtils.CUSTOM + currentNumber + FGMSongsUtils.XML_EXTENSION;
+            xml.store( filename, xmlString );
+
+            sDao.updateSong( song );
+            List<Song> newSongs = sDao.getAllSongs();
+            ArrayList<String> newTitleSongs = FGMSongsUtils.getAllTitleSongs( newSongs );
+
+            am.setSongs( newSongs );
+            am.setTitleSongs( newTitleSongs );
+        }
     }
 
 }

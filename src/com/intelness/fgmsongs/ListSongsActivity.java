@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.intelness.fgmsongs.adapters.ListSongsAdapter;
+import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.globals.AppManager;
 
@@ -21,7 +22,8 @@ import com.intelness.fgmsongs.globals.AppManager;
  */
 public class ListSongsActivity extends MainActivity {
 
-    private List<Song> songs;
+    private List<Song>           songs;
+    private ApplicationVariables appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -30,7 +32,9 @@ public class ListSongsActivity extends MainActivity {
         setTitle( navDrawerItems[0] );
 
         // get all the global variables, particularly songs
-        getGlobalVariables();
+        // getGlobalVariables();
+        appVars = super.getAllApplicationVariables();
+        songs = appVars.getSongs();
 
         ListView lvListSongs = (ListView) layout.findViewById( R.id.lvListSongs );
         ListSongsAdapter adapter = new ListSongsAdapter( this, songs );
@@ -54,6 +58,8 @@ public class ListSongsActivity extends MainActivity {
 
     /**
      * get global variables
+     * 
+     * @deprecated
      */
     public void getGlobalVariables() {
         AppManager app = (AppManager) getApplicationContext();

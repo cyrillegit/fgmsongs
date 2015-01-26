@@ -1,19 +1,19 @@
 package com.intelness.fgmsongs;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.intelness.fgmsongs.beans.ApplicationVariables;
-import com.intelness.fgmsongs.globals.AppManager;
+import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 public class HomeActivity extends MainActivity {
 
     private static final String  TAG = "HomeActivity";
-    private AlertDialog          alertDialog;
     private ApplicationVariables appVars;
 
     @Override
@@ -29,8 +29,6 @@ public class HomeActivity extends MainActivity {
         TextView tvSecondVerse = (TextView) layout.findViewById( R.id.tvHomeSecondVerse );
         TextView tvPsalms342 = (TextView) layout.findViewById( R.id.tvPsalms342 );
 
-        // int languageId = getLocaleLanguage();
-        displayAlertDialog();
         if ( appVars.getLanguage() < 0 ) {
             displayAlertDialog();
         } else {
@@ -52,40 +50,28 @@ public class HomeActivity extends MainActivity {
     public void displayAlertDialog() {
 
         String selectLanguage = getResources().getString( R.string.select_language );
-        super.displayAlertDialog( selectLanguage, "", SINGLE_CHOICE );
-        Log.i( TAG, "choice : " + getChoice() );
-        // setLocaleLanguage( getChoice() );
 
-        /*
-         * AlertDialog.Builder builder = new AlertDialog.Builder( this );
-         * builder.setTitle( selectLanguage ); builder.setSingleChoiceItems(
-         * FGMSongsUtils.LANGUAGES, -1, new DialogInterface.OnClickListener() {
-         * 
-         * @Override public void onClick( DialogInterface dialog, int which ) {
-         * // savePreferences( which ); setLocaleLanguage( which );
-         * alertDialog.dismiss(); } } ); alertDialog = builder.create();
-         * alertDialog.show();
-         */
+        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+        builder.setTitle( selectLanguage );
+        builder.setSingleChoiceItems(
+                FGMSongsUtils.LANGUAGES, -1, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick( DialogInterface dialog, int which ) {
+                        setLocaleLanguage( which );
+                        dialog.dismiss();
+                    }
+                } );
+        builder.create().show();
     }
 
     /**
      * set locale
      * 
-     * @deprecated since 2015-01-25
      */
     private void setLocaleLanguage( int language ) {
-        final AppManager app = (AppManager) getApplicationContext();
-        app.setLanguage( language );
-    }
-
-    /**
-     * get locale
-     * 
-     * @deprecated since 2015-01-25
-     */
-    private int getLocaleLanguage() {
-        final AppManager app = (AppManager) getApplicationContext();
-        return app.getLanguage();
+        ApplicationManager am = new ApplicationManager( this );
+        am.setLanguage( language );
     }
 
 }

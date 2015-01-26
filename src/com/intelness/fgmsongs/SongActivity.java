@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.intelness.fgmsongs.adapters.ASongAdapter;
+import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.Verse;
 import com.intelness.fgmsongs.globals.AppManager;
@@ -22,18 +23,21 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  */
 public class SongActivity extends MainActivity {
 
-    private static final String TAG = "SongActivity";
-    private List<Song>          songs;
-    private List<Verse>         verses;
-    private int                 position;
+    private static final String  TAG = "SongActivity";
+    private List<Song>           songs;
+    private List<Verse>          verses;
+    private int                  position;
+    private ApplicationVariables appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         View layout = getLayoutInflater().inflate( R.layout.activity_song, frameLayout );
 
-        // get global variables
-        getGlobalVariables();
+        // get global variables, all songs
+        // getGlobalVariables();
+        appVars = super.getAllApplicationVariables();
+        songs = appVars.getSongs();
 
         // get clicked item
         Bundle bundle = getIntent().getExtras();
@@ -85,6 +89,8 @@ public class SongActivity extends MainActivity {
 
     /**
      * get global variables
+     * 
+     * @deprecated
      */
     public void getGlobalVariables() {
         AppManager app = (AppManager) getApplicationContext();

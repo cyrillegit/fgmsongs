@@ -116,6 +116,9 @@ public class FGMSongsUtils {
      */
     public static ArrayList<Song> getEditableSongs( List<Song> songs ) {
         ArrayList<Song> editableSongs = new ArrayList<Song>();
+        if ( songs.isEmpty() || songs == null ) {
+            return null;
+        }
         for ( Song song : songs ) {
             if ( song.getNumber() >= FIRST_CUSTOM_NUMBER_SONG ) {
                 editableSongs.add( song );

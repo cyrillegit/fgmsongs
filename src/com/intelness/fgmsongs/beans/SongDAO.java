@@ -47,6 +47,7 @@ public class SongDAO extends DatabaseDAO {
         values.put( KEY_CREATED_DATE, song.getCreatedDate().toString() );
 
         db.insert( TABLE_SONG, null, values );
+        close();
     }
 
     /**
@@ -86,6 +87,7 @@ public class SongDAO extends DatabaseDAO {
                 cursor.getString( 5 ) );
 
         cursor.close();
+        close();
         return song;
     }
 
@@ -126,6 +128,7 @@ public class SongDAO extends DatabaseDAO {
                 cursor.getString( 5 ) );
 
         cursor.close();
+        close();
         return song;
     }
 

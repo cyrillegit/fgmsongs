@@ -64,4 +64,21 @@
     <string name="english">English</string>
     <string name="french">French</string>
     <string name="select_language">Select a language</string>
+    <string name="title">Title</string>
+    <string name="hint_title">Type the title of the song</string>
+    <string name="verse">Verse</string>
+    <string name="hint_verse">Add a new verse of the song</string>
+    <string name="add_new_verse">Add new verse</string>
+    <string name="of_the">of the</string>
+    <string name="no_empty_verse">The verse is empty. Please write something in &#8230;</string>
+    <string name="delete">Delete</string>
+    <string name="no_verse_to_display">No verse to display</string>
+    <string name="no_file_found">No file found</string>
+    <string name="confirm_deletion">Do you really want to delete this song ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="song_deleted">Song deleted</string>
+    <string name="no_editable_songs">You have no personal song</string>
+    <string name="ok">OK</string>
+    <string name="song_updated">Song updated</string>
 </resources>

@@ -2018,6 +2018,7 @@ containing a value of this type.
         public static final int select_language=0x7f0b0027;
         public static final int sing=0x7f0b0014;
         public static final int song_deleted=0x7f0b0035;
+        public static final int song_updated=0x7f0b0038;
         public static final int songs=0x7f0b0020;
         public static final int title=0x7f0b0028;
         public static final int validate=0x7f0b0023;

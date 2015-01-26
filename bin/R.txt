@@ -624,6 +624,7 @@ int string search_song 0x7f0b0021
 int string select_language 0x7f0b0027
 int string sing 0x7f0b0014
 int string song_deleted 0x7f0b0035
+int string song_updated 0x7f0b0038
 int string songs 0x7f0b0020
 int string title 0x7f0b0028
 int string validate 0x7f0b0023

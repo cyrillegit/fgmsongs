@@ -81,4 +81,5 @@
     <string name="song_deleted">Song deleted</string>
     <string name="no_editable_songs">You have no personal song</string>
     <string name="ok">OK</string>
+    <string name="song_updated">Song updated</string>
 </resources>

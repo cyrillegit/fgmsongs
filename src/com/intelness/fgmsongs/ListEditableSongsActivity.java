@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.intelness.fgmsongs.adapters.ListEditableSongAdapter;
+import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
@@ -30,6 +31,7 @@ public class ListEditableSongsActivity extends MainActivity {
     protected static final String TAG = "ListEditableSongsActvity";
     private List<Song>            songs;
     private ArrayList<Song>       editableSongs;
+    private ApplicationVariables  appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -38,11 +40,12 @@ public class ListEditableSongsActivity extends MainActivity {
         View layout = getLayoutInflater().inflate( R.layout.activity_listeditablesongs, frameLayout );
         setTitle( navDrawerItems[3] );
         // get all the songs
-        getAllSongs();
+        appVars = super.getAllApplicationVariables();
+        songs = appVars.getSongs();
         // get all the editable songs
         editableSongs = FGMSongsUtils.getEditableSongs( songs );
 
-        if ( editableSongs == null ) {
+        if ( editableSongs == null || editableSongs.isEmpty() ) {
             alertDialogNoSong();
         } else {
 
@@ -98,6 +101,8 @@ public class ListEditableSongsActivity extends MainActivity {
 
     /**
      * get global variables
+     * 
+     * @deprecated
      */
     private void getAllSongs() {
         AppManager app = (AppManager) getApplicationContext();
