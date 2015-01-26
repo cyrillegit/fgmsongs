@@ -90,5 +90,6 @@
     <string name="fgmsongs_author">  Inspirés par Dieu</string>
     <string name="fgmsongs_programer">  McCyrille</string>
     <string name="fgm_contact">  contact@intelness.com</string>
-    <string name="intelness">Intelness</string>    
+    <string name="intelness">Intelness</string>
+    <string name="no_empty_title">Le titre est vide. Veuillez donner un titre</string>        
 </resources>

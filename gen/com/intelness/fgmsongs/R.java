@@ -2140,6 +2140,7 @@ containing a value of this type.
         public static final int lord=0x7f0b0013;
         public static final int no=0x7f0b0034;
         public static final int no_editable_songs=0x7f0b0036;
+        public static final int no_empty_title=0x7f0b0043;
         public static final int no_empty_verse=0x7f0b002e;
         public static final int no_file_found=0x7f0b0031;
         public static final int no_verse_to_display=0x7f0b0030;

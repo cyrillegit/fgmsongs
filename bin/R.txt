@@ -746,6 +746,7 @@ int string language 0x7f0b0024
 int string lord 0x7f0b0013
 int string no 0x7f0b0034
 int string no_editable_songs 0x7f0b0036
+int string no_empty_title 0x7f0b0043
 int string no_empty_verse 0x7f0b002e
 int string no_file_found 0x7f0b0031
 int string no_verse_to_display 0x7f0b0030

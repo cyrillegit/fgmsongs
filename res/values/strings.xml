@@ -71,7 +71,7 @@
     <string name="hint_verse">Add a new verse of the song</string>
     <string name="add_new_verse">Add new verse</string>
     <string name="of_the">of the</string>
-    <string name="no_empty_verse">The verse is empty. Please write something in ...</string>
+    <string name="no_empty_verse">The verse is empty. Please write something in</string>
     <string name="delete">Delete</string>
     <string name="no_verse_to_display">No verse to display</string>
     <string name="no_file_found">No file found</string>
@@ -92,4 +92,5 @@
     <string name="fgmsongs_programer">  McCyrille</string>
     <string name="fgm_contact">  contact@intelness.com</string>
     <string name="intelness">Intelness</string>
+    <string name="no_empty_title">The title is empty. Please write a title</string>
 </resources>

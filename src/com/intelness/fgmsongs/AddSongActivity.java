@@ -81,6 +81,7 @@ public class AddSongActivity extends MainActivity {
             String textVerse = etAddNewSong.getText().toString();
 
             if ( TextUtils.isEmpty( textVerse ) ) {
+
                 Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_empty_verse ),
                         Toast.LENGTH_LONG ).show();
             } else {
@@ -89,8 +90,14 @@ public class AddSongActivity extends MainActivity {
                 numberVerses++;
             }
         } else {
-            prepareNewVerseLayout( numberVerses, vgAddSong );
-            numberVerses++;
+            String title = etAddSongTitle.getText().toString();
+            if ( TextUtils.isEmpty( title ) ) {
+                Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_empty_title ),
+                        Toast.LENGTH_LONG ).show();
+            } else {
+                prepareNewVerseLayout( numberVerses, vgAddSong );
+                numberVerses++;
+            }
         }
     }
 
