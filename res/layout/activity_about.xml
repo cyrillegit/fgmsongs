@@ -4,13 +4,124 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvFGMSongs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="215dp"
-        android:text="About"
+        android:layout_marginTop="68dp"
+        android:text="@string/fgm_songs"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvProgramer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAuthor"
+        android:text="@string/programer"
+        android:layout_marginBottom="@dimen/about_margin"
+        android:layout_marginLeft="@dimen/about_margin"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tvProgramer"
+        android:layout_below="@+id/tvFGMSongs"
+        android:layout_marginLeft="@dimen/about_margin"
+        android:layout_marginBottom="@dimen/about_margin"
+        android:layout_marginTop="41dp"
+        android:text="@string/author"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvFGMSongsProgramer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvProgramer"
+        android:layout_alignBottom="@+id/tvProgramer"
+        android:layout_alignRight="@+id/tvFGMSongsAuthor"
+        android:layout_toRightOf="@+id/tvProgramer"
+        android:text="@string/fgmsongs_programer"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvFGMContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvContact"
+        android:layout_alignBottom="@+id/tvContact"
+        android:layout_alignLeft="@+id/tvFGMSongsProgramer"
+        android:layout_alignParentRight="true"
+        android:text="@string/fgm_contact"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvFGMSongsVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvVersion"
+        android:layout_alignBottom="@+id/tvVersion"
+        android:layout_alignLeft="@+id/tvFGMContact"
+        android:layout_alignParentRight="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/ivIntelness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="@dimen/about_margin"
+        android:contentDescription="@string/intelness"
+        android:src="@drawable/intelness" />
+
+    <TextView
+        android:id="@+id/tvCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivIntelness"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/ivIntelness"
+        android:layout_marginLeft="@dimen/about_margin"
+        android:text="@string/company"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvFGMSongsAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvAuthor"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tvAuthor"
+        android:layout_toRightOf="@+id/tvAuthor"
+        android:text="@string/fgmsongs_author"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tvProgramer"
+        android:layout_below="@+id/tvProgramer"
+        android:layout_marginLeft="@dimen/about_margin"
+        android:text="@string/contact"
+        android:layout_marginBottom="@dimen/about_margin"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/tvContact"
+        android:layout_below="@+id/tvContact"
+        android:layout_marginLeft="@dimen/about_margin"
+        android:text="@string/version"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -194,6 +195,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
             // mainIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK |
             // Intent.FLAG_ACTIVITY_CLEAR_TASK );
             // mainIntent.putExtra( "EXIT", true );
+            ActivityCompat.finishAffinity( this );
             this.finish();
             System.exit( 0 );
             break;
