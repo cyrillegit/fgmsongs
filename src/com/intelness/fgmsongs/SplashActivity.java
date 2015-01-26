@@ -3,7 +3,6 @@ package com.intelness.fgmsongs;
 import java.util.List;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.PreferencesVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
-import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.managers.SharedPreferencesManager;
 import com.intelness.fgmsongs.managers.XMLFileManager;
@@ -49,6 +47,16 @@ public class SplashActivity extends ActionBarActivity {
         String current = res.getConfiguration().locale.getCountry();
         Log.i( TAG, "current locale : " + current );
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         new loadSongs().execute();
     }
 
@@ -92,13 +100,12 @@ public class SplashActivity extends ActionBarActivity {
             } catch ( InterruptedException e ) {
                 Thread.interrupted();
             }
-            populateDatabase();
-            songs = getAllSongs();
+            PreferencesVariables prefVars = getAllPreferencesVariables();
+            populateDatabase( prefVars.getLocaleLanguage() );
+            songs = getAllSongs( prefVars.getLocaleLanguage() );
 
-            // load global variables
-            // setGlobalVariables();
             // initialize
-            initialize();
+            initialize( prefVars );
             return null;
         }
 
@@ -129,9 +136,9 @@ public class SplashActivity extends ActionBarActivity {
      * 
      * @return list of songs
      */
-    public List<Song> getAllSongs() {
+    public List<Song> getAllSongs( int locale ) {
 
-        SongDAO sDao = new SongDAO( this );
+        SongDAO sDao = new SongDAO( this, locale );
         List<Song> allSongs = sDao.getAllSongs();
         return allSongs;
     }
@@ -141,23 +148,21 @@ public class SplashActivity extends ActionBarActivity {
      * 
      * @since 2015-01-25
      */
-    public void populateDatabase() {
+    public void populateDatabase( int locale ) {
 
-        SongDAO sDao = new SongDAO( this );
+        SongDAO sDao = new SongDAO( this, locale );
         int rows = sDao.getNumberOfSongs();
 
         List<Song> songs;
 
-        // old way
-        // XMLParser parser = new XMLParser( XMLParser.SONG );
-        // songs = parser.parseSong( getResources().openRawResource(
-        // R.raw.fr_songs ) );
-
-        // with XMLFileManager
+        // parse song from xml file
         XMLFileManager manager = new XMLFileManager( XMLFileManager.SONG );
-        songs = manager.parseSong( getResources().openRawResource( R.raw.fr_songs ) );
+        if ( locale == 1 ) {
+            songs = manager.parseSong( getResources().openRawResource( R.raw.fr_songs ) );
+        } else {
+            songs = manager.parseSong( getResources().openRawResource( R.raw.en_songs ) );
+        }
 
-        // Log.i( TAG, "songs : " + songs.toString() );
         for ( Song song : songs ) {
             int number = song.getNumber();
             // if db is empty, store every songs that is in xml file in db
@@ -168,24 +173,6 @@ public class SplashActivity extends ActionBarActivity {
                 sDao.addSong( song );
             }
         }
-    }
-
-    /**
-     * set global variable
-     * 
-     * @deprecated use setApplicationVariables instead
-     * @see setApplicationVariables
-     */
-    private void setGlobalVariables() {
-        // calling the application class
-        final AppManager app = (AppManager) getApplicationContext();
-        SharedPreferences prefs = getSharedPreferences( FGMSongsUtils.PREFERENCES, MODE_PRIVATE );
-
-        app.setSongs( songs );
-        app.setTitleSongs( FGMSongsUtils.getAllTitleSongs( songs ) );
-        app.setLanguage( prefs.getInt( FGMSongsUtils.LANGUAGE, -1 ) );
-        app.setLastCustomNumberSong( prefs.getInt( FGMSongsUtils.LAST_CUSTOM_NUMBER_SONG,
-                FGMSongsUtils.FIRST_CUSTOM_NUMBER_SONG ) );
     }
 
     /**
@@ -214,9 +201,9 @@ public class SplashActivity extends ActionBarActivity {
      * 
      * @since 2015-01-25
      */
-    private void initialize() {
+    private void initialize( PreferencesVariables prefVars ) {
         ApplicationVariables appVars = new ApplicationVariables();
-        PreferencesVariables prefVars = getAllPreferencesVariables();
+        // PreferencesVariables prefVars = getAllPreferencesVariables();
 
         appVars.setSongs( songs );
         appVars.setTitleSongs( FGMSongsUtils.getAllTitleSongs( songs ) );
@@ -224,7 +211,5 @@ public class SplashActivity extends ActionBarActivity {
         appVars.setLastCustomNumberSong( prefVars.getLastCustomNumberSong() );
 
         setAllApplicationVariables( appVars );
-
-        Log.i( TAG, "language : " + appVars.getLanguage() );
     }
 }

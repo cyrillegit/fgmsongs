@@ -28,14 +28,16 @@
         android:id="@+id/tvPsalms342"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/song_margin"
         android:layout_alignRight="@+id/tvHomeSecondVerse"
         android:layout_below="@+id/tvHomeSecondVerse"
         android:layout_marginTop="15dp"
         android:gravity="center" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/ivLogoFGM"
         android:layout_width="wrap_content"
+        android:contentDescription="@string/fullGospelMission"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

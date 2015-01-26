@@ -20,8 +20,8 @@
         android:layout_height="@dimen/title_song_frame"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/song_margin"
         android:layout_toRightOf="@+id/tvEditSongNumber"
-        android:paddingTop="@dimen/song_margin"
         android:gravity="left"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -34,8 +34,9 @@
         android:layout_alignBottom="@+id/tvEditSongNumber"
         android:layout_alignLeft="@+id/tvEditSongTitle"
         android:layout_alignRight="@+id/tvEditSongTitle"
-        android:layout_below="@+id/tvEditSongTitle"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginBottom="@dimen/song_margin_bottom"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="@dimen/second_line" />
 
 </RelativeLayout>

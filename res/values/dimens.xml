@@ -15,5 +15,6 @@
     <dimen name="song_margin">10dp</dimen>
     <dimen name="search_song_margin">10dp</dimen>
     <dimen name="about_margin">20dp</dimen>
+    <dimen name="song_margin_bottom">5dp</dimen>
 
 </resources>

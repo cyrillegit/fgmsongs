@@ -39,16 +39,6 @@
         android:text="@string/of_the"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/tvLord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvPraises"
-        android:layout_below="@+id/tvOf"
-        android:layout_marginTop="18dp"
-        android:text="@string/lord"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
@@ -70,5 +60,15 @@
         android:text="@string/fullGospelMission"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="@dimen/fgm_size" />
+
+    <TextView
+        android:id="@+id/tvLord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOf"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/lord"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

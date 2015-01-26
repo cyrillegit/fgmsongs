@@ -19,10 +19,11 @@
         android:layout_height="@dimen/title_song_frame"
         android:textSize="@dimen/title_song"
         android:gravity="left"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/song_margin"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/tvNumberSong"
+        android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -30,11 +31,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/song_margin_bottom"
         android:textSize="@dimen/second_line"
         android:layout_alignBottom="@+id/tvNumberSong"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/tvNumberSong"
+        android:text="Meduim Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.intelness.fgmsongs;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import android.os.Bundle;
@@ -47,7 +49,7 @@ public class SongActivity extends MainActivity {
             position = 0;
         }
         setTitle( songs.get( position ).getNumber() + ". " + songs.get( position ).getTitle() );
-        verses = getVersesOfSong( songs.get( position ).getNumber(), FGMSongsUtils.FR );
+        verses = getVersesOfSong( songs.get( position ).getNumber(), FGMSongsUtils.LOCALE[appVars.getLanguage()] );
         if ( verses != null ) {
             Log.i( TAG, verses.get( 0 ).getStrophe() );
 
@@ -72,18 +74,32 @@ public class SongActivity extends MainActivity {
     public List<Verse> getVersesOfSong( int number, String language ) {
 
         List<Verse> versesOfSong = null;
-        int fileResource = FGMSongsUtils.getFileByNumber( number, language );
-        if ( fileResource <= 0 ) {
-            return versesOfSong;
-        }
-        // old way
-        // XMLParser parser = new XMLParser( XMLParser.VERSE );
-        // versesOfSong = parser.parseVerse( ( getResources().openRawResource(
-        // fileResource ) ) );
-
-        // new way
         XMLFileManager manager = new XMLFileManager( XMLFileManager.VERSE );
-        versesOfSong = manager.parseVerse( getResources().openRawResource( fileResource ) );
+
+        if ( number < FGMSongsUtils.FIRST_CUSTOM_NUMBER_SONG ) {
+            int fileResource = FGMSongsUtils.getFileByNumber( number, language );
+            if ( fileResource <= 0 ) {
+                return versesOfSong;
+            }
+
+            // get verses from xml file resources
+            versesOfSong = manager.parseVerse( getResources().openRawResource( fileResource ) );
+        } else {
+            InputStream is = null;
+            String filename = FGMSongsUtils.CUSTOM + number + FGMSongsUtils.XML_EXTENSION;
+            try {
+                is = openFileInput( filename );
+
+                // parse verses of the song
+                versesOfSong = manager.parseVerse( is );
+
+            } catch ( FileNotFoundException e ) {
+                e.printStackTrace();
+                Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_file_found ),
+                        Toast.LENGTH_LONG ).show();
+            }
+
+        }
         return versesOfSong;
     }
 

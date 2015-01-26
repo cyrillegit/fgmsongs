@@ -1,8 +1,6 @@
 package com.intelness.fgmsongs;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -30,7 +28,6 @@ import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.PreferencesVariables;
 import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.managers.SharedPreferencesManager;
-import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 /**
  * this class is the class that implements the navigation drawer, all the other
@@ -42,23 +39,17 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  */
 public class MainActivity extends ActionBarActivity implements OnItemClickListener {
 
-    private static final String     TAG             = "MainActiviy";
-
-    protected static final String   POSITION        = "position";
-    protected static final String   MULTIPLE_CHOICE = "MULTIPLE_CHOICE";
-    protected static final String   SINGLE_CHOICE   = "SINGLE_CHOICE";
-    protected static final String   NEUTRAL         = "NEUTRAL";
+    private static final String     TAG      = "MainActiviy";
+    protected static final String   POSITION = "position";
 
     protected DrawerLayout          drawerLayout;
     protected ListView              listView;
     protected ActionBarDrawerToggle drawerListener;
-    protected Toolbar               toolbar         = null;
+    protected Toolbar               toolbar  = null;
     protected DrawerAdapter         drawerAdapter;
     protected String[]              navDrawerItems;
     protected SpinnerAdapter        spinnerAdapter;
     protected FrameLayout           frameLayout;
-
-    protected int                   choice;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -190,13 +181,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
             break;
 
         case 7:
-            // mainIntent = new Intent( getApplicationContext(),
-            // SplashActivity.class );
-            // mainIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK |
-            // Intent.FLAG_ACTIVITY_CLEAR_TASK );
-            // mainIntent.putExtra( "EXIT", true );
             ActivityCompat.finishAffinity( this );
-            this.finish();
             System.exit( 0 );
             break;
         default:
@@ -252,76 +237,5 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     protected ApplicationVariables getAllApplicationVariables() {
         ApplicationManager am = new ApplicationManager( this );
         return am.getApplicationVariables();
-    }
-
-    /**
-     * display alert dialog
-     * 
-     * @param title
-     *            to show
-     * @param message
-     *            to show
-     * @param mode
-     *            to display the dialog
-     * @since 2015-01-25
-     */
-    protected int displayAlertDialog( String title, String message, String mode ) {
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle( title );
-
-        if ( mode.equals( NEUTRAL ) ) {
-            builder.setMessage( message )
-                    .setCancelable( false )
-                    .setNeutralButton( R.string.ok, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick( DialogInterface dialog, int which ) {
-                            setchoice( which );
-                            dialog.dismiss();
-                        }
-                    } );
-
-        } else if ( mode.equals( SINGLE_CHOICE ) ) {
-
-            builder.setSingleChoiceItems( FGMSongsUtils.LANGUAGES, -1, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick( DialogInterface dialog, int which ) {
-                    setchoice( which );
-                    dialog.dismiss();
-                }
-            } );
-
-        } else if ( mode.equals( MULTIPLE_CHOICE ) ) {
-            builder.setMessage( message )
-                    .setCancelable( false )
-                    .setPositiveButton( R.string.yes, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick( DialogInterface dialog, int which ) {
-                            setchoice( which );
-                            dialog.dismiss();
-                        }
-                    } )
-                    .setNegativeButton( R.string.no, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick( DialogInterface dialog, int which ) {
-                            setchoice( which );
-                            dialog.dismiss();
-                        }
-                    } );
-        }
-
-        builder.create().show();
-        return choice;
-    }
-
-    protected void setchoice( int which ) {
-        choice = which;
-    }
-
-    protected int getChoice() {
-        return choice;
     }
 }

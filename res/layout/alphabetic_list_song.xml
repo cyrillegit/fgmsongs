@@ -47,9 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvAlpha"
         android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/song_margin"
         android:layout_toLeftOf="@+id/tvAlphaNumber"
         android:gravity="left"
-        android:layout_marginLeft="@dimen/song_margin"
+        android:layout_marginBottom="@dimen/song_margin_bottom"
         android:text="Second line"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="@dimen/second_line" />

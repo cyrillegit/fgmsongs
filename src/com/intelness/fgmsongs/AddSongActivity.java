@@ -20,7 +20,6 @@ import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.beans.Verse;
-import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
@@ -208,72 +207,6 @@ public class AddSongActivity extends MainActivity {
     }
 
     /**
-     * store xml file in internal storage
-     * 
-     * @param filename
-     *            name of the file
-     * @param xmlString
-     *            content of the file
-     */
-    /*
-     * public void storeXMLFile( String filename, String xmlString ) { try {
-     * FileOutputStream fileout = this.openFileOutput( filename, MODE_PRIVATE );
-     * OutputStreamWriter outputWriter = new OutputStreamWriter( fileout );
-     * outputWriter.write( xmlString ); outputWriter.close();
-     * 
-     * } catch ( Exception e ) { e.printStackTrace(); } }
-     */
-
-    /**
-     * store the custom song in db
-     * 
-     * @param song
-     *            to be stored
-     * @deprecated
-     */
-    public void storeSongInDB( Song song ) {
-        SongDAO sDao = new SongDAO( this );
-        sDao.addSong( song );
-    }
-
-    /**
-     * get the last custom song number
-     * 
-     * @return number of the song
-     * @deprecated
-     */
-    public int getLastCustomNumberSong() {
-        final AppManager app = (AppManager) this.getApplicationContext();
-        return app.getLastCustomNumberSong();
-    }
-
-    /**
-     * store the current custom song number
-     * 
-     * @param number
-     *            current number
-     * @deprecated
-     */
-    public void setLastCustomNumberSong( int number ) {
-        final AppManager app = (AppManager) getApplicationContext();
-        app.setLastCustomNumberSong( number );
-    }
-
-    /**
-     * add new song to other songs
-     * 
-     * @param song
-     *            to add
-     * @deprecated
-     */
-    public void setNewSongInSetOfSongs( Song song ) {
-        final AppManager app = (AppManager) getApplicationContext();
-        List<Song> oldSongs = app.getSongs();
-        oldSongs.add( song );
-        app.setSongs( oldSongs );
-    }
-
-    /**
      * update songs and last number of songs
      * 
      * @param number
@@ -283,9 +216,12 @@ public class AddSongActivity extends MainActivity {
      */
     private void updateSongs( Song song ) {
         ApplicationManager am = new ApplicationManager( this );
-        SongDAO sDao = new SongDAO( this );
+        SongDAO enDao = new SongDAO( this, 0 );
+        SongDAO frDao = new SongDAO( this, 1 );
 
-        sDao.addSong( song );
+        enDao.addSong( song );
+        frDao.addSong( song );
+
         List<Song> oldSongs = appVars.getSongs();
         oldSongs.add( song );
 

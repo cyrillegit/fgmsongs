@@ -81,4 +81,14 @@
     <string name="no_editable_songs">You have no personal song</string>
     <string name="ok">OK</string>
     <string name="song_updated">Song updated</string>
+    <string name="fgm_songs">Full Gospel Mission Songs</string>
+    <string name="author">Author : </string>
+    <string name="company">Company : </string>
+    <string name="programer">Programer : </string>
+    <string name="contact">Contact : </string>
+    <string name="version">Version : </string>
+    <string name="fgmsongs_author">  Inspired by God</string>
+    <string name="fgmsongs_programer">  McCyrille</string>
+    <string name="fgm_contact">  contact@intelness.com</string>
+    <string name="intelness">Intelness</string>    
 </resources>

@@ -19,16 +19,19 @@ import com.intelness.fgmsongs.db.DatabaseDAO;
  */
 public class SongDAO extends DatabaseDAO {
 
-    public static final String TABLE_SONG       = "song";
-    public static final String KEY_ID           = "id";
-    public static final String KEY_NUMBER       = "number";
-    public static final String KEY_TITLE        = "title";
-    public static final String KEY_SECOND       = "second";
-    public static final String KEY_AUTHOR       = "author";
-    public static final String KEY_CREATED_DATE = "createdDate";
+    public static final String[] TABLE_SONG       = { "song_en", "song_fr" };
+    public static final String   KEY_ID           = "id";
+    public static final String   KEY_NUMBER       = "number";
+    public static final String   KEY_TITLE        = "title";
+    public static final String   KEY_SECOND       = "second";
+    public static final String   KEY_AUTHOR       = "author";
+    public static final String   KEY_CREATED_DATE = "createdDate";
 
-    public SongDAO( Context context ) {
+    private int                  locale;
+
+    public SongDAO( Context context, int language ) {
         super( context );
+        this.locale = language;
     }
 
     /**
@@ -46,7 +49,7 @@ public class SongDAO extends DatabaseDAO {
         values.put( KEY_AUTHOR, song.getAuthor() );
         values.put( KEY_CREATED_DATE, song.getCreatedDate().toString() );
 
-        db.insert( TABLE_SONG, null, values );
+        db.insert( TABLE_SONG[locale], null, values );
         close();
     }
 
@@ -61,7 +64,7 @@ public class SongDAO extends DatabaseDAO {
 
         SQLiteDatabase db = open();
 
-        Cursor cursor = db.query( TABLE_SONG,
+        Cursor cursor = db.query( TABLE_SONG[locale],
                 new String[] { KEY_ID,
                         KEY_NUMBER,
                         KEY_TITLE,
@@ -102,7 +105,7 @@ public class SongDAO extends DatabaseDAO {
 
         SQLiteDatabase db = open();
 
-        Cursor cursor = db.query( TABLE_SONG,
+        Cursor cursor = db.query( TABLE_SONG[locale],
                 new String[] { KEY_ID,
                         KEY_NUMBER,
                         KEY_TITLE,
@@ -140,7 +143,7 @@ public class SongDAO extends DatabaseDAO {
     public List<Song> getAllSongs() {
         List<Song> songList = new ArrayList<Song>();
 
-        String selectQuery = "SELECT * FROM " + TABLE_SONG;
+        String selectQuery = "SELECT * FROM " + TABLE_SONG[locale];
         SQLiteDatabase db = open();
         Cursor cursor = db.rawQuery( selectQuery, null );
 
@@ -174,7 +177,7 @@ public class SongDAO extends DatabaseDAO {
         if ( db == null ) {
             return -1;
         }
-        int numRows = (int) DatabaseUtils.queryNumEntries( db, TABLE_SONG );
+        int numRows = (int) DatabaseUtils.queryNumEntries( db, TABLE_SONG[locale] );
         super.close();
         return numRows;
     }
@@ -195,7 +198,7 @@ public class SongDAO extends DatabaseDAO {
         values.put( KEY_AUTHOR, song.getAuthor() );
         values.put( KEY_CREATED_DATE, song.getCreatedDate() );
 
-        return db.update( TABLE_SONG, values, KEY_ID + " = ?",
+        return db.update( TABLE_SONG[locale], values, KEY_ID + " = ?",
                 new String[] { String.valueOf( song.getId() ) } );
     }
 
@@ -207,6 +210,6 @@ public class SongDAO extends DatabaseDAO {
      */
     public void deleteSong( Song song ) {
         SQLiteDatabase db = open();
-        db.delete( TABLE_SONG, KEY_ID + " = ?", new String[] { String.valueOf( song.getId() ) } );
+        db.delete( TABLE_SONG[locale], KEY_ID + " = ?", new String[] { String.valueOf( song.getId() ) } );
     }
 }

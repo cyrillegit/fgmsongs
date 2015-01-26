@@ -276,7 +276,7 @@ public class EditSongActivity extends MainActivity {
      * @since 2015-01-26
      */
     private void updateSongsOnDelete( Song song ) {
-        SongDAO sDao = new SongDAO( getApplicationContext() );
+        SongDAO sDao = new SongDAO( getApplicationContext(), appVars.getLanguage() );
         ApplicationManager am = new ApplicationManager( getApplicationContext() );
 
         String filename = FGMSongsUtils.CUSTOM + song.getNumber() + FGMSongsUtils.XML_EXTENSION;
@@ -296,7 +296,7 @@ public class EditSongActivity extends MainActivity {
      * @since 2015-01-26
      */
     private void updateSongsOnValidate() {
-        SongDAO sDao = new SongDAO( getApplicationContext() );
+        SongDAO sDao = new SongDAO( getApplicationContext(), appVars.getLanguage() );
         ApplicationManager am = new ApplicationManager( getApplicationContext() );
 
         // get the data of the edited song

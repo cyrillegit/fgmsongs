@@ -6,8 +6,8 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -18,7 +18,6 @@ import android.widget.ListView;
 import com.intelness.fgmsongs.adapters.ListSongsAdapter;
 import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
-import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 public class SearchSongActivity extends MainActivity {
@@ -51,6 +50,13 @@ public class SearchSongActivity extends MainActivity {
                 titleSongs );
         // actvSearchSong.setDropDownWidth( llSearchSong.getWidth() );
         actvSearchSong.setAdapter( arrayAdapter );
+        actvSearchSong.setOnClickListener( new OnClickListener() {
+
+            @Override
+            public void onClick( View v ) {
+                manageSearch();
+            }
+        } );
         // triggered when search button is clicked
         onClickSearchBtn();
 
@@ -89,24 +95,18 @@ public class SearchSongActivity extends MainActivity {
 
             @Override
             public void onClick( View v ) {
-                Editable searchedText = actvSearchSong.getText();
-                // Toast.makeText( getApplicationContext(), searchedText,
-                // Toast.LENGTH_LONG ).show();
-                List<Song> newSongs = FGMSongsUtils.getSongsWithTitleContainingString( searchedText.toString(), songs );
-                Log.i( TAG, "new songs : " + newSongs.get( 0 ).getTitle() );
-                manageItemsLvSearchedSongs( newSongs );
+                manageSearch();
             }
         } );
     }
 
     /**
-     * get global variables
-     * 
-     * @deprecated
+     * manage the search
      */
-    public void getGlobalVariables() {
-        AppManager app = (AppManager) getApplicationContext();
-        songs = app.getSongs();
-        titleSongs = app.getTitleSongs();
+    private void manageSearch() {
+        Editable searchedText = actvSearchSong.getText();
+        List<Song> newSongs = FGMSongsUtils.getSongsWithTitleContainingString( searchedText.toString(), songs );
+        // Log.i( TAG, "new songs : " + newSongs.get( 0 ).getTitle() );
+        manageItemsLvSearchedSongs( newSongs );
     }
 }
