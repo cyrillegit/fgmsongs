@@ -12,7 +12,6 @@ import android.widget.ListView;
 import com.intelness.fgmsongs.adapters.ListSongsAdapter;
 import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
-import com.intelness.fgmsongs.globals.AppManager;
 
 /**
  * class to display the list of songs
@@ -32,7 +31,6 @@ public class ListSongsActivity extends MainActivity {
         setTitle( navDrawerItems[0] );
 
         // get all the global variables, particularly songs
-        // getGlobalVariables();
         appVars = super.getAllApplicationVariables();
         songs = appVars.getSongs();
 
@@ -54,15 +52,5 @@ public class ListSongsActivity extends MainActivity {
             }
         } );
 
-    }
-
-    /**
-     * get global variables
-     * 
-     * @deprecated
-     */
-    public void getGlobalVariables() {
-        AppManager app = (AppManager) getApplicationContext();
-        songs = app.getSongs();
     }
 }

@@ -11,14 +11,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.intelness.fgmsongs.adapters.SummaryAdapter;
+import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
-public class SommaryActivity extends MainActivity {
+public class SummaryActivity extends MainActivity {
 
-    private List<Song>      songs;
-    private ArrayList<Song> sortedSongs;
+    private List<Song>           songs;
+    private ArrayList<Song>      sortedSongs;
+    private ApplicationVariables appVars;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -28,7 +30,9 @@ public class SommaryActivity extends MainActivity {
         setTitle( navDrawerItems[4] );
 
         // get all the global variables, particularly songs
-        getGlobalVariables();
+        // getGlobalVariables();
+        appVars = super.getAllApplicationVariables();
+        songs = appVars.getSongs();
 
         sortedSongs = FGMSongsUtils.sortSongsAlphabetically( songs );
 
@@ -53,6 +57,8 @@ public class SommaryActivity extends MainActivity {
 
     /**
      * get global variables
+     * 
+     * @deprecated
      */
     public void getGlobalVariables() {
         AppManager app = (AppManager) getApplicationContext();

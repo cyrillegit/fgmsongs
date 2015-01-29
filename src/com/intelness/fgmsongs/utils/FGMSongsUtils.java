@@ -218,10 +218,12 @@ public class FGMSongsUtils {
             }
         }
 
+        // put the sorted lst in an arraylist
         for ( int i = 0; i < ALPHABET.length; i++ ) {
             for ( int k = 0; k < sortedSongs.get( i ).size(); k++ ) {
                 sortedSongsAlphabetically.add( sortedSongs.get( i ).get( k ) );
-                Log.i( TAG, "sorted : " + sortedSongs.get( i ).get( k ).getTitle() );
+                // Log.i( TAG, "sorted : " + sortedSongs.get( i ).get( k
+                // ).getTitle() );
             }
         }
 

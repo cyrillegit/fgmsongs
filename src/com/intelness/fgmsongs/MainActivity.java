@@ -166,7 +166,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
             break;
 
         case 4:
-            mainIntent = new Intent( getApplicationContext(), SommaryActivity.class );
+            mainIntent = new Intent( getApplicationContext(), SummaryActivity.class );
             startActivity( mainIntent );
             break;
 

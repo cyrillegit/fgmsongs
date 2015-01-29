@@ -45,7 +45,7 @@
         </activity>
         
         <activity
-            android:name=".SommaryActivity"
+            android:name=".SummaryActivity"
             android:label="@string/app_name" >
         </activity>
         
