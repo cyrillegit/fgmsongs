@@ -53,9 +53,9 @@ public class FGMSongsUtils {
         String newString = "";
         for ( int i = 0; i < splitString.length; i++ ) {
             if ( i == splitString.length - 1 ) {
-                newString += splitString[i];
+                newString += splitString[i].trim();
             } else {
-                newString += splitString[i] + System.getProperty( "line.separator" );
+                newString += splitString[i].trim() + System.getProperty( "line.separator" );
             }
         }
         return newString;
@@ -69,7 +69,7 @@ public class FGMSongsUtils {
      * @return string1## string2
      */
     public static String StringsReplaceNewLine( String string ) {
-        return string.replace( NEW_LINE, SPLIT );
+        return string.trim().replace( NEW_LINE, SPLIT );
     }
 
     /**
