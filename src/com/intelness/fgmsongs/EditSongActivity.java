@@ -155,7 +155,7 @@ public class EditSongActivity extends MainActivity {
                     public void onClick( DialogInterface dialog, int which ) {
 
                         // delete de song, and update the set of songs
-                        updateSongsOnDelete( song );
+                        updateSongsOnDelete( song, appVars.getLanguage() );
 
                         Toast.makeText( getApplicationContext(), getResources().getString( R.string.song_deleted ),
                                 Toast.LENGTH_LONG ).show();
@@ -274,6 +274,7 @@ public class EditSongActivity extends MainActivity {
      * @param song
      *            to be deleted
      * @since 2015-01-26
+     * @deprecated
      */
     private void updateSongsOnDelete( Song song ) {
         SongDAO sDao = new SongDAO( getApplicationContext(), appVars.getLanguage() );

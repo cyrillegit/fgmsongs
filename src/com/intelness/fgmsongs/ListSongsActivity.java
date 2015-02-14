@@ -2,7 +2,6 @@ package com.intelness.fgmsongs;
 
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,18 +22,20 @@ public class ListSongsActivity extends MainActivity {
 
     private List<Song>           songs;
     private ApplicationVariables appVars;
+    private View                 layout;
+    private ListView             lvListSongs;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        View layout = getLayoutInflater().inflate( R.layout.activity_listsongs, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_listsongs, frameLayout );
         setTitle( navDrawerItems[0] );
 
         // get all the global variables, particularly songs
         appVars = super.getAllApplicationVariables();
         songs = appVars.getSongs();
 
-        ListView lvListSongs = (ListView) layout.findViewById( R.id.lvListSongs );
+        lvListSongs = (ListView) layout.findViewById( R.id.lvListSongs );
         ListSongsAdapter adapter = new ListSongsAdapter( this, songs );
         lvListSongs.setAdapter( adapter );
 
@@ -42,15 +43,22 @@ public class ListSongsActivity extends MainActivity {
 
             @Override
             public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
-
-                Bundle bundle = new Bundle();
-                bundle.putInt( POSITION, position );
-                Intent intent = new Intent( getApplicationContext(), SongActivity.class );
-                intent.putExtras( bundle );
-                startActivity( intent );
-                finish();
+                goToSongActivity( position );
+                // Bundle bundle = new Bundle();
+                // bundle.putInt( POSITION, position );
+                // Intent intent = new Intent( getApplicationContext(),
+                // SongActivity.class );
+                // intent.putExtras( bundle );
+                // startActivity( intent );
+                // finish();
             }
         } );
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onSwipeScreen( getApplicationContext(), lvListSongs, LIST_SONGS_ACTIVITY_POSITION );
     }
 }

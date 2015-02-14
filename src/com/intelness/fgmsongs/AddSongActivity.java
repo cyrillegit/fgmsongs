@@ -43,12 +43,13 @@ public class AddSongActivity extends MainActivity {
     private final static String  VERSE        = "Verse";
     private int                  lastNumber;
     private ApplicationVariables appVars;
+    private View                 layout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
 
-        View layout = getLayoutInflater().inflate( R.layout.activity_addsong, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_addsong, frameLayout );
         setTitle( navDrawerItems[2] );
 
         // get all applications variables
@@ -68,6 +69,17 @@ public class AddSongActivity extends MainActivity {
         onClickBtnAddNewVerse();
         onClickBtnAddSongValidate();
         onClickBtnAddSongCancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onSwipeScreen( getApplicationContext(), layout, ADD_SONG_ACTIVITY_POSITION );
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     /**

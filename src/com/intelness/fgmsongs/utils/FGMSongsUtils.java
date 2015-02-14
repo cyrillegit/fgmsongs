@@ -108,6 +108,21 @@ public class FGMSongsUtils {
     }
 
     /**
+     * get the index of all songs
+     * 
+     * @param songs
+     * @return list of index
+     * @since 2015-02-13
+     */
+    public static ArrayList<Integer> getAllIndexSongs( List<Song> songs ) {
+        ArrayList<Integer> indexSongs = new ArrayList<Integer>();
+        for ( Song s : songs ) {
+            indexSongs.add( songs.indexOf( s ) );
+        }
+        return indexSongs;
+    }
+
+    /**
      * get all the editable songs
      * 
      * @param songs

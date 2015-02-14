@@ -2,8 +2,11 @@ package com.intelness.fgmsongs.managers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 
 import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
@@ -21,8 +24,10 @@ public class ApplicationManager {
 
     private AppManager           appManager;
     private ApplicationVariables applicationVariables;
+    private Context              context;
 
     public ApplicationManager( Context context ) {
+        this.context = context;
         appManager = (AppManager) context.getApplicationContext();
     }
 
@@ -80,6 +85,21 @@ public class ApplicationManager {
 
     public void setLastCustomNumberSong( int lastCustomNumberSong ) {
         appManager.setLastCustomNumberSong( lastCustomNumberSong );
+    }
+
+    /**
+     * set a locale
+     * 
+     * @param languageCode
+     *            to set
+     */
+    public void setLocaleResources( final String languageCode ) {
+
+        Resources res = context.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = new Locale( languageCode.toLowerCase( Locale.ENGLISH ) );
+        res.updateConfiguration( conf, dm );
     }
 
 }

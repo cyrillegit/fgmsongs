@@ -11,16 +11,24 @@ import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
+/**
+ * home activity
+ * 
+ * @author McCyrille
+ * @version 1.0
+ * @since 2015-02-13
+ */
 public class HomeActivity extends MainActivity {
 
     private static final String  TAG = "HomeActivity";
     private ApplicationVariables appVars;
+    private View                 layout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
 
-        View layout = getLayoutInflater().inflate( R.layout.activity_home, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_home, frameLayout );
         setTitle( getResources().getString( R.string.songs ) );
         // get all the application variables from super class
         appVars = super.getAllApplicationVariables();
@@ -38,9 +46,15 @@ public class HomeActivity extends MainActivity {
         tvHomeFirstVerse.setText( FGMSongsUtils.StringsWithNewLine( getResources()
                 .getString( R.string.home_first_verse ) ) );
         tvSecondVerse.setText( FGMSongsUtils
-                .StringsWithNewLine( getResources().getString( R.string.home_seconf_verse ) ) );
+                .StringsWithNewLine( getResources().getString( R.string.home_second_verse ) ) );
         tvPsalms342.setText( getResources().getString( R.string.psalms_34_2 ) );
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onSwipeScreen( getApplicationContext(), layout, HOME_ACTIVITY_POSITION );
     }
 
     /**

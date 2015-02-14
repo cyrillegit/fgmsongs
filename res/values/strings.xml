@@ -11,18 +11,10 @@
     <string name="descLogo">Logo FGM</string>
     <string name="fullGospelMission">Mission du Plein Evangile</string>
 
-    <!-- Nav Drawer Menu Items -->
-    <string-array name="planets">
-        <item >Mercury</item>
-        <item >Venus</item>
-        <item >Earth</item>
-        <item >Mars</item>
-        <item >Jupiter</item>
-        <item >Saturn</item>
-        <item >Uranus</item>
-        <item >Neptune</item>
-        <item >Pluto</item>  
-        <item >Sedna</item>       
+    <!-- Edit song choices -->
+    <string-array name="edit_song_choices">
+        <item >Modify</item>
+        <item >Delete</item>     
     </string-array>
     
       <!-- Nav Drawer Menu Items -->
@@ -34,7 +26,7 @@
         <item >Summary</item>
         <item >Options</item>
         <item >About</item>
-        <item >Exit</item>
+        <item >Home</item>
     </string-array>
      
     <!-- Nav Drawer List Item Icons -->
@@ -55,7 +47,7 @@
     <string name="drawer_close">Close Navigation Drawer</string>
     <string name="empty"> </string>
     <string name="home_first_verse">&quot;I WILL BLESS THE LORD ## AT ALL TIMES</string>
-    <string name="home_seconf_verse">HS PRAISE SHQLL CONTINUALLY ## BE IN MY MOUTH.&quot;</string>
+    <string name="home_second_verse">HIS PRAISE SHALL CONTINUALLY ## BE IN MY MOUTH.&quot;</string>
     <string name="psalms_34_2">Psalms 34.2</string>
     <string name="songs">Songs</string>
     <string name="search_song">Search a song</string>
@@ -93,4 +85,10 @@
     <string name="fgm_contact">  contact@intelness.com</string>
     <string name="intelness">Intelness</string>
     <string name="no_empty_title">The title is empty. Please write a title</string>
+    <string name="register">Register</string>
+    <string name="delete_song">Delete song</string>
+    <string name="copy_song">Copy song</string>
+    <string name="edit_song">Modify song</string>
+    <string name="make_choice">Make a choice</string>
+    <string name="loading">Loading &#x2026;</string>
 </resources>

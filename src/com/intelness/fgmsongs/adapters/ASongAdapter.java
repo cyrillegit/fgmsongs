@@ -63,6 +63,8 @@ public class ASongAdapter extends BaseAdapter {
         String newVerse = FGMSongsUtils.StringsWithNewLine( verse.getStrophe() );
 
         tvASong.setText( newVerse );
+
+        convertView.setEnabled( false );
         return convertView;
     }
 }

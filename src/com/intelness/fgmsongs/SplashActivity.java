@@ -101,6 +101,7 @@ public class SplashActivity extends ActionBarActivity {
                 Thread.interrupted();
             }
             PreferencesVariables prefVars = getAllPreferencesVariables();
+            setLocaleLanguage( FGMSongsUtils.LOCALE[prefVars.getLocaleLanguage()] );
             populateDatabase( prefVars.getLocaleLanguage() );
             songs = getAllSongs( prefVars.getLocaleLanguage() );
 
@@ -194,6 +195,25 @@ public class SplashActivity extends ActionBarActivity {
     private PreferencesVariables getAllPreferencesVariables() {
         SharedPreferencesManager spm = new SharedPreferencesManager( this );
         return spm.getPreferencesVariables();
+    }
+
+    /**
+     * set locale language
+     * 
+     * @param languageCode
+     * @since 2015-01-30
+     */
+    private void setLocaleLanguage( final String languageCode ) {
+
+        ApplicationManager am = new ApplicationManager( getApplicationContext() );
+        am.setLocaleResources( languageCode );
+
+        // Resources res = getBaseContext().getResources();
+        // DisplayMetrics dm = res.getDisplayMetrics();
+        // android.content.res.Configuration conf = res.getConfiguration();
+        // conf.locale = new Locale( languageCode.toLowerCase( Locale.ENGLISH )
+        // );
+        // res.updateConfiguration( conf, dm );
     }
 
     /**

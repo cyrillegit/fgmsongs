@@ -69,6 +69,8 @@ public class SummaryAdapter extends BaseAdapter {
             tvAlphaTitleSong.setVisibility( View.INVISIBLE );
             tvAlpha.setVisibility( View.VISIBLE );
             tvAlpha.setText( song.getTitle() );
+            convertView.setEnabled( false );
+            convertView.setOnClickListener( null );
         } else {
             tvAlphaNumberSong.setVisibility( View.VISIBLE );
             tvAlphaSecondLine.setVisibility( View.VISIBLE );

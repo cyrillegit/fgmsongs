@@ -9,12 +9,13 @@ import android.widget.TextView;
 
 public class AboutActivity extends MainActivity {
     private TextView tvVersion;
+    private View     layout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
 
-        View layout = getLayoutInflater().inflate( R.layout.activity_about, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_about, frameLayout );
 
         setTitle( navDrawerItems[6] );
         getSupportActionBar().setIcon( R.drawable.ic_launcher );
@@ -32,4 +33,16 @@ public class AboutActivity extends MainActivity {
 
         tvVersion.setText( version );
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onSwipeScreen( getApplicationContext(), layout, ABOUT_ACTIVITY_POSITION );
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
 }

@@ -5,36 +5,6 @@
     android:orientation="vertical"
     android:background="@drawable/splash" >
 
-    <TextView
-        android:id="@+id/tvHomeFirstVerse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/tvHomeSecondVerse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvHomeFirstVerse"
-        android:layout_below="@+id/tvHomeFirstVerse"
-        android:layout_marginTop="45dp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/tvPsalms342"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/song_margin"
-        android:layout_alignRight="@+id/tvHomeSecondVerse"
-        android:layout_below="@+id/tvHomeSecondVerse"
-        android:layout_marginTop="15dp"
-        android:gravity="center" />
-
     <ImageView
         android:id="@+id/ivLogoFGM"
         android:layout_width="wrap_content"
@@ -44,5 +14,37 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="96dp"
         android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvPsalms342"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tvHomeSecondVerse"
+        android:layout_below="@+id/tvHomeSecondVerse"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="psalms   " />
+
+    <TextView
+        android:id="@+id/tvHomeSecondVerse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvHomeFirstVerse"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:gravity="center"
+        android:text="second                  "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvHomeFirstVerse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="first               "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

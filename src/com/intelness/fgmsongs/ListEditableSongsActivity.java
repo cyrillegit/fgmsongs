@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.intelness.fgmsongs.adapters.ListEditableSongAdapter;
 import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
-import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 /**
@@ -32,50 +31,37 @@ public class ListEditableSongsActivity extends MainActivity {
     private List<Song>            songs;
     private ArrayList<Song>       editableSongs;
     private ApplicationVariables  appVars;
+    private ListView              lvEditSongs;
+    private Song                  song;
+    private View                  layout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
 
-        View layout = getLayoutInflater().inflate( R.layout.activity_listeditablesongs, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_listeditablesongs, frameLayout );
         setTitle( navDrawerItems[3] );
         // get all the songs
         appVars = super.getAllApplicationVariables();
         songs = appVars.getSongs();
         // get all the editable songs
         editableSongs = FGMSongsUtils.getEditableSongs( songs );
+        lvEditSongs = (ListView) layout.findViewById( R.id.lvEditableSongs );
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         if ( editableSongs == null || editableSongs.isEmpty() ) {
             alertDialogNoSong();
         } else {
-
-            ListView lvEditSongs = (ListView) layout.findViewById( R.id.lvEditableSongs );
-            ListEditableSongAdapter adapter = new ListEditableSongAdapter( this, editableSongs );
-            lvEditSongs.setAdapter( adapter );
-
-            lvEditSongs.setOnItemClickListener( new OnItemClickListener() {
-
-                @Override
-                public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
-
-                    Bundle bundle = new Bundle();
-                    bundle.putInt( POSITION, position );
-                    Intent intent = new Intent( getApplicationContext(), EditSongActivity.class );
-                    intent.putExtras( bundle );
-                    startActivity( intent );
-                    finish();
-                }
-            } );
-
-            lvEditSongs.setOnItemLongClickListener( new OnItemLongClickListener() {
-
-                @Override
-                public boolean onItemLongClick( AdapterView<?> parent, View view, int position, long id ) {
-                    Toast.makeText( getBaseContext(), "long click", Toast.LENGTH_LONG ).show();
-                    return false;
-                }
-            } );
+            manageEditedSong();
         }
+
+        onSwipeScreen( getApplicationContext(), lvEditSongs, LIST_EDITABLE_SONGS_ACTIVITY_POSITION );
+        onSwipeScreen( getApplicationContext(), layout, LIST_EDITABLE_SONGS_ACTIVITY_POSITION );
     }
 
     /**
@@ -100,12 +86,119 @@ public class ListEditableSongsActivity extends MainActivity {
     }
 
     /**
-     * get global variables
+     * manage onLongClick on editable song
      * 
-     * @deprecated
+     * @since 2015-01-30
      */
-    private void getAllSongs() {
-        AppManager app = (AppManager) getApplicationContext();
-        songs = app.getSongs();
+    private void alertDialogOnLongClick( final int position ) {
+
+        final String[] choiceItems = this.getResources().getStringArray( R.array.edit_song_choices );
+        String choiceMessage = this.getResources().getString( R.string.make_choice );
+
+        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+        builder.setTitle( choiceMessage );
+        builder.setItems( choiceItems, new DialogInterface.OnClickListener() {
+            public void onClick( DialogInterface dialog, int item ) {
+                switch ( item ) {
+                // copy
+                case 0:
+
+                    break;
+                // edit
+                case 1:
+                    forwardToEditSongActivity( position );
+                    break;
+                // delete
+                case 2:
+                    onDeleteSong( position );
+                    break;
+
+                default:
+                    break;
+                }
+                dialog.dismiss();
+            }
+        } );
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    /**
+     * manage list of editable songs
+     * 
+     * @since 2015-01-30
+     */
+    private void manageEditedSong() {
+
+        ListEditableSongAdapter adapter = new ListEditableSongAdapter( this, editableSongs );
+        lvEditSongs.setAdapter( adapter );
+
+        lvEditSongs.setOnItemClickListener( new OnItemClickListener() {
+
+            @Override
+            public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
+                forwardToEditSongActivity( position );
+            }
+        } );
+
+        lvEditSongs.setOnItemLongClickListener( new OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick( AdapterView<?> parent, View view, int position, long id ) {
+                alertDialogOnLongClick( position );
+                return false;
+            }
+        } );
+
+    }
+
+    /**
+     * forward to EditSong Activity
+     * 
+     * @param position
+     *            of the item
+     */
+    private void forwardToEditSongActivity( int position ) {
+        Bundle bundle = new Bundle();
+        bundle.putInt( POSITION, position );
+        Intent intent = new Intent( getApplicationContext(), EditSongActivity.class );
+        intent.putExtras( bundle );
+        startActivity( intent );
+        finish();
+    }
+
+    /**
+     * set alert dialog to confirm deletion of a song
+     */
+    private void onDeleteSong( int position ) {
+        song = editableSongs.get( position );
+        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+        builder.setTitle( R.string.delete );
+        builder.setMessage( R.string.confirm_deletion )
+                .setCancelable( false )
+                .setPositiveButton( R.string.yes, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick( DialogInterface dialog, int which ) {
+
+                        // delete de song, and update the set of songs
+                        updateSongsOnDelete( song, appVars.getLanguage() );
+
+                        Toast.makeText( getApplicationContext(), getResources().getString( R.string.song_deleted ),
+                                Toast.LENGTH_LONG ).show();
+
+                        Intent intent = new Intent( getApplicationContext(), ListEditableSongsActivity.class );
+                        startActivity( intent );
+                    }
+                } )
+                .setNegativeButton( R.string.no, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick( DialogInterface dialog, int which ) {
+                        dialog.dismiss();
+                    }
+                } );
+
+        builder.create().show();
     }
 }

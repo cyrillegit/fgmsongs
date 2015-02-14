@@ -29,12 +29,13 @@ public class SearchSongActivity extends MainActivity {
     private static ArrayList<String> titleSongs;
     private List<Song>               songs;
     private ApplicationVariables     appVars;
+    private View                     layout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
 
-        View layout = getLayoutInflater().inflate( R.layout.activity_searchsong, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_searchsong, frameLayout );
         setTitle( navDrawerItems[1] );
         // get all the global variables, particularly the list of title of songs
         // getGlobalVariables();
@@ -64,6 +65,12 @@ public class SearchSongActivity extends MainActivity {
         // lvSearchedSongs.setAdapter( adapter );
         // triggered when an item of the listview is clicked
         manageItemsLvSearchedSongs( songs );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onSwipeScreen( getApplicationContext(), lvSearchedSongs, SEARCH_SONG_ACTIVITY_POSITION );
     }
 
     /**

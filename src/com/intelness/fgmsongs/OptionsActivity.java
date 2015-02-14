@@ -1,11 +1,7 @@
 package com.intelness.fgmsongs;
 
-import java.util.Locale;
-
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -30,12 +26,13 @@ public class OptionsActivity extends MainActivity {
     private int                  selectedRadioButton;
     private int                  language;
     private ApplicationVariables appVars;
+    private View                 layout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
 
-        View layout = getLayoutInflater().inflate( R.layout.activity_options, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_options, frameLayout );
         setTitle( navDrawerItems[5] );
 
         btnOptionsValidate = (Button) layout.findViewById( R.id.btnOptionsValidate );
@@ -55,6 +52,12 @@ public class OptionsActivity extends MainActivity {
         onClickBtnValidate();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onSwipeScreen( getApplicationContext(), layout, OPTIONS_ACTIVITY_POSITION );
+    }
+
     public void onClickBtnValidate() {
         btnOptionsValidate.setOnClickListener( new View.OnClickListener() {
 
@@ -72,7 +75,7 @@ public class OptionsActivity extends MainActivity {
                     language = 0;
                 }
                 setLocaleLanguage( language );
-                setLocaleResources( FGMSongsUtils.LOCALE[language] );
+                // setLocaleResources( FGMSongsUtils.LOCALE[language] );
                 Intent intent = new Intent( getApplicationContext(), SplashActivity.class );
                 startActivity( intent );
             }
@@ -85,6 +88,8 @@ public class OptionsActivity extends MainActivity {
             @Override
             public void onClick( View v ) {
                 setPreviousState();
+                Intent intent = new Intent( getApplicationContext(), HomeActivity.class );
+                startActivity( intent );
             }
         } );
     }
@@ -122,20 +127,12 @@ public class OptionsActivity extends MainActivity {
         rgLanguages.check( selectedRadioButton );
     }
 
-    void setLocaleResources( final String languageCode ) {
-
-        Resources res = getBaseContext().getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = new Locale( languageCode.toLowerCase( Locale.ENGLISH ) );
-        res.updateConfiguration( conf, dm );
-    }
-
     /**
      * set global variables
      */
     public void setLocaleLanguage( int localeLanguage ) {
         ApplicationManager am = new ApplicationManager( this );
+        am.setLocaleResources( FGMSongsUtils.LOCALE[localeLanguage] );
         am.setLanguage( localeLanguage );
         super.savePreferences();
     }

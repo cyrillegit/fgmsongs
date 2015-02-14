@@ -2,10 +2,10 @@ package com.intelness.fgmsongs;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -14,7 +14,6 @@ import com.intelness.fgmsongs.adapters.ASongAdapter;
 import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.Verse;
-import com.intelness.fgmsongs.globals.AppManager;
 import com.intelness.fgmsongs.managers.XMLFileManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
@@ -30,16 +29,20 @@ public class SongActivity extends MainActivity {
     private List<Verse>          verses;
     private int                  position;
     private ApplicationVariables appVars;
+    private View                 layout;
+    private ArrayList<Integer>   indexes;
+    private ListView             lvASong;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        View layout = getLayoutInflater().inflate( R.layout.activity_song, frameLayout );
+        layout = getLayoutInflater().inflate( R.layout.activity_song, frameLayout );
 
         // get global variables, all songs
         // getGlobalVariables();
         appVars = super.getAllApplicationVariables();
         songs = appVars.getSongs();
+        indexes = FGMSongsUtils.getAllIndexSongs( songs );
 
         // get clicked item
         Bundle bundle = getIntent().getExtras();
@@ -51,15 +54,19 @@ public class SongActivity extends MainActivity {
         setTitle( songs.get( position ).getNumber() + ". " + songs.get( position ).getTitle() );
         verses = getVersesOfSong( songs.get( position ).getNumber(), FGMSongsUtils.LOCALE[appVars.getLanguage()] );
         if ( verses != null ) {
-            Log.i( TAG, verses.get( 0 ).getStrophe() );
-
-            ListView lvASong = (ListView) layout.findViewById( R.id.lvASong );
+            lvASong = (ListView) layout.findViewById( R.id.lvASong );
             ASongAdapter adapter = new ASongAdapter( this, verses );
             lvASong.setAdapter( adapter );
         } else {
             Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_verse_to_display ),
                     Toast.LENGTH_LONG ).show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onSwipeScreenSong( getApplicationContext(), lvASong, position, indexes );
     }
 
     /**
@@ -101,16 +108,6 @@ public class SongActivity extends MainActivity {
 
         }
         return versesOfSong;
-    }
-
-    /**
-     * get global variables
-     * 
-     * @deprecated
-     */
-    public void getGlobalVariables() {
-        AppManager app = (AppManager) getApplicationContext();
-        songs = app.getSongs();
     }
 
 }
