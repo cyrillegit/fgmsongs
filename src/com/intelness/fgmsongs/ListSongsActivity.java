@@ -44,13 +44,6 @@ public class ListSongsActivity extends MainActivity {
             @Override
             public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
                 goToSongActivity( position );
-                // Bundle bundle = new Bundle();
-                // bundle.putInt( POSITION, position );
-                // Intent intent = new Intent( getApplicationContext(),
-                // SongActivity.class );
-                // intent.putExtras( bundle );
-                // startActivity( intent );
-                // finish();
             }
         } );
 
@@ -61,4 +54,10 @@ public class ListSongsActivity extends MainActivity {
         super.onResume();
         onSwipeScreen( getApplicationContext(), lvListSongs, LIST_SONGS_ACTIVITY_POSITION );
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
 }

@@ -55,4 +55,10 @@ public class SummaryActivity extends MainActivity {
         super.onResume();
         onSwipeScreen( getApplicationContext(), lvSummarySongs, SUMMARY_ACTIVITY_POSITION );
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
 }

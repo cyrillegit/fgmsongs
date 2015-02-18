@@ -36,48 +36,32 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="@dimen/song_margin"
+        android:layout_marginRight="@dimen/song_margin"
         android:background="@drawable/border"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tvLanguage"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/sSelectLanguage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/language"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
-
-        <RadioGroup
-            android:id="@+id/rgLanguages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvLanguage"
-            android:layout_alignRight="@+id/tvLanguage"
-            android:layout_below="@+id/tvLanguage" >
-
-            <RadioButton
-                android:id="@+id/rbEnglish"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/english" />
-
-            <RadioButton
-                android:id="@+id/rbFrench"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/french" />
-
-        </RadioGroup>
+            android:entries="@array/language_options"
+            android:gravity="right"
+            android:prompt="@string/select_language" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/song_margin"
+        android:layout_marginTop="29dp"
+        android:text="@string/language"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

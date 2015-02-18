@@ -101,6 +101,16 @@ public class EditSongActivity extends MainActivity {
         onClickBtnEditSongValidate();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     /**
      * triggred when button cancel is clicked
      */
@@ -266,29 +276,6 @@ public class EditSongActivity extends MainActivity {
         }
 
         return versesWithTitle;
-    }
-
-    /**
-     * delete the song, both in DB and internal storage, and update the songs
-     * 
-     * @param song
-     *            to be deleted
-     * @since 2015-01-26
-     * @deprecated
-     */
-    private void updateSongsOnDelete( Song song ) {
-        SongDAO sDao = new SongDAO( getApplicationContext(), appVars.getLanguage() );
-        ApplicationManager am = new ApplicationManager( getApplicationContext() );
-
-        String filename = FGMSongsUtils.CUSTOM + song.getNumber() + FGMSongsUtils.XML_EXTENSION;
-        deleteFile( filename );
-
-        sDao.deleteSong( song );
-        List<Song> newSongs = sDao.getAllSongs();
-        ArrayList<String> newTitleSongs = FGMSongsUtils.getAllTitleSongs( newSongs );
-
-        am.setSongs( newSongs );
-        am.setTitleSongs( newTitleSongs );
     }
 
     /**

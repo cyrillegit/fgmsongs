@@ -69,6 +69,11 @@ public class SongActivity extends MainActivity {
         onSwipeScreenSong( getApplicationContext(), lvASong, position, indexes );
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     /**
      * get the verses of a song acording to the number and the language
      * 

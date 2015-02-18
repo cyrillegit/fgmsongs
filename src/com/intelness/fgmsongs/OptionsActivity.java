@@ -3,11 +3,12 @@ package com.intelness.fgmsongs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.intelness.fgmsongs.beans.ApplicationVariables;
+import com.intelness.fgmsongs.listeners.OnSelectLanguageListener;
 import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
@@ -19,14 +20,10 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
 public class OptionsActivity extends MainActivity {
     private Button               btnOptionsValidate;
     private Button               btnOptionsCancel;
-    private RadioGroup           rgLanguages;
-    private RadioButton          rbLanguage;
-    private RadioButton          rbEnglish;
-    private RadioButton          rbFrench;
-    private int                  selectedRadioButton;
     private int                  language;
     private ApplicationVariables appVars;
     private View                 layout;
+    private Spinner              sSelectLanguage;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -37,16 +34,10 @@ public class OptionsActivity extends MainActivity {
 
         btnOptionsValidate = (Button) layout.findViewById( R.id.btnOptionsValidate );
         btnOptionsCancel = (Button) layout.findViewById( R.id.btnOptionsCancel );
-        rgLanguages = (RadioGroup) layout.findViewById( R.id.rgLanguages );
-        rbEnglish = (RadioButton) layout.findViewById( R.id.rbEnglish );
-        rbFrench = (RadioButton) layout.findViewById( R.id.rbFrench );
+        // btnOptionsCancel.setVisibility( View.INVISIBLE );
+        sSelectLanguage = (Spinner) findViewById( R.id.sSelectLanguage );
 
         appVars = super.getAllApplicationVariables();
-
-        // set the current state on the radio button
-        setCurrentState( appVars.getLanguage() );
-        // get the state of the layout of the radio button
-        getCurrentState();
 
         onClickBtnCancel();
         onClickBtnValidate();
@@ -55,39 +46,41 @@ public class OptionsActivity extends MainActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setLanguageToSpinner( appVars.getLanguage() );
+        onSelectLanguage();
         onSwipeScreen( getApplicationContext(), layout, OPTIONS_ACTIVITY_POSITION );
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    /**
+     * triggered when button validate is clicked
+     */
     public void onClickBtnValidate() {
         btnOptionsValidate.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick( View v ) {
-                int selected = rgLanguages.getCheckedRadioButtonId();
-                rbLanguage = (RadioButton) findViewById( selected );
-                if ( rbLanguage.getText().toString().trim()
-                        .equals( getResources().getString( R.string.english ).trim() ) ) {
-                    language = 0;
-                } else if ( rbLanguage.getText().toString().trim()
-                        .equals( getResources().getString( R.string.french ).trim() ) ) {
-                    language = 1;
-                } else {
-                    language = 0;
-                }
-                setLocaleLanguage( language );
-                // setLocaleResources( FGMSongsUtils.LOCALE[language] );
+
+                setLocaleLanguage( getLanguage() );
                 Intent intent = new Intent( getApplicationContext(), SplashActivity.class );
                 startActivity( intent );
             }
         } );
     }
 
+    /**
+     * triggered when button cancel is clicked
+     */
     public void onClickBtnCancel() {
         btnOptionsCancel.setOnClickListener( new View.OnClickListener() {
 
             @Override
             public void onClick( View v ) {
-                setPreviousState();
+                setLanguage( appVars.getLanguage() );
                 Intent intent = new Intent( getApplicationContext(), HomeActivity.class );
                 startActivity( intent );
             }
@@ -95,36 +88,37 @@ public class OptionsActivity extends MainActivity {
     }
 
     /**
-     * get the current state of the options on the layout
+     * set language to spinner
+     * 
+     * @param position
+     *            of the language
+     * @since 2015-02-18
      */
-    public void getCurrentState() {
-        selectedRadioButton = rgLanguages.getCheckedRadioButtonId();
+    public void setLanguageToSpinner( int position ) {
+        sSelectLanguage.setSelection( position );
     }
 
     /**
-     * set the current state
+     * set language selected
+     * 
+     * @since 2015-02-18
      */
-    public void setCurrentState( int language ) {
-        switch ( language ) {
-        case 0:
-            rbEnglish.setChecked( true );
-            rbFrench.setChecked( false );
-            break;
-        case 1:
-            rbEnglish.setChecked( false );
-            rbFrench.setChecked( true );
-            break;
+    public void onSelectLanguage() {
+        sSelectLanguage.setOnItemSelectedListener( new OnSelectLanguageListener() {
 
-        default:
-            break;
-        }
-    }
+            @Override
+            public void onItemSelected( AdapterView<?> parent, View view, int position, long id ) {
 
-    /**
-     * set the previous state of the layout
-     */
-    public void setPreviousState() {
-        rgLanguages.check( selectedRadioButton );
+                setLanguage( position );
+
+            }
+
+            @Override
+            public void onNothingSelected( AdapterView<?> parent ) {
+                // TODO Auto-generated method stub
+                super.onNothingSelected( parent );
+            }
+        } );
     }
 
     /**
@@ -135,5 +129,13 @@ public class OptionsActivity extends MainActivity {
         am.setLocaleResources( FGMSongsUtils.LOCALE[localeLanguage] );
         am.setLanguage( localeLanguage );
         super.savePreferences();
+    }
+
+    public int getLanguage() {
+        return language;
+    }
+
+    public void setLanguage( int language ) {
+        this.language = language;
     }
 }

@@ -3,7 +3,6 @@ package com.intelness.fgmsongs;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -73,6 +72,11 @@ public class SearchSongActivity extends MainActivity {
         onSwipeScreen( getApplicationContext(), lvSearchedSongs, SEARCH_SONG_ACTIVITY_POSITION );
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     /**
      * triggered when an item of the listveiw is clicked
      */
@@ -84,12 +88,14 @@ public class SearchSongActivity extends MainActivity {
             @Override
             public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
                 int realPosition = FGMSongsUtils.getIndexByNumber( songsToDisplay.get( position ).getNumber(), songs );
-                Bundle bundle = new Bundle();
-                bundle.putInt( POSITION, realPosition );
-                Intent intent = new Intent( getApplicationContext(), SongActivity.class );
-                intent.putExtras( bundle );
-                startActivity( intent );
-                finish();
+                goToSongActivity( realPosition );
+                // Bundle bundle = new Bundle();
+                // bundle.putInt( POSITION, realPosition );
+                // Intent intent = new Intent( getApplicationContext(),
+                // SongActivity.class );
+                // intent.putExtras( bundle );
+                // startActivity( intent );
+                // finish();
             }
         } );
     }

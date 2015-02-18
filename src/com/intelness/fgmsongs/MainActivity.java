@@ -48,6 +48,7 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
 public class MainActivity extends ActionBarActivity implements OnItemClickListener {
 
     private static final String     TAG                                   = "MainActiviy";
+    protected static final String   HOME_ACTIVITY                         = "HomeActivity";
     protected static final String   POSITION                              = "position";
     protected static final String   SONGS                                 = "songs";
     protected static final int      LIST_SONGS_ACTIVITY_POSITION          = 0;
@@ -161,59 +162,6 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
         selectItem( position );
         goToActivity( position );
-        // Intent mainIntent;
-        //
-        // switch ( position ) {
-        // case 0:
-        // mainIntent = new Intent( getApplicationContext(),
-        // ListSongsActivity.class );
-        // startActivity( mainIntent );
-        // break;
-        //
-        // case 1:
-        // mainIntent = new Intent( getApplicationContext(),
-        // SearchSongActivity.class );
-        // startActivity( mainIntent );
-        // break;
-        //
-        // case 2:
-        // mainIntent = new Intent( getApplicationContext(),
-        // AddSongActivity.class );
-        // startActivity( mainIntent );
-        // break;
-        //
-        // case 3:
-        // mainIntent = new Intent( getApplicationContext(),
-        // ListEditableSongsActivity.class );
-        // startActivity( mainIntent );
-        // break;
-        //
-        // case 4:
-        // mainIntent = new Intent( getApplicationContext(),
-        // SummaryActivity.class );
-        // startActivity( mainIntent );
-        // break;
-        //
-        // case 5:
-        // mainIntent = new Intent( getApplicationContext(),
-        // OptionsActivity.class );
-        // startActivity( mainIntent );
-        // break;
-        //
-        // case 6:
-        // mainIntent = new Intent( getApplicationContext(), AboutActivity.class
-        // );
-        // startActivity( mainIntent );
-        // break;
-        //
-        // case 7:
-        // mainIntent = new Intent( getApplicationContext(), HomeActivity.class
-        // );
-        // startActivity( mainIntent );
-        // break;
-        // default:
-        // break;
-        // }
     }
 
     @Override
@@ -374,7 +322,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
      * @param position
      * @since 2015-02-13
      */
-    protected void onSwipeScreen( Context context, View view, final int position ) {
+    protected void onSwipeScreen( final Context context, View view, final int position ) {
         view.setOnTouchListener( new OnSwipeTouchListener( context ) {
 
             @Override
@@ -390,23 +338,29 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
                 overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_left );
             }
 
-            @Override
-            public void onSwipeBottom() {
-                int positions = ( position <= 0 ) ? EIGHT : position;
-                goToActivity( ( positions - 1 ) % EIGHT );
-                overridePendingTransition( R.anim.slide_in_top, R.anim.slide_out_bottom );
-            }
-
-            @Override
-            public void onSwipeTop() {
-                goToActivity( ( position + 1 ) % EIGHT );
-                overridePendingTransition( R.anim.slide_in_bottom, R.anim.slide_out_top );
-            }
+            // @Override
+            // public void onSwipeBottom() {
+            // int positions = ( position <= 0 ) ? EIGHT : position;
+            // goToActivity( ( positions - 1 ) % EIGHT );
+            // overridePendingTransition( R.anim.slide_in_top,
+            // R.anim.slide_out_bottom );
+            // }
+            //
+            // @Override
+            // public void onSwipeTop() {
+            // goToActivity( ( position + 1 ) % EIGHT );
+            // overridePendingTransition( R.anim.slide_in_bottom,
+            // R.anim.slide_out_top );
+            // }
 
             @Override
             public boolean onTouch( View v, MotionEvent event ) {
-                // Toast.makeText( getApplicationContext(), "on touch",
-                // Toast.LENGTH_LONG ).show();
+                String activity = context.getClass().getSimpleName();
+                if ( activity.equals( HOME_ACTIVITY ) ) {
+                    // go to list of songs
+                    goToActivity( 0 );
+                }
+
                 return super.onTouch( v, event );
             }
 
@@ -438,18 +392,20 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
                 overridePendingTransition( R.anim.slide_in_right, R.anim.slide_out_left );
             }
 
-            @Override
-            public void onSwipeBottom() {
-                goToSongActivity( indexes.get( ( position + 1 ) % SIZE ) );
-                overridePendingTransition( R.anim.slide_in_top, R.anim.slide_out_bottom );
-            }
-
-            @Override
-            public void onSwipeTop() {
-                int positions = ( position <= 0 ) ? SIZE : position;
-                goToSongActivity( indexes.get( ( positions - 1 ) % SIZE ) );
-                overridePendingTransition( R.anim.slide_in_bottom, R.anim.slide_out_top );
-            }
+            // @Override
+            // public void onSwipeBottom() {
+            // goToSongActivity( indexes.get( ( position + 1 ) % SIZE ) );
+            // overridePendingTransition( R.anim.slide_in_top,
+            // R.anim.slide_out_bottom );
+            // }
+            //
+            // @Override
+            // public void onSwipeTop() {
+            // int positions = ( position <= 0 ) ? SIZE : position;
+            // goToSongActivity( indexes.get( ( positions - 1 ) % SIZE ) );
+            // overridePendingTransition( R.anim.slide_in_bottom,
+            // R.anim.slide_out_top );
+            // }
 
             @Override
             public boolean onTouch( View v, MotionEvent event ) {

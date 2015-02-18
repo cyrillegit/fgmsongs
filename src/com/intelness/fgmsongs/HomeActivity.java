@@ -54,7 +54,7 @@ public class HomeActivity extends MainActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        onSwipeScreen( getApplicationContext(), layout, HOME_ACTIVITY_POSITION );
+        onSwipeScreen( this, layout, HOME_ACTIVITY_POSITION );
     }
 
     /**
