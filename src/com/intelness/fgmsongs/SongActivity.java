@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -51,6 +52,8 @@ public class SongActivity extends MainActivity {
         } else {
             position = 0;
         }
+        setSongNumber( String.valueOf( songs.get( position ).getNumber() ) );
+
         setTitle( songs.get( position ).getNumber() + ". " + songs.get( position ).getTitle() );
         verses = getVersesOfSong( songs.get( position ).getNumber(), FGMSongsUtils.LOCALE[appVars.getLanguage()] );
         if ( verses != null ) {
@@ -61,6 +64,12 @@ public class SongActivity extends MainActivity {
             Toast.makeText( getApplicationContext(), getResources().getString( R.string.no_verse_to_display ),
                     Toast.LENGTH_LONG ).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, String.valueOf( songs.get( position ).getNumber() ) );
+        return super.onCreateOptionsMenu( menu );
     }
 
     @Override

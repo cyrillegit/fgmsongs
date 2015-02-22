@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -69,6 +70,12 @@ public class AddSongActivity extends MainActivity {
         onClickBtnAddNewVerse();
         onClickBtnAddSongValidate();
         onClickBtnAddSongCancel();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, getSongNumber() );
+        return super.onCreateOptionsMenu( menu );
     }
 
     @Override

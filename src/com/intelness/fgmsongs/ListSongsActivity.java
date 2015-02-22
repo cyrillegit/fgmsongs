@@ -3,6 +3,7 @@ package com.intelness.fgmsongs;
 import java.util.List;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -47,6 +48,12 @@ public class ListSongsActivity extends MainActivity {
             }
         } );
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, getSongNumber() );
+        return super.onCreateOptionsMenu( menu );
     }
 
     @Override

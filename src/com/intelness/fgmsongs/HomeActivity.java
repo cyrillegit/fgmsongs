@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -55,6 +56,12 @@ public class HomeActivity extends MainActivity {
     protected void onResume() {
         super.onResume();
         onSwipeScreen( this, layout, HOME_ACTIVITY_POSITION );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, getSongNumber() );
+        return super.onCreateOptionsMenu( menu );
     }
 
     /**

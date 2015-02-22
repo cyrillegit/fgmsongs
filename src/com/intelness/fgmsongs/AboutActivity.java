@@ -4,6 +4,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,6 +33,12 @@ public class AboutActivity extends MainActivity {
         }
 
         tvVersion.setText( version );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, getSongNumber() );
+        return super.onCreateOptionsMenu( menu );
     }
 
     @Override

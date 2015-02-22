@@ -9,23 +9,30 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 import com.intelness.fgmsongs.adapters.DrawerAdapter;
 import com.intelness.fgmsongs.beans.ApplicationVariables;
@@ -45,7 +52,7 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  * @version 1.0
  * @since
  */
-public class MainActivity extends ActionBarActivity implements OnItemClickListener {
+public class MainActivity extends ActionBarActivity implements OnItemClickListener, OnEditorActionListener {
 
     private static final String     TAG                                   = "MainActiviy";
     protected static final String   HOME_ACTIVITY                         = "HomeActivity";
@@ -60,6 +67,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     protected static final int      ABOUT_ACTIVITY_POSITION               = 6;
     protected static final int      HOME_ACTIVITY_POSITION                = 7;
     protected static final int      EIGHT                                 = 8;
+    protected static final String   NUMBER                                = "number";
 
     protected DrawerLayout          drawerLayout;
     protected ListView              listView;
@@ -69,6 +77,10 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     protected String[]              navDrawerItems;
     protected SpinnerAdapter        spinnerAdapter;
     protected FrameLayout           frameLayout;
+    protected static String         songNumber                            = "1";
+
+    private MenuItem                myActionMenuItem;
+    private EditText                myActionEditText;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -110,6 +122,8 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         actionBar.setHomeButtonEnabled( true );
         actionBar.setDisplayHomeAsUpEnabled( true );
         actionBar.setDisplayUseLogoEnabled( true );
+        getSupportActionBar().setDisplayShowTitleEnabled( true );
+        getSupportActionBar().setLogo( R.drawable.ic_launcher );
 
         // // actionBar.setCustomView( R.layout.actionbar_view );
         // // EditText search = (EditText)
@@ -124,6 +138,9 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         // }
         // } );
         // actionBar.setDisplayOptions( ActionBar.DISPLAY_USE_LOGO );
+        View menuView = getLayoutInflater().inflate( R.layout.my_action, null );
+
+        onClickBtnMenuSearch( menuView );
 
         spinnerAdapter = ArrayAdapter.createFromResource( this, R.array.edit_song_choices,
                 android.R.layout.simple_spinner_dropdown_item );
@@ -132,9 +149,28 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 
     @Override
     public boolean onCreateOptionsMenu( Menu menu ) {
+
+        setMenuItemSearch( menu );
+
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.splash, menu );
+        inflater.inflate( R.menu.main_activity_bar, menu );
+
         return super.onCreateOptionsMenu( menu );
+    }
+
+    @Override
+    public boolean onEditorAction( TextView textView, int i, KeyEvent keyEvent ) {
+        if ( keyEvent != null ) {
+            // When the return key is pressed, we get the text the user entered,
+            // display it and collapse the view
+            if ( keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER ) {
+                CharSequence textInput = textView.getText();
+                // Do something useful with the text
+                Toast.makeText( this, textInput, Toast.LENGTH_SHORT ).show();
+                MenuItemCompat.collapseActionView( myActionMenuItem );
+            }
+        }
+        return false;
     }
 
     @Override
@@ -148,7 +184,31 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         if ( drawerListener.onOptionsItemSelected( item ) ) {
             return true;
         }
-        return super.onOptionsItemSelected( item );
+
+        // Handle presses on the action bar items
+        switch ( item.getItemId() ) {
+        case R.id.action_search:
+            // Code you want run when activity is clicked
+            Toast.makeText( this, "Search clicked", Toast.LENGTH_SHORT ).show();
+            return true;
+        case R.id.action_record:
+            Toast.makeText( this, "Record clicked", Toast.LENGTH_SHORT ).show();
+            return true;
+        case R.id.action_save:
+            Toast.makeText( this, "Save clicked", Toast.LENGTH_SHORT ).show();
+            return true;
+        case R.id.action_label:
+            Toast.makeText( this, "Label clicked", Toast.LENGTH_SHORT ).show();
+            return true;
+        case R.id.action_play:
+            Toast.makeText( this, "Play clicked", Toast.LENGTH_SHORT ).show();
+            return true;
+        case R.id.action_settings:
+            Toast.makeText( this, "Settings clicked", Toast.LENGTH_SHORT ).show();
+            return true;
+        default:
+            return super.onOptionsItemSelected( item );
+        }
     }
 
     @Override
@@ -175,6 +235,35 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         super.onDestroy();
         Log.i( TAG, "ondestroy" );
         savePreferences();
+    }
+
+    /**
+     * set items on menu
+     * 
+     * @param menu
+     */
+    protected void setMenuItemNumber( Menu menu, String number ) {
+
+        menu.add( NUMBER )
+                .setOnMenuItemClickListener( this.NumberButtonClickListener )
+                .setTitle( number )
+                .setShowAsAction( MenuItem.SHOW_AS_ACTION_IF_ROOM );
+    }
+
+    /**
+     * set items on menu
+     * 
+     * @param menu
+     */
+    protected void setMenuItemSearch( Menu menu ) {
+
+        menu.add( "Search" )
+                .setOnMenuItemClickListener( this.SearchButtonClickListener )
+                .setIcon( R.drawable.ic_action_search_light )
+                .setTitle( "Search" )
+                .setActionView( R.layout.my_action )
+                .setShowAsAction( MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItem.SHOW_AS_ACTION_IF_ROOM );
+
     }
 
     public void selectItem( int position ) {
@@ -251,50 +340,63 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
      * @since 2015-02-15
      */
     protected void goToActivity( int position ) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString( NUMBER, getSongNumber() );
         Intent mainIntent;
+        Toast.makeText( getApplicationContext(), getSongNumber(), Toast.LENGTH_LONG ).show();
 
         switch ( position ) {
         case LIST_SONGS_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), ListSongsActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
 
         case SEARCH_SONG_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), SearchSongActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
 
         case ADD_SONG_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), AddSongActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
 
         case LIST_EDITABLE_SONGS_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), ListEditableSongsActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
 
         case SUMMARY_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), SummaryActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
 
         case OPTIONS_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), OptionsActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
 
         case ABOUT_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), AboutActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
 
         case HOME_ACTIVITY_POSITION:
             mainIntent = new Intent( getApplicationContext(), HomeActivity.class );
+            mainIntent.putExtras( bundle );
             startActivity( mainIntent );
             break;
         default:
             break;
+
         }
     }
 
@@ -302,6 +404,8 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
      * display a specific song
      * 
      * @param position
+     *            of the song
+     * @param number
      *            of the song
      * @since 2015-02-13
      */
@@ -414,5 +518,69 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 
         } );
     }
+
+    public String getSongNumber() {
+        return songNumber;
+    }
+
+    public void setSongNumber( String songNumber ) {
+        MainActivity.songNumber = songNumber;
+    }
+
+    /**
+     * @since 2015-02-22
+     */
+    public void onClickBtnMenuSearch( View v ) {
+        // View menuView = getLayoutInflater().inflate( R.layout.my_action, null
+        // );
+        // Button btnMenuOK = (Button) menuView.findViewById( R.id.btnMenuOK );
+        // btnMenuOK.setOnClickListener( new View.OnClickListener() {
+        //
+        // @Override
+        // public void onClick( View v ) {
+        // Toast.makeText( getApplicationContext(), "Menu Search",
+        // Toast.LENGTH_SHORT ).show();
+        //
+        // }
+        // } );
+        Toast.makeText( getApplicationContext(), "Menu Search", Toast.LENGTH_SHORT ).show();
+
+    }
+
+    // Capture first menu button click
+    OnMenuItemClickListener NumberButtonClickListener = new OnMenuItemClickListener() {
+
+                                                          public boolean onMenuItemClick(
+                                                                  MenuItem item ) {
+
+                                                              Intent intent = new Intent( getApplicationContext(),
+                                                                      ListNumberSongsActivity.class );
+                                                              startActivity( intent );
+                                                              return false;
+                                                          }
+
+                                                      };
+    // Capture first menu button click
+    OnMenuItemClickListener SearchButtonClickListener = new OnMenuItemClickListener() {
+
+                                                          public boolean onMenuItemClick(
+                                                                  MenuItem item ) {
+
+                                                              // Create
+                                                              // a
+                                                              // simple
+                                                              // toast
+                                                              // message
+                                                              Toast.makeText( MainActivity.this,
+                                                                      "Search",
+                                                                      Toast.LENGTH_SHORT )
+                                                                      .show();
+
+                                                              // onClickBtnMenuSearch();
+
+                                                              return false;
+                                                          }
+
+                                                      };
 
 }

@@ -94,5 +94,6 @@
     <string name="copy_song">Copier cantique</string>
     <string name="edit_song">Modifier cantique</string> 
     <string name="make_choice">Faire un choix</string> 
-    <string name="loading">Chargement &#x2026;</string>     
+    <string name="loading">Chargement &#x2026;</string>    
+    <string name="list_number_songs">Choisir un numéro de cantique</string>     
 </resources>

@@ -95,4 +95,5 @@
     <string name="edit_song">Modify song</string>
     <string name="make_choice">Make a choice</string>
     <string name="loading">Loading &#x2026;</string>
+    <string name="list_number_songs">Choose a song number</string>    
 </resources>

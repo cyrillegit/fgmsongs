@@ -11,6 +11,14 @@
     <string name="descLogo">Logo FGM</string>
     <string name="fullGospelMission">Mission du Plein Evangile</string>
 
+    
+	  <string name="action_search">Search</string>
+	  <string name="action_record">Record Video</string>
+	  <string name="action_save">Save</string>
+	  <string name="action_label">Add Label</string>
+	  <string name="action_play">Play Video</string>
+  
+  
     <!-- Edit song choices -->
     <string-array name="edit_song_choices">
         <item >Modify</item>
@@ -96,4 +104,5 @@
     <string name="edit_song">Modify song</string>
     <string name="make_choice">Make a choice</string>
     <string name="loading">Loading &#x2026;</string>
+    <string name="list_number_songs">Choose a song number</string>
 </resources>

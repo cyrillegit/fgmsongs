@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -99,6 +100,12 @@ public class EditSongActivity extends MainActivity {
         onClickBtnEditSongCancel();
         onClickBtnEditSongDelete();
         onClickBtnEditSongValidate();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, getSongNumber() );
+        return super.onCreateOptionsMenu( menu );
     }
 
     @Override

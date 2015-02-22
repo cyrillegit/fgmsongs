@@ -21,7 +21,7 @@ public class DrawerAdapter extends BaseAdapter {
     private Context  context;
     private String[] navDrawerItems;
     private int[]    navDrawerIcons = { R.drawable.ic_action_view_as_list,
-                                    R.drawable.ic_action_search,
+                                    R.drawable.ic_action_search_light,
                                     R.drawable.ic_action_new,
                                     R.drawable.ic_action_edit,
                                     R.drawable.ic_action_sort_by_size,

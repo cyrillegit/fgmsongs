@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -62,6 +63,12 @@ public class ListEditableSongsActivity extends MainActivity {
 
         onSwipeScreen( getApplicationContext(), lvEditSongs, LIST_EDITABLE_SONGS_ACTIVITY_POSITION );
         onSwipeScreen( getApplicationContext(), layout, LIST_EDITABLE_SONGS_ACTIVITY_POSITION );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, getSongNumber() );
+        return super.onCreateOptionsMenu( menu );
     }
 
     /**

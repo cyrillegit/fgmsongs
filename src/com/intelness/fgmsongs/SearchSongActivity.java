@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -64,6 +65,12 @@ public class SearchSongActivity extends MainActivity {
         // lvSearchedSongs.setAdapter( adapter );
         // triggered when an item of the listview is clicked
         manageItemsLvSearchedSongs( songs );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        setMenuItemNumber( menu, getSongNumber() );
+        return super.onCreateOptionsMenu( menu );
     }
 
     @Override
