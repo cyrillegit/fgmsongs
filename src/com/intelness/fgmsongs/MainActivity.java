@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -26,7 +27,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
@@ -40,6 +40,7 @@ import com.intelness.fgmsongs.beans.PreferencesVariables;
 import com.intelness.fgmsongs.beans.Song;
 import com.intelness.fgmsongs.beans.SongDAO;
 import com.intelness.fgmsongs.listeners.OnSwipeTouchListener;
+import com.intelness.fgmsongs.managers.ActivitiesManager;
 import com.intelness.fgmsongs.managers.ApplicationManager;
 import com.intelness.fgmsongs.managers.SharedPreferencesManager;
 import com.intelness.fgmsongs.utils.FGMSongsUtils;
@@ -54,38 +55,40 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  */
 public class MainActivity extends ActionBarActivity implements OnItemClickListener, OnEditorActionListener {
 
-    private static final String     TAG                                   = "MainActiviy";
-    protected static final String   HOME_ACTIVITY                         = "HomeActivity";
-    protected static final String   POSITION                              = "position";
-    protected static final String   SONGS                                 = "songs";
-    protected static final int      LIST_SONGS_ACTIVITY_POSITION          = 0;
-    protected static final int      SEARCH_SONG_ACTIVITY_POSITION         = 1;
-    protected static final int      ADD_SONG_ACTIVITY_POSITION            = 2;
-    protected static final int      LIST_EDITABLE_SONGS_ACTIVITY_POSITION = 3;
-    protected static final int      SUMMARY_ACTIVITY_POSITION             = 4;
-    protected static final int      OPTIONS_ACTIVITY_POSITION             = 5;
-    protected static final int      ABOUT_ACTIVITY_POSITION               = 6;
-    protected static final int      HOME_ACTIVITY_POSITION                = 7;
-    protected static final int      EIGHT                                 = 8;
-    protected static final String   NUMBER                                = "number";
+    private static final String        TAG                                   = "MainActiviy";
+    protected static final String      HOME_ACTIVITY                         = "HomeActivity";
+    protected static final String      POSITION                              = "position";
+    protected static final String      SONGS                                 = "songs";
+    protected static final int         LIST_SONGS_ACTIVITY_POSITION          = 0;
+    protected static final int         SEARCH_SONG_ACTIVITY_POSITION         = 1;
+    protected static final int         ADD_SONG_ACTIVITY_POSITION            = 2;
+    protected static final int         LIST_EDITABLE_SONGS_ACTIVITY_POSITION = 3;
+    protected static final int         SUMMARY_ACTIVITY_POSITION             = 4;
+    protected static final int         OPTIONS_ACTIVITY_POSITION             = 5;
+    protected static final int         ABOUT_ACTIVITY_POSITION               = 6;
+    protected static final int         HOME_ACTIVITY_POSITION                = 7;
+    protected static final int         EIGHT                                 = 8;
+    protected static final String      NUMBER                                = "number";
 
-    protected DrawerLayout          drawerLayout;
-    protected ListView              listView;
-    protected ActionBarDrawerToggle drawerListener;
-    protected Toolbar               toolbar                               = null;
-    protected DrawerAdapter         drawerAdapter;
-    protected String[]              navDrawerItems;
-    protected SpinnerAdapter        spinnerAdapter;
-    protected FrameLayout           frameLayout;
-    protected static String         songNumber                            = "1";
-
-    private MenuItem                myActionMenuItem;
-    private EditText                myActionEditText;
+    protected DrawerLayout             drawerLayout;
+    protected ListView                 listView;
+    protected ActionBarDrawerToggle    drawerListener;
+    protected Toolbar                  toolbar                               = null;
+    protected DrawerAdapter            drawerAdapter;
+    protected String[]                 navDrawerItems;
+    protected SpinnerAdapter           spinnerAdapter;
+    protected FrameLayout              frameLayout;
+    protected static String            songNumber                            = "1";
+    protected static ActivitiesManager activitiesManager;
+    private MenuItem                   myActionMenuItem;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
+
+        // get the class instance that manager the activities
+        getActivitiesManager();
 
         // frameLayout : other activities layout are going to be put in this
         // layout
@@ -138,9 +141,10 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         // }
         // } );
         // actionBar.setDisplayOptions( ActionBar.DISPLAY_USE_LOGO );
-        View menuView = getLayoutInflater().inflate( R.layout.my_action, null );
+        // View menuView = getLayoutInflater().inflate( R.layout.my_action, null
+        // );
 
-        onClickBtnMenuSearch( menuView );
+        // onClickBtnMenuSearch( menuView );
 
         spinnerAdapter = ArrayAdapter.createFromResource( this, R.array.edit_song_choices,
                 android.R.layout.simple_spinner_dropdown_item );
@@ -150,10 +154,10 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     @Override
     public boolean onCreateOptionsMenu( Menu menu ) {
 
-        setMenuItemSearch( menu );
+        // setMenuItemSearch( menu );
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.main_activity_bar, menu );
+        inflater.inflate( R.menu.splash, menu );
 
         return super.onCreateOptionsMenu( menu );
     }
@@ -165,8 +169,6 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
             // display it and collapse the view
             if ( keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER ) {
                 CharSequence textInput = textView.getText();
-                // Do something useful with the text
-                Toast.makeText( this, textInput, Toast.LENGTH_SHORT ).show();
                 MenuItemCompat.collapseActionView( myActionMenuItem );
             }
         }
@@ -204,7 +206,7 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
             Toast.makeText( this, "Play clicked", Toast.LENGTH_SHORT ).show();
             return true;
         case R.id.action_settings:
-            Toast.makeText( this, "Settings clicked", Toast.LENGTH_SHORT ).show();
+            goToActivity( OPTIONS_ACTIVITY_POSITION );
             return true;
         default:
             return super.onOptionsItemSelected( item );
@@ -222,6 +224,11 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
     public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
         selectItem( position );
         goToActivity( position );
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
@@ -344,7 +351,6 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         Bundle bundle = new Bundle();
         bundle.putString( NUMBER, getSongNumber() );
         Intent mainIntent;
-        Toast.makeText( getApplicationContext(), getSongNumber(), Toast.LENGTH_LONG ).show();
 
         switch ( position ) {
         case LIST_SONGS_ACTIVITY_POSITION:
@@ -397,6 +403,27 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         default:
             break;
 
+        }
+    }
+
+    /**
+     * to go an activity
+     * 
+     * @param activity
+     *            to go to
+     * @since 2015-02-24
+     */
+    protected void goToActivity( Activity activity ) {
+        if ( activity != null ) {
+            Log.i( TAG, activity.getLocalClassName() );
+            Bundle bundle = new Bundle();
+            bundle.putString( NUMBER, getSongNumber() );
+            Intent mainIntent;
+            mainIntent = new Intent( getApplicationContext(), activity.getClass() );
+            mainIntent.putExtras( bundle );
+            startActivity( mainIntent );
+        } else {
+            Log.i( TAG, "Exit" );
         }
     }
 
@@ -519,32 +546,40 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         } );
     }
 
+    /**
+     * get the activitiesManager
+     * 
+     * @return
+     */
+    protected void getActivitiesManager() {
+        if ( activitiesManager == null ) {
+            activitiesManager = new ActivitiesManager();
+        }
+    }
+
+    /**
+     * push activity into LIFO
+     * 
+     * @param activity
+     */
+    protected void pushActivity( Activity activity ) {
+        if ( !activitiesManager.empty() ) {
+            Log.i( TAG, "1: " + activity + "   2: " + activitiesManager.peek() );
+            if ( !activity.equals( activitiesManager.peek() ) ) {
+                activitiesManager.push( activity );
+            }
+        } else {
+            Log.i( TAG, "push: " + activity );
+            activitiesManager.push( activity );
+        }
+    }
+
     public String getSongNumber() {
         return songNumber;
     }
 
     public void setSongNumber( String songNumber ) {
         MainActivity.songNumber = songNumber;
-    }
-
-    /**
-     * @since 2015-02-22
-     */
-    public void onClickBtnMenuSearch( View v ) {
-        // View menuView = getLayoutInflater().inflate( R.layout.my_action, null
-        // );
-        // Button btnMenuOK = (Button) menuView.findViewById( R.id.btnMenuOK );
-        // btnMenuOK.setOnClickListener( new View.OnClickListener() {
-        //
-        // @Override
-        // public void onClick( View v ) {
-        // Toast.makeText( getApplicationContext(), "Menu Search",
-        // Toast.LENGTH_SHORT ).show();
-        //
-        // }
-        // } );
-        Toast.makeText( getApplicationContext(), "Menu Search", Toast.LENGTH_SHORT ).show();
-
     }
 
     // Capture first menu button click
@@ -565,18 +600,6 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
 
                                                           public boolean onMenuItemClick(
                                                                   MenuItem item ) {
-
-                                                              // Create
-                                                              // a
-                                                              // simple
-                                                              // toast
-                                                              // message
-                                                              Toast.makeText( MainActivity.this,
-                                                                      "Search",
-                                                                      Toast.LENGTH_SHORT )
-                                                                      .show();
-
-                                                              // onClickBtnMenuSearch();
 
                                                               return false;
                                                           }

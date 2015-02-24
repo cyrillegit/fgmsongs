@@ -21,6 +21,7 @@ import com.intelness.fgmsongs.beans.Song;
  */
 public class ListSongsActivity extends MainActivity {
 
+    private static final String  TAG = "ListSongsActivity";
     private List<Song>           songs;
     private ApplicationVariables appVars;
     private View                 layout;
@@ -63,8 +64,14 @@ public class ListSongsActivity extends MainActivity {
     }
 
     @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
+    }
+
+    @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        goToActivity( activitiesManager.pop() );
     }
 
 }

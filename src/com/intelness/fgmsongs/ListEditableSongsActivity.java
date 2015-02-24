@@ -66,6 +66,17 @@ public class ListEditableSongsActivity extends MainActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        goToActivity( activitiesManager.pop() );
+    }
+
+    @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu( Menu menu ) {
         setMenuItemNumber( menu, getSongNumber() );
         return super.onCreateOptionsMenu( menu );

@@ -9,8 +9,9 @@ import android.view.View;
 import android.widget.TextView;
 
 public class AboutActivity extends MainActivity {
-    private TextView tvVersion;
-    private View     layout;
+    private static final String TAG = "AboutActivity";
+    private TextView            tvVersion;
+    private View                layout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -49,7 +50,13 @@ public class AboutActivity extends MainActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        goToActivity( activitiesManager.pop() );
+    }
+
+    @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
     }
 
 }

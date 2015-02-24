@@ -86,7 +86,13 @@ public class AddSongActivity extends MainActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        goToActivity( activitiesManager.pop() );
+    }
+
+    @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
     }
 
     /**

@@ -53,9 +53,20 @@ public class HomeActivity extends MainActivity {
     }
 
     @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         onSwipeScreen( this, layout, HOME_ACTIVITY_POSITION );
+    }
+
+    @Override
+    public void onBackPressed() {
+        goToActivity( activitiesManager.pop() );
     }
 
     @Override

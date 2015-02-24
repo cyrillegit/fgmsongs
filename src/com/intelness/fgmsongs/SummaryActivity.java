@@ -17,6 +17,7 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
 
 public class SummaryActivity extends MainActivity {
 
+    private static final String  TAG = "SummaryActivity";
     private List<Song>           songs;
     private ArrayList<Song>      sortedSongs;
     private ApplicationVariables appVars;
@@ -65,7 +66,13 @@ public class SummaryActivity extends MainActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        goToActivity( activitiesManager.pop() );
+    }
+
+    @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
     }
 
 }

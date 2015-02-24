@@ -21,14 +21,17 @@ public final class R {
         public static final int activity_open_scale=0x7f040009;
         public static final int activity_open_translate=0x7f04000a;
         public static final int activity_out=0x7f04000b;
-        public static final int slide_in_bottom=0x7f04000c;
-        public static final int slide_in_left=0x7f04000d;
-        public static final int slide_in_right=0x7f04000e;
-        public static final int slide_in_top=0x7f04000f;
-        public static final int slide_out_bottom=0x7f040010;
-        public static final int slide_out_left=0x7f040011;
-        public static final int slide_out_right=0x7f040012;
-        public static final int slide_out_top=0x7f040013;
+        public static final int fadeout=0x7f04000c;
+        public static final int slide_in_bottom=0x7f04000d;
+        public static final int slide_in_left=0x7f04000e;
+        public static final int slide_in_right=0x7f04000f;
+        public static final int slide_in_top=0x7f040010;
+        public static final int slide_out_bottom=0x7f040011;
+        public static final int slide_out_left=0x7f040012;
+        public static final int slide_out_right=0x7f040013;
+        public static final int slide_out_top=0x7f040014;
+        public static final int zoomin=0x7f040015;
+        public static final int zoomin_fadeout=0x7f040016;
     }
     public static final class array {
         /**  Edit song choices 

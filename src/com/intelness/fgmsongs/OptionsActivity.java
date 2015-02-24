@@ -2,6 +2,7 @@ package com.intelness.fgmsongs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  * @version 1.0
  */
 public class OptionsActivity extends MainActivity {
+    private static final String  TAG = "OptionsActivity";
     private Button               btnOptionsValidate;
     private Button               btnOptionsCancel;
     private int                  language;
@@ -54,7 +56,13 @@ public class OptionsActivity extends MainActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        goToActivity( activitiesManager.pop() );
+    }
+
+    @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
     }
 
     @Override
@@ -87,6 +95,9 @@ public class OptionsActivity extends MainActivity {
 
             @Override
             public void onClick( View v ) {
+                while ( !activitiesManager.empty() ) {
+                    Log.i( TAG, "top : " + activitiesManager.pop().getClass() );
+                }
                 setLanguage( appVars.getLanguage() );
                 Intent intent = new Intent( getApplicationContext(), HomeActivity.class );
                 startActivity( intent );

@@ -23,6 +23,7 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  */
 public class ListNumberSongsActivity extends MainActivity implements OnClickListener {
 
+    private static final String  TAG = "ListNumberSongsActivity";
     private GridLayout           glNumberSongs;
     private ApplicationVariables appVars;
     private List<Song>           songs;
@@ -49,6 +50,17 @@ public class ListNumberSongsActivity extends MainActivity implements OnClickList
     public boolean onCreateOptionsMenu( Menu menu ) {
         setMenuItemNumber( menu, getSongNumber() );
         return super.onCreateOptionsMenu( menu );
+    }
+
+    @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        goToActivity( activitiesManager.pop() );
     }
 
     @Override

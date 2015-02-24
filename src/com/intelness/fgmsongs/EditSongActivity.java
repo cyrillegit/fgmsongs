@@ -110,12 +110,18 @@ public class EditSongActivity extends MainActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        goToActivity( activitiesManager.pop() );
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        pushActivity( this );
+        super.onPause();
     }
 
     /**

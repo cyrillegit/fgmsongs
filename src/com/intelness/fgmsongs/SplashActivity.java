@@ -3,13 +3,15 @@ package com.intelness.fgmsongs;
 import java.util.List;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.intelness.fgmsongs.beans.ApplicationVariables;
 import com.intelness.fgmsongs.beans.PreferencesVariables;
@@ -26,11 +28,14 @@ import com.intelness.fgmsongs.utils.FGMSongsUtils;
  * @author McCyrille
  * @version 1.0
  */
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends ActionBarActivity implements AnimationListener {
 
-    private static final int    SPLASH_TIME_OUT = 3000;
+    private static final int    SPLASH_TIME_OUT = 1000;
     private static final String TAG             = "SplashActivity";
     private List<Song>          songs;
+    private ImageView           ivLogo;
+    private Animation           zoomin;
+    private Animation           fadeout;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -38,14 +43,14 @@ public class SplashActivity extends ActionBarActivity {
         setContentView( R.layout.activity_splash );
         getSupportActionBar().hide();
 
-        // if ( getIntent().getBooleanExtra( "EXIT", false ) ) {
-        // finish();
-        // System.exit( 0 );
-        // }
+        zoomin = AnimationUtils.loadAnimation( this, R.anim.zoomin_fadeout );
+        zoomin.setAnimationListener( this );
+        // fadeout = AnimationUtils.loadAnimation( this, R.anim.fadeout );
 
-        Resources res = getResources();
-        String current = res.getConfiguration().locale.getCountry();
-        Log.i( TAG, "current locale : " + current );
+        // Resources res = getResources();
+        // String current = res.getConfiguration().locale.getCountry();
+        // Log.i( TAG, "current locale : " + current );
+        ivLogo = (ImageView) findViewById( R.id.ivLogo );
 
     }
 
@@ -57,6 +62,7 @@ public class SplashActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ivLogo.startAnimation( zoomin );
         new loadSongs().execute();
     }
 
@@ -116,10 +122,7 @@ public class SplashActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute( Void result ) {
-
-            Intent i = new Intent( getApplicationContext(), HomeActivity.class );
-            startActivity( i );
-            finish();
+            goToHome();
         }
 
         @Override
@@ -130,6 +133,17 @@ public class SplashActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate( Void... values ) {
         }
+    }
+
+    /**
+     * go to home activity
+     * 
+     * @since 2015-02-23
+     */
+    public void goToHome() {
+        Intent i = new Intent( getApplicationContext(), HomeActivity.class );
+        startActivity( i );
+        finish();
     }
 
     /**
@@ -231,5 +245,22 @@ public class SplashActivity extends ActionBarActivity {
         appVars.setLastCustomNumberSong( prefVars.getLastCustomNumberSong() );
 
         setAllApplicationVariables( appVars );
+    }
+
+    @Override
+    public void onAnimationStart( Animation animation ) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onAnimationEnd( Animation animation ) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat( Animation animation ) {
+        // TODO Auto-generated method stub
+
     }
 }
